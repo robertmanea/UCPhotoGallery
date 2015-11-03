@@ -464,6 +464,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
 }
 
+- (void)galleryItem:(UCPhotoGalleryItemView *)galleryItem didZoomToScale:(CGFloat)zoomScale {
+    if (galleryItem == self.visibleItem) {
+        self.doneButton.hidden = !self.isFullscreen || (zoomScale != galleryItem.minimumZoomScale);
+    }
+}
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (self.performingLayout || self.rotating) {

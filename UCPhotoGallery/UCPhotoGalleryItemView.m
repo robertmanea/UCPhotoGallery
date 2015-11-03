@@ -33,6 +33,18 @@
     return self;
 }
 
+- (void)setUrl:(NSURL *)url {
+    _url = url;
+    [self.imageView sd_setImageWithURL:url
+                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+     {
+         [self displayImage];
+         if ([self.galleryItemDelegate respondsToSelector:@selector(imageLoadedForGalleryItem:)]) {
+             [self.galleryItemDelegate imageLoadedForGalleryItem:self];
+         }
+     }];
+}
+
 - (void)viewDoubleTapped:(UITapGestureRecognizer *)recognizer {
     if (self.zoomScale != self.minimumZoomScale) {
         [self setZoomScale:self.minimumZoomScale animated:YES];
@@ -45,18 +57,6 @@
         [self zoomToRect:CGRectMake(touchPoint.x - xsize / 2, touchPoint.y - ysize / 2, xsize, ysize)
                 animated:YES];
     }
-}
-
-- (void)setUrl:(NSURL *)url {
-    _url = url;
-    [self.imageView sd_setImageWithURL:url
-                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
-    {
-        [self displayImage];
-        if ([self.galleryItemDelegate respondsToSelector:@selector(imageLoadedForGalleryItem:)]) {
-            [self.galleryItemDelegate imageLoadedForGalleryItem:self];
-        }
-    }];
 }
 
 - (void)prepareForReuse {
@@ -171,7 +171,6 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
     return self.imageView;
 }
@@ -183,6 +182,9 @@
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     [self setNeedsLayout];
     [self layoutIfNeeded];
+    if ([self.galleryItemDelegate respondsToSelector:@selector(galleryItem:didZoomToScale:)]) {
+        [self.galleryItemDelegate galleryItem:self didZoomToScale:self.zoomScale];
+    }
 }
 
 @end
