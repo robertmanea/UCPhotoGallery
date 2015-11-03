@@ -123,8 +123,12 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
-    self.transitionController.presentFromRect = [self imageFrameInSuperview];
-    self.transitionController.transitionImage = self.visibleItem.imageView.image;
+    // Annoying hacky way to ensure the layout is actually 100% finished before attempting to pass this info
+    // on to the transition controller.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.transitionController.presentFromRect = [self imageFrameInSuperview];
+        self.transitionController.transitionImage = self.visibleItem.imageView.image;
+    });
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

@@ -7,7 +7,8 @@
 @property (nonatomic) UCPhotoGalleryFullscreenTransitionController *transitionController;
 @property (nonatomic) NSArray *urls;
 @property (nonatomic) CGRect selectedPhotoRect;
-@property (nonatomic) UCPhotoCell *selectedCell;
+@property (nonatomic) NSUInteger selectedIndex;
+//@property (nonatomic) UCPhotoCell *selectedCell;
 @property (nonatomic) NSCache *heightCache;
 @end
 
@@ -18,6 +19,7 @@
     self = [super initWithCollectionViewLayout:layout];
     if (self) {
         self.heightCache = [NSCache new];
+        self.selectedIndex = NSNotFound;
         self.transitionController = [UCPhotoGalleryFullscreenTransitionController new];
     }
 
@@ -37,6 +39,27 @@
             forCellWithReuseIdentifier:[UCPhotoCell reuseIdentifier]];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+
+    UCPhotoCell *selectedCell = [self selectedCell];
+    if (selectedCell) {
+        self.transitionController.presentFromRect = [self.view convertRect:selectedCell.imageFrame
+                                                                  fromView:selectedCell.contentView];
+        self.transitionController.transitionImage = selectedCell.image;
+        selectedCell.alpha = 0;
+    }
+}
+
+- (UCPhotoCell *)selectedCell {
+    if (self.selectedIndex != NSNotFound) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedIndex inSection:0];
+        return (UCPhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    }
+
+    return nil;
+}
+
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection
               withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super willTransitionToTraitCollection:newCollection
@@ -44,9 +67,6 @@
 
     [self.heightCache removeAllObjects];
     [self.collectionView.collectionViewLayout invalidateLayout];
-    self.transitionController.presentFromRect = [self.view convertRect:self.selectedCell.imageFrame
-                                                              fromView:self.selectedCell.contentView];
-    self.transitionController.transitionImage = self.selectedCell.image;
 }
 
 #pragma mark - UICollectionView
@@ -56,6 +76,7 @@
                                                                   forIndexPath:indexPath];
     cell.delegate = self;
     cell.url = self.urls[indexPath.row];
+    cell.alpha = (self.selectedIndex == indexPath.row) ? 0 : 1;
     return cell;
 }
 
@@ -95,7 +116,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedCell = (UCPhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    self.selectedIndex = indexPath.row;
     UIViewController *container = self.parentViewController;
     self.transitionController.presentFromRect = [container.view convertRect:[self.selectedCell imageFrame]
                                                                    fromView:self.selectedCell.contentView];
@@ -134,29 +155,25 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
 #pragma mark - UCGalleryDelegate
 - (void)dismissFullscreenGalleryController:(UCPhotoGalleryViewController *)galleryViewController {
+    UCPhotoCell *selectedCell = [self selectedCell];
     [galleryViewController dismissViewControllerAnimated:YES completion:^{
-        self.selectedCell.alpha = 1;
-        self.selectedCell = nil;
+        selectedCell.alpha = 1;
+        self.selectedIndex = NSNotFound;
     }];
 }
 
 - (void)galleryView:(UCPhotoGalleryViewController *)galleryViewController
         pageChanged:(NSUInteger)page {
+    UCPhotoCell *previouslySelectedCell = [self selectedCell];
+    previouslySelectedCell.alpha = 1;
+
     // Keep the collection view in sync with the full-screen gallery view
+    self.selectedIndex = page;
+
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:page inSection:0];
-    self.selectedCell.alpha = 1;
     [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:UICollectionViewScrollPositionNone
                                         animated:NO];
-
-    // Give the collection view time to scroll
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.selectedCell = (UCPhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-        self.selectedCell.alpha = 0;
-        self.transitionController.presentFromRect = [self.view convertRect:self.selectedCell.imageFrame
-                                                                  fromView:self.selectedCell.contentView];
-        self.transitionController.transitionImage = self.selectedCell.image;
-    });
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
