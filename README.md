@@ -9,3 +9,14 @@ There are two view controllers (`UCPhotoGalleryViewController`, which provides a
 3. Add its view to the parent view controller's view
 4. Implement `UCGalleryViewDataSource` (currently just the `imageURLsForGalleryView:` function)
 5. That's it!
+
+## Running the example project
+After cloning this repository…
+
+1. `cd UCPhotoGallery`
+2. `pod install`
+3. Open `UCPhotoGallery.xcworkspace`
+4. Ensure the target is `UCPhotoGalleryExample`
+5. Build and run
+
+Switching between the `UCPhotoGalleryViewController` and the `UCPhotosViewController` can be done by commenting/uncommenting the appropriate lines in `ViewController.m`'s `viewDidLoad` function. 
