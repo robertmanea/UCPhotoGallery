@@ -15,6 +15,11 @@
 @property (assign, nonatomic) float translation;
 
 /**
+ *  The velocity of the pan gesture
+ */
+@property (assign, nonatomic) float velocity;
+
+/**
  *  The amount of horizontal movement allowed before this recogznier fails AND the amount of 
  *  vertical movement required before the recognizer is triggered.
  */

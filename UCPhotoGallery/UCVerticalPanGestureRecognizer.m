@@ -2,6 +2,8 @@
 
 @interface UCVerticalPanGestureRecognizer () {
     CGPoint _startPoint;
+    NSTimeInterval _lastTimestamp;
+    CGPoint _lastPosition;
 }
 
 @end
@@ -11,7 +13,9 @@
     if ([touches count] > 1) {
         self.state = UIGestureRecognizerStateFailed;
     } else {
-        _startPoint = [[touches anyObject] locationInView:self.view];
+        UITouch *touch = [touches anyObject];
+        _startPoint = _lastPosition = [touch locationInView:self.view];
+        _lastTimestamp = touch.timestamp;
     }
 }
 
@@ -20,7 +24,9 @@
         return;
     }
 
-    CGPoint currentLocation = [[touches anyObject] locationInView:self.view];
+    UITouch *touch = [touches anyObject];
+    NSTimeInterval elapsedTime = touch.timestamp - _lastTimestamp;
+    CGPoint currentLocation = [touch locationInView:self.view];
     CGPoint translation;
     translation.x = currentLocation.x - _startPoint.x;
     translation.y = currentLocation.y - _startPoint.y;
@@ -41,8 +47,12 @@
     // If we reached this point the gesture was succesfully recognized so we now enter changed state
     self.state = UIGestureRecognizerStateChanged;
 
-    // We are just insterested in the vertical translation
+    // We are just insterested in vertical movement
     self.translation = translation.y;
+    self.velocity = (currentLocation.y - _lastPosition.y) / elapsedTime;
+
+    _lastTimestamp = touch.timestamp;
+    _lastPosition = currentLocation;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -65,7 +75,8 @@
 
 - (void)reset {
     [super reset];
-    _startPoint = CGPointZero;
+    _startPoint = _lastPosition = CGPointZero;
+    _lastTimestamp = 0;
 }
 
 @end
