@@ -1,6 +1,6 @@
 #import "UCPhotoGalleryItemView.h"
 #import <AVFoundation/AVFoundation.h>
-#import <UIImageView+WebCache.h>
+#import "UIImageView+WebCache.h"
 
 @interface UCPhotoGalleryItemView () <UIScrollViewDelegate>
 @end

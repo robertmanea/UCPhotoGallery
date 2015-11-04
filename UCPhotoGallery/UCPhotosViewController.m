@@ -1,14 +1,12 @@
 #import "UCPhotosViewController.h"
 #import "UCPhotoCell.h"
 #import "UCPhotoGalleryFullscreenTransitionController.h"
-#import <UIImageView+WebCache.h>
 
 @interface UCPhotosViewController () <UCGalleryViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate, UCPhotoCellDelegate>
 @property (nonatomic) UCPhotoGalleryFullscreenTransitionController *transitionController;
 @property (nonatomic) NSArray *urls;
 @property (nonatomic) CGRect selectedPhotoRect;
 @property (nonatomic) NSUInteger selectedIndex;
-//@property (nonatomic) UCPhotoCell *selectedCell;
 @property (nonatomic) NSCache *heightCache;
 @end
 
