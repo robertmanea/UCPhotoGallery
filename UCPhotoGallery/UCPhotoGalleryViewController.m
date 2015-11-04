@@ -240,8 +240,8 @@
     }
     
     CGRect visibleBounds = self.scrollView.bounds;
-    NSInteger firstVisibleIndex = (NSInteger)floorf((CGRectGetMinX(visibleBounds)) / CGRectGetWidth(visibleBounds));
-    NSInteger lastVisibleIndex  = (NSInteger)floorf((CGRectGetMaxX(visibleBounds) - 1) / CGRectGetWidth(visibleBounds));
+    NSInteger firstVisibleIndex = (NSInteger)floorf(CGRectGetMinX(visibleBounds) / CGRectGetWidth(visibleBounds));
+    NSInteger lastVisibleIndex  = (NSInteger)floorf(CGRectGetMaxX(visibleBounds) / CGRectGetWidth(visibleBounds));
 
     // Ensure both indexes are within the url array bounds
     firstVisibleIndex = MIN(MAX(0, firstVisibleIndex), self.urls.count - 1);
@@ -251,7 +251,7 @@
     NSInteger index;
     for (UCPhotoGalleryItemView *item in self.visibleItems) {
         index = item.index;
-        if (index < (NSUInteger)firstVisibleIndex || index > (NSUInteger)lastVisibleIndex) {
+        if (index < firstVisibleIndex || index > lastVisibleIndex) {
             [self.recycledItems addObject:item];
             [item prepareForReuse];
             [item removeFromSuperview];
@@ -271,8 +271,9 @@
             if (!item) {
                 item = [UCPhotoGalleryItemView new];
                 item.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-                item.translatesAutoresizingMaskIntoConstraints = NO;
                 item.galleryItemDelegate = self;
+                item.translatesAutoresizingMaskIntoConstraints = NO;
+                item.userInteractionEnabled = self.isFullscreen;
             }
 
             [self.visibleItems addObject:item];
@@ -318,7 +319,7 @@
  */
 - (BOOL)isItemVisibleAtIndex:(NSUInteger)index {
     for (UCPhotoGalleryItemView *item in self.visibleItems) {
-        if (item.index == self.currentIndex) {
+        if (item.index == index) {
             return YES;
         }
     }
