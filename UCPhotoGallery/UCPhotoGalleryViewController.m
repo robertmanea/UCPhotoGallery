@@ -336,6 +336,11 @@
     return NO;
 }
 
+/**
+ *  Removes a gallery item from the recycle pool
+ *
+ *  @return The gallery item to be recycled
+ */
 - (UCPhotoGalleryItemView *)dequeueRecycledItem {
     if (!self.recycledItems.count) {
         return nil;
@@ -344,6 +349,15 @@
     UCPhotoGalleryItemView *item = [self.recycledItems anyObject];
     [self.recycledItems removeObject:item];
     return item;
+}
+
+/**
+ *  Shows or hides the done button based on whether the gallery is full-screen and whether the 
+ *  currently visible item is zoomed in at all
+ */
+- (void)updateDoneButtonVisibility {
+    CGFloat zoomScale = self.visibleItem.zoomScale;
+    self.doneButton.hidden = !self.isFullscreen || (zoomScale > self.visibleItem.minimumZoomScale);
 }
 
 /**
@@ -472,10 +486,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
 }
 
-- (void)galleryItem:(UCPhotoGalleryItemView *)galleryItem didZoomToScale:(CGFloat)zoomScale {
-    if (galleryItem == self.visibleItem) {
-        self.doneButton.hidden = !self.isFullscreen || (zoomScale != galleryItem.minimumZoomScale);
-    }
+- (void)galleryItemDidZoom:(__unused UCPhotoGalleryItemView *)galleryItem {
+    [self updateDoneButtonVisibility];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -493,11 +505,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     NSUInteger previousIndex = self.currentIndex;
     _currentIndex = index; // use the ivar to avoid setter logic
 
-    // Notify delegate of page change
-    if (self.urls.count &&
-        self.currentIndex != previousIndex &&
-        [self.delegate respondsToSelector:@selector(galleryView:pageChanged:)]) {
-        [self.delegate galleryView:self pageChanged:index];
+    if (self.urls.count && self.currentIndex != previousIndex) {
+        [self updateDoneButtonVisibility];
+
+        // Notify delegate of page change
+        if ([self.delegate respondsToSelector:@selector(galleryView:pageChanged:)]) {
+            [self.delegate galleryView:self pageChanged:index];
+        }
     }
 }
 

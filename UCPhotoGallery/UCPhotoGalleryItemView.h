@@ -20,10 +20,8 @@
  *  Notifies that zooming has occurred
  *
  *  @param galleryItem The zoomed item
- *  @param zoomScale   The scroll view's zoom scale
  */
-- (void)galleryItem:(UCPhotoGalleryItemView *)galleryItem
-     didZoomToScale:(CGFloat)zoomScale;
+- (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem;
 @end
 
 @interface UCPhotoGalleryItemView : UIScrollView

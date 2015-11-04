@@ -182,8 +182,8 @@
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView {
     [self setNeedsLayout];
     [self layoutIfNeeded];
-    if ([self.galleryItemDelegate respondsToSelector:@selector(galleryItem:didZoomToScale:)]) {
-        [self.galleryItemDelegate galleryItem:self didZoomToScale:self.zoomScale];
+    if ([self.galleryItemDelegate respondsToSelector:@selector(galleryItemDidZoom:)]) {
+        [self.galleryItemDelegate galleryItemDidZoom:self];
     }
 }
 

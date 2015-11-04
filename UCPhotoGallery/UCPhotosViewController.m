@@ -177,6 +177,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:UICollectionViewScrollPositionNone
                                         animated:NO];
+    [self updateTransitionControllerWithSelectedView];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
