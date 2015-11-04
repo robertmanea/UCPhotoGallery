@@ -84,7 +84,6 @@
                                                                action:@selector(scrollViewPanned:)];
             recognizer.direction = UCGestureRecognizerDirectionVertical;
             recognizer.delegate = self;
-            recognizer.offsetThreshold = 20;
             [scrollView addGestureRecognizer:recognizer];
             recognizer;
         });
