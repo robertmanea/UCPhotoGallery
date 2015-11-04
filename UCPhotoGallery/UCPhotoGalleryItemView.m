@@ -163,7 +163,7 @@
     self.scrollEnabled = NO;
 
     // Layout
-    [self setNeedsLayout];
+    [self layoutSubviews];
 }
 
 - (CGRect)imageFrame {

@@ -129,8 +129,7 @@
     // Annoying hacky way to ensure the layout is actually 100% finished before attempting to pass this info
     // on to the transition controller.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.transitionController.presentFromRect = [self imageFrameInSuperview];
-        self.transitionController.transitionImage = self.visibleItem.imageView.image;
+        [self updateTransitionControllerWithSelectedView];
     });
 }
 
@@ -151,6 +150,15 @@
     self.rotating = NO;
 
     [self layoutVisibleItems];
+}
+
+- (void)updateTransitionControllerWithSelectedView {
+    if (self.isFullscreen || !self.parentViewController) {
+        return;
+    }
+
+    self.transitionController.presentFromRect = [self imageFrameInSuperview];
+    self.transitionController.transitionImage = self.visibleItem.imageView.image;
 }
 
 - (void)reloadData {
@@ -184,8 +192,7 @@
         gallery;
     });
 
-    self.transitionController.presentFromRect = [self imageFrameInSuperview];
-    self.transitionController.transitionImage = self.visibleItem.imageView.image;
+    [self updateTransitionControllerWithSelectedView];
 
     [viewController presentViewController:galleryVC
                                  animated:YES
@@ -209,9 +216,8 @@
 
 - (CGRect)imageFrameInSuperview {
     UCPhotoGalleryItemView *visibleItem = [self visibleItem];
-    CGRect ret = visibleItem.imageView.frame;
-    ret = [self.view.superview convertRect:ret
-                                  fromView:self.view];
+    CGRect ret = [self.view.superview convertRect:visibleItem.imageView.frame
+                                         fromView:self.view];
     return ret;
 }
 
@@ -444,8 +450,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     self.visibleItem.alpha = 0;
 
     if (self.visibleItem.imageView.image) {
-        self.transitionController.presentFromRect = [self imageFrameInSuperview];
-        self.transitionController.transitionImage = self.visibleItem.imageView.image;
+        [self updateTransitionControllerWithSelectedView];
     }
 }
 
@@ -463,8 +468,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
  */
 - (void)imageLoadedForGalleryItem:(UCPhotoGalleryItemView *)galleryItem {
     if (galleryItem == self.visibleItem) {
-        self.transitionController.presentFromRect = [self imageFrameInSuperview];
-        self.transitionController.transitionImage = galleryItem.imageView.image;
+        [self updateTransitionControllerWithSelectedView];
     }
 }
 

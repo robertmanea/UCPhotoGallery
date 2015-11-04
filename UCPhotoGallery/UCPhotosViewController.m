@@ -41,11 +41,15 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    [self updateTransitionControllerWithSelectedView];
+}
 
+- (void)updateTransitionControllerWithSelectedView {
     UCPhotoCell *selectedCell = [self selectedCell];
     if (selectedCell) {
-        self.transitionController.presentFromRect = [self.view convertRect:selectedCell.imageFrame
-                                                                  fromView:selectedCell.contentView];
+        UIViewController *container = self.parentViewController;
+        self.transitionController.presentFromRect = [container.view convertRect:[selectedCell imageFrame]
+                                                                       fromView:selectedCell.contentView];
         self.transitionController.transitionImage = selectedCell.image;
         selectedCell.alpha = 0;
     }
@@ -118,27 +122,26 @@
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndex = indexPath.row;
     UIViewController *container = self.parentViewController;
-    self.transitionController.presentFromRect = [container.view convertRect:[self.selectedCell imageFrame]
-                                                                   fromView:self.selectedCell.contentView];
-    self.transitionController.transitionImage = self.selectedCell.image;
     UCPhotoGalleryViewController *galleryVC = ({
         UCPhotoGalleryViewController *presentVC = [UCPhotoGalleryViewController new];
+        presentVC.isFullscreen = YES;
         presentVC.dataSource = self.dataSource;
         presentVC.delegate = self;
         presentVC.view.frame = container.view.bounds;
-        presentVC.isFullscreen = YES;
         presentVC.currentIndex = indexPath.row;
         presentVC.transitioningDelegate = self;
         presentVC.modalPresentationStyle = UIModalPresentationCustom;
         presentVC;
     });
 
+    [self updateTransitionControllerWithSelectedView];
+
     [container presentViewController:galleryVC
                             animated:YES
                           completion:nil];
 
     // Give the animation a little time to begin to avoid the image briefly disappearing
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         self.selectedCell.alpha = 0;
     });
 }
@@ -147,9 +150,9 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 - (void)imageLoadedForPhotoCell:(UCPhotoCell *)cell {
     // If an image loads and the host cell is improperly sized, update the collection view's layout
     if ([self cachedHeightForImageAtURL:cell.url] != cell.bounds.size.height) {
-        [UIView animateWithDuration:0.1 animations:^{
-            [self.collectionView.collectionViewLayout invalidateLayout];
-        }];
+        // NOTE: This was previously animated, but the collection view is not interactive during the animations,
+        // so non-animated it is
+        [self.collectionView.collectionViewLayout invalidateLayout];
     }
 }
 
