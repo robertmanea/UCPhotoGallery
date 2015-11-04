@@ -1,7 +1,7 @@
 #import "UCPhotoGalleryViewController.h"
 #import "UCPhotoGalleryItemView.h"
 #import "UCPhotoGalleryFullscreenTransitionController.h"
-#import "UCVerticalPanGestureRecognizer.h"
+#import <UCDirectionalPanGestureRecognizer/UCDirectionalPanGestureRecognizer.h>
 
 @interface UCPhotoGalleryViewController () <UCGalleryViewDelegate, UCGalleryItemDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UIViewControllerTransitioningDelegate>
 
@@ -14,7 +14,7 @@
 
 @property (nonatomic) UIButton *doneButton;
 @property (nonatomic) UIScrollView *scrollView;
-@property (nonatomic) UCVerticalPanGestureRecognizer *scrollDismissRecognizer;
+@property (nonatomic) UCDirectionalPanGestureRecognizer *scrollDismissRecognizer;
 @property (nonatomic) UCPhotoGalleryFullscreenTransitionController *transitionController;
 
 @end
@@ -79,9 +79,10 @@
         scrollView.showsVerticalScrollIndicator = NO;
 
         self.scrollDismissRecognizer = ({
-            UCVerticalPanGestureRecognizer *recognizer =
-            [[UCVerticalPanGestureRecognizer alloc] initWithTarget:self
-                                                            action:@selector(scrollViewPanned:)];
+            UCDirectionalPanGestureRecognizer *recognizer =
+            [[UCDirectionalPanGestureRecognizer alloc] initWithTarget:self
+                                                               action:@selector(scrollViewPanned:)];
+            recognizer.direction = UCGestureRecognizerDirectionVertical;
             recognizer.delegate = self;
             recognizer.offsetThreshold = 20;
             [scrollView addGestureRecognizer:recognizer];
@@ -396,7 +397,7 @@
 }
 
 #pragma mark - Gesture Recognizers
-- (void)scrollViewPanned:(UCVerticalPanGestureRecognizer *)recognizer {
+- (void)scrollViewPanned:(UCDirectionalPanGestureRecognizer *)recognizer {
     static UCPhotoGalleryItemView *visibleItemView = nil;
     CGFloat yTranslation = recognizer.translation;
     CGFloat translationThreshold = 175;

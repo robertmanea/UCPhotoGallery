@@ -25,8 +25,6 @@
 		9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */; settings = {ASSET_TAGS = (); }; };
 		9376C50E1BE958610097257C /* UCPhotosViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5021BE958610097257C /* UCPhotosViewController.h */; settings = {ASSET_TAGS = (); }; };
 		9376C50F1BE958610097257C /* UCPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5031BE958610097257C /* UCPhotosViewController.m */; settings = {ASSET_TAGS = (); }; };
-		9376C5101BE958610097257C /* UCVerticalPanGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5041BE958610097257C /* UCVerticalPanGestureRecognizer.h */; settings = {ASSET_TAGS = (); }; };
-		9376C5111BE958610097257C /* UCVerticalPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5051BE958610097257C /* UCVerticalPanGestureRecognizer.m */; settings = {ASSET_TAGS = (); }; };
 		9376C5121BE958F60097257C /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9376C4D41BE958130097257C /* UCPhotoGallery.framework */; };
 		9376C5131BE958F60097257C /* UCPhotoGallery.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9376C4D41BE958130097257C /* UCPhotoGallery.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -81,8 +79,6 @@
 		9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryViewController.m; sourceTree = "<group>"; };
 		9376C5021BE958610097257C /* UCPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotosViewController.h; sourceTree = "<group>"; };
 		9376C5031BE958610097257C /* UCPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotosViewController.m; sourceTree = "<group>"; };
-		9376C5041BE958610097257C /* UCVerticalPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCVerticalPanGestureRecognizer.h; sourceTree = "<group>"; };
-		9376C5051BE958610097257C /* UCVerticalPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCVerticalPanGestureRecognizer.m; sourceTree = "<group>"; };
 		AADA9F2A03B1C257AC17F729 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -149,8 +145,6 @@
 				9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */,
 				9376C5021BE958610097257C /* UCPhotosViewController.h */,
 				9376C5031BE958610097257C /* UCPhotosViewController.m */,
-				9376C5041BE958610097257C /* UCVerticalPanGestureRecognizer.h */,
-				9376C5051BE958610097257C /* UCVerticalPanGestureRecognizer.m */,
 			);
 			path = UCPhotoGallery;
 			sourceTree = "<group>";
@@ -195,7 +189,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9376C5101BE958610097257C /* UCVerticalPanGestureRecognizer.h in Headers */,
 				9376C4D81BE958130097257C /* UCPhotoGallery.h in Headers */,
 				9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */,
 				9376C50E1BE958610097257C /* UCPhotosViewController.h in Headers */,
@@ -343,7 +336,6 @@
 			files = (
 				9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */,
 				9376C5071BE958610097257C /* UCPhotoCell.m in Sources */,
-				9376C5111BE958610097257C /* UCVerticalPanGestureRecognizer.m in Sources */,
 				9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */,
 				9376C50F1BE958610097257C /* UCPhotosViewController.m in Sources */,
 				9376C5091BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m in Sources */,

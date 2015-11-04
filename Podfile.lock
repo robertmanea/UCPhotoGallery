@@ -2,11 +2,23 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
+  - UCDirectionalPanGestureRecognizer (0.1)
 
 DEPENDENCIES:
   - SDWebImage
+  - UCDirectionalPanGestureRecognizer (from `https://github.com/bryanoltman/UCDirectionalPanGestureRecognizer`)
+
+EXTERNAL SOURCES:
+  UCDirectionalPanGestureRecognizer:
+    :git: https://github.com/bryanoltman/UCDirectionalPanGestureRecognizer
+
+CHECKOUT OPTIONS:
+  UCDirectionalPanGestureRecognizer:
+    :commit: dc13eba737bfc801b5f3b1360c4e415d82253ea5
+    :git: https://github.com/bryanoltman/UCDirectionalPanGestureRecognizer
 
 SPEC CHECKSUMS:
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  UCDirectionalPanGestureRecognizer: 6910c33610498991ce2ce96460dabc82c1157d8f
 
 COCOAPODS: 0.39.0
