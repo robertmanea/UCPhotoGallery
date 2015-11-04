@@ -399,7 +399,7 @@
 #pragma mark - Gesture Recognizers
 - (void)scrollViewPanned:(UCDirectionalPanGestureRecognizer *)recognizer {
     static UCPhotoGalleryItemView *visibleItemView = nil;
-    CGFloat yTranslation = recognizer.translation;
+    CGFloat yTranslation = [recognizer translationInView:self.view].y;
     CGFloat translationThreshold = 175;
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
