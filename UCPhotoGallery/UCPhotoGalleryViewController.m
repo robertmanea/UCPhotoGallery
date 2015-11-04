@@ -59,6 +59,9 @@
     _isFullscreen = isFullscreen;
     self.doneButton.hidden = !isFullscreen;
     self.scrollDismissRecognizer.enabled = isFullscreen;
+    for (UCPhotoGalleryItemView *item in self.visibleItems) {
+        item.userInteractionEnabled = isFullscreen;
+    }
 }
 
 #pragma mark - View Lifecycle
