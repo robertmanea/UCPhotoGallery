@@ -56,29 +56,37 @@
 
     self.view.backgroundColor = [UIColor whiteColor];
 
-//    self.galleryVC = ({
-//        CGRect galleryFrame = self.view.bounds ;
-//        galleryFrame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
-//        galleryFrame.size.height = 350;
-//        UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
-//        gallery.dataSource = self;
-//        gallery.delegate = self;
-//        gallery.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-//        gallery.view.frame = galleryFrame;
-//        [self addChildViewController:gallery];
-//        [self.view addSubview:gallery.view];
-//        gallery;
-//    });
+    self.galleryVC = ({
+        CGRect galleryFrame = self.view.bounds ;
+        galleryFrame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
+        galleryFrame.size.height = 350;
+        UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
+        gallery.dataSource = self;
+        gallery.delegate = self;
+        gallery.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;
+        gallery.view.frame = galleryFrame;
+        [self addChildViewController:gallery];
+        [self.view addSubview:gallery.view];
+        gallery;
+    });
 
-        self.photosVC = ({
-            UCPhotosViewController *vc = [UCPhotosViewController new];
-            vc.view.frame = self.view.bounds;
-            vc.dataSource = self;
-            vc.view.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
-            [self addChildViewController:vc];
-            [self.view addSubview:vc.view];
-            vc;
-        });
+    self.photosVC = ({
+        UCPhotosViewController *vc = [UCPhotosViewController new];
+        CGRect frame = self.view.bounds;
+//        frame.size.width = 175;
+//        frame.origin.x = 100;
+//        frame.origin.y = 64;
+        vc.view.frame = frame;
+        vc.dataSource = self;
+        vc.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        vc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+        [self addChildViewController:vc];
+        [self.view addSubview:vc.view];
+        vc;
+    });
+
+    self.galleryVC.view.hidden = YES;
+//    self.photosVC.view.hidden = YES;
 }
 
 #pragma mark - UCGalleryView
