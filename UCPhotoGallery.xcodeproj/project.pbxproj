@@ -18,7 +18,7 @@
 		9376C5071BE958610097257C /* UCPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FB1BE958610097257C /* UCPhotoCell.m */; settings = {ASSET_TAGS = (); }; };
 		9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */; settings = {ASSET_TAGS = (); }; };
 		9376C5091BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FD1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m */; settings = {ASSET_TAGS = (); }; };
-		9376C50A1BE958610097257C /* UCPhotoGalleryItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FE1BE958610097257C /* UCPhotoGalleryItemView.h */; settings = {ASSET_TAGS = (); }; };
+		9376C50A1BE958610097257C /* UCPhotoGalleryItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FE1BE958610097257C /* UCPhotoGalleryItemView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */; settings = {ASSET_TAGS = (); }; };
 		9376C50C1BE958610097257C /* UCPhotoGalleryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -198,8 +198,8 @@
 				9376C4D81BE958130097257C /* UCPhotoGallery.h in Headers */,
 				9376C50E1BE958610097257C /* UCPhotosViewController.h in Headers */,
 				9376C50C1BE958610097257C /* UCPhotoGalleryViewController.h in Headers */,
-				9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */,
 				9376C50A1BE958610097257C /* UCPhotoGalleryItemView.h in Headers */,
+				9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */,
 				9376C5061BE958610097257C /* UCPhotoCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
