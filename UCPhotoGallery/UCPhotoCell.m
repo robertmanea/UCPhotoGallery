@@ -1,5 +1,5 @@
 #import "UCPhotoCell.h"
-#import "UIImageView+WebCache.h"
+#import <WebImage/UIImageView+WebCache.h>
 @import AVFoundation;
 
 @interface UCPhotoCell ()

@@ -10,7 +10,6 @@
 
 #import "UCPhotoGalleryViewController.h"
 #import "UCPhotosViewController.h"
-#import <UCDirectionalPanGestureRecognizer/UCDirectionalPanGestureRecognizer.h>
 
 @interface ViewController () <UCGalleryViewDataSource, UCGalleryViewDelegate>
 @property UCPhotoGalleryViewController *galleryVC;
