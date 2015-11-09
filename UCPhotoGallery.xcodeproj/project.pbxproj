@@ -14,16 +14,16 @@
 		9376C4F01BE958520097257C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9376C4EE1BE958520097257C /* Main.storyboard */; };
 		9376C4F21BE958520097257C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9376C4F11BE958520097257C /* Assets.xcassets */; };
 		9376C4F51BE958520097257C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9376C4F31BE958520097257C /* LaunchScreen.storyboard */; };
-		9376C5061BE958610097257C /* UCPhotoCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FA1BE958610097257C /* UCPhotoCell.h */; settings = {ASSET_TAGS = (); }; };
-		9376C5071BE958610097257C /* UCPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FB1BE958610097257C /* UCPhotoCell.m */; settings = {ASSET_TAGS = (); }; };
-		9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */; settings = {ASSET_TAGS = (); }; };
-		9376C5091BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FD1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m */; settings = {ASSET_TAGS = (); }; };
+		9376C5061BE958610097257C /* UCPhotoCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FA1BE958610097257C /* UCPhotoCell.h */; };
+		9376C5071BE958610097257C /* UCPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FB1BE958610097257C /* UCPhotoCell.m */; };
+		9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */; };
+		9376C5091BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FD1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m */; };
 		9376C50A1BE958610097257C /* UCPhotoGalleryItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FE1BE958610097257C /* UCPhotoGalleryItemView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */; settings = {ASSET_TAGS = (); }; };
+		9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */; };
 		9376C50C1BE958610097257C /* UCPhotoGalleryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */; settings = {ASSET_TAGS = (); }; };
+		9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */; };
 		9376C50E1BE958610097257C /* UCPhotosViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5021BE958610097257C /* UCPhotosViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9376C50F1BE958610097257C /* UCPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5031BE958610097257C /* UCPhotosViewController.m */; settings = {ASSET_TAGS = (); }; };
+		9376C50F1BE958610097257C /* UCPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5031BE958610097257C /* UCPhotosViewController.m */; };
 		9376C5121BE958F60097257C /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9376C4D41BE958130097257C /* UCPhotoGallery.framework */; };
 		9376C5131BE958F60097257C /* UCPhotoGallery.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9376C4D41BE958130097257C /* UCPhotoGallery.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		93C1CAB11BEBD88E006956E1 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */; };
@@ -475,6 +475,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"-Wextra",
+					"-Wall",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.compass.UCPhotoGallery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -496,6 +500,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_CFLAGS = (
+					"-Wextra",
+					"-Wall",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.compass.UCPhotoGallery;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

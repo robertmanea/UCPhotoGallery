@@ -12,5 +12,13 @@
  *  Provides photo URLs
  */
 @property (weak, nonatomic) NSObject<UCGalleryViewDataSource>* dataSource;
+@property (weak, nonatomic) NSObject<UCGalleryViewDelegate>* delegate;
+
+/**
+ *  If a full-screen gallery is present, dismisses it
+ *
+ *  @param animated Whether the dismiss transition is animated
+ */
+- (void)dismiss:(BOOL)animated;
 
 @end

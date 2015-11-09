@@ -12,7 +12,6 @@
 @property BOOL performingLayout;
 @property BOOL rotating;
 
-@property (nonatomic) UIButton *doneButton;
 @property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic) UCDirectionalPanGestureRecognizer *scrollDismissRecognizer;
 @property (nonatomic) UCPhotoGalleryFullscreenTransitionController *transitionController;
@@ -25,17 +24,25 @@
     self = [super init];
     if (self) {
         self.transitionController = [UCPhotoGalleryFullscreenTransitionController new];
-        [self.view setNeedsLayout];
+        self.currentIndex = 0;
+        self.rotating = NO;
+        self.visibleItems = [NSMutableSet new];
+        self.recycledItems = [NSMutableSet new];
     }
 
     return self;
 }
 
-#pragma mark - Getters/Setters
-- (UIColor *)backgroundColor {
-    return self.scrollView.backgroundColor;
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    for (UCPhotoGalleryItemView *item in self.visibleItems) {
+        item.userInteractionEnabled = self.isFullscreen;
+    }
+
+    self.scrollDismissRecognizer.enabled = self.isFullscreen;
 }
 
+#pragma mark - Getters/Setters
 - (void)setCurrentIndex:(NSUInteger)currentIndex {
     [self setCurrentIndex:currentIndex animated:NO];
 }
@@ -47,6 +54,9 @@
         CGRect frame = [self frameForItemAtIndex:currentIndex];
         [self.scrollView setContentOffset:CGPointMake(frame.origin.x, 0)
                                  animated:animated];
+        if ([self.delegate respondsToSelector:@selector(galleryViewController:pageChanged:)]) {
+            [self.delegate galleryViewController:self pageChanged:currentIndex];
+        }
     }
 }
 
@@ -55,24 +65,20 @@
     [self reloadData];
 }
 
-- (void)setIsFullscreen:(BOOL)isFullscreen {
-    _isFullscreen = isFullscreen;
-    self.doneButton.hidden = !isFullscreen;
-    self.scrollDismissRecognizer.enabled = isFullscreen;
-    for (UCPhotoGalleryItemView *item in self.visibleItems) {
-        item.userInteractionEnabled = isFullscreen;
-    }
+- (BOOL)isFullscreen {
+    return self.presentingViewController != nil;
 }
 
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.view.backgroundColor = [UIColor blackColor];
+
     self.scrollView = ({
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
         scrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth|
                                        UIViewAutoresizingFlexibleHeight);
-        scrollView.backgroundColor = [UIColor blackColor];
         scrollView.delegate = self;
         scrollView.pagingEnabled = YES;
         scrollView.showsHorizontalScrollIndicator = NO;
@@ -91,25 +97,6 @@
         [self.view addSubview:scrollView];
         scrollView;
     });
-
-    self.doneButton = ({
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 50, 30, 100, 44)];
-        button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleBottomMargin;
-        [button setTitle:@"Done" forState:UIControlStateNormal];
-        [button sizeToFit];
-        [button addTarget:self
-                   action:@selector(doneButtonClicked:)
-         forControlEvents:UIControlEventTouchUpInside];
-        button.hidden = !self.isFullscreen;
-        [self.view addSubview:button];
-        button;
-    });
-
-    self.currentIndex = 0;
-    self.isFullscreen = NO;
-    self.rotating = NO;
-    self.visibleItems = [NSMutableSet new];
-    self.recycledItems = [NSMutableSet new];
 
     [self.view addGestureRecognizer:
      [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -133,20 +120,20 @@
     });
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                duration:(NSTimeInterval)duration {
+- (void)willRotateToInterfaceOrientation:(__unused UIInterfaceOrientation)toInterfaceOrientation
+                                duration:(__unused NSTimeInterval)duration {
     // Remember index before rotation
     self.indexBeforeRotation = self.currentIndex;
     self.rotating = YES;
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                         duration:(NSTimeInterval)duration {
+- (void)willAnimateRotationToInterfaceOrientation:(__unused UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(__unused NSTimeInterval)duration {
     self.currentIndex = self.indexBeforeRotation;
     [self layoutVisibleItems];
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+- (void)didRotateFromInterfaceOrientation:(__unused UIInterfaceOrientation)fromInterfaceOrientation {
     self.rotating = NO;
 
     [self layoutVisibleItems];
@@ -174,19 +161,18 @@
     [self.view setNeedsLayout];
 }
 
-- (void)expandInViewController:(UIViewController *)viewController {
-    if (!viewController || self.isFullscreen) {
+- (void)expand:(BOOL)animated {
+    if (self.isFullscreen) {
         return;
     }
 
     // Create a fullscreen gallery view controller
     UCPhotoGalleryViewController *galleryVC = ({
         UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
-        gallery.view.frame = viewController.view.bounds;
+        gallery.view.frame = [[[UIApplication sharedApplication] delegate] window].bounds;
         gallery.currentIndex = self.currentIndex;
         gallery.dataSource = self.dataSource;
         gallery.delegate = self;
-        gallery.isFullscreen = YES;
         gallery.transitioningDelegate = self;
         gallery.modalPresentationStyle = UIModalPresentationCustom;
         gallery;
@@ -194,9 +180,17 @@
 
     [self updateTransitionControllerWithSelectedView];
 
-    [viewController presentViewController:galleryVC
-                                 animated:YES
-                               completion:nil];
+    if ([self.delegate respondsToSelector:@selector(willPresentGalleryViewController:)]) {
+        [self.delegate willPresentGalleryViewController:galleryVC];
+    }
+
+    [self presentViewController:galleryVC
+                       animated:animated
+                     completion:^{
+                         if ([self.delegate respondsToSelector:@selector(didPresentGalleryViewController:)]) {
+                             [self.delegate didPresentGalleryViewController:galleryVC];
+                         }
+                     }];
 
     // Give the transition animation time to start before hiding the selected item
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -249,15 +243,15 @@
     }
 
     CGRect visibleBounds = self.scrollView.bounds;
-    NSInteger firstVisibleIndex = (NSInteger)floorf(CGRectGetMinX(visibleBounds) / CGRectGetWidth(visibleBounds));
-    NSInteger lastVisibleIndex  = (NSInteger)floorf(CGRectGetMaxX(visibleBounds) / CGRectGetWidth(visibleBounds));
+    NSUInteger firstVisibleIndex = (NSUInteger)floorf(CGRectGetMinX(visibleBounds) / CGRectGetWidth(visibleBounds));
+    NSUInteger lastVisibleIndex  = (NSUInteger)floorf(CGRectGetMaxX(visibleBounds) / CGRectGetWidth(visibleBounds));
 
     // Ensure both indexes are within the url array bounds
-    firstVisibleIndex = MIN(MAX(0, firstVisibleIndex), self.urls.count - 1);
-    lastVisibleIndex = MIN(MAX(0, lastVisibleIndex), self.urls.count - 1);
+    firstVisibleIndex = MIN(MAX(0ul, firstVisibleIndex), self.urls.count - 1);
+    lastVisibleIndex = MIN(MAX(0ul, lastVisibleIndex), self.urls.count - 1);
 
     // Move non-visible items to the reuse pool
-    NSInteger index;
+    NSUInteger index;
     for (UCPhotoGalleryItemView *item in self.visibleItems) {
         index = item.index;
         if (index < firstVisibleIndex || index > lastVisibleIndex) {
@@ -352,15 +346,6 @@
 }
 
 /**
- *  Shows or hides the done button based on whether the gallery is full-screen and whether the
- *  currently visible item is zoomed in at all
- */
-- (void)updateDoneButtonVisibility {
-    CGFloat zoomScale = self.visibleItem.zoomScale;
-    self.doneButton.hidden = !self.isFullscreen || (zoomScale > self.visibleItem.minimumZoomScale);
-}
-
-/**
  *  Prepare the gallery item for presentation
  *
  *  @param view  The gallery item
@@ -386,15 +371,6 @@
     return CGPointMake(newOffset, 0);
 }
 
-#pragma mark - UIActions
-- (void)doneButtonClicked:(__unused UIButton *)sender {
-    if ([self.delegate respondsToSelector:@selector(dismissFullscreenGalleryController:)]) {
-        [self.delegate dismissFullscreenGalleryController:self];
-    } else {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
 #pragma mark - Gesture Recognizers
 - (void)scrollViewPanned:(UCDirectionalPanGestureRecognizer *)recognizer {
     static UCPhotoGalleryItemView *visibleItemView = nil;
@@ -403,11 +379,14 @@
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
             visibleItemView = [self visibleItem];
+            if ([self.delegate respondsToSelector:@selector(galleryViewControllerWillDismiss:)]) {
+                [self.delegate galleryViewControllerWillDismiss:self];
+            }
             break;
         case UIGestureRecognizerStateChanged:
             visibleItemView.transform = CGAffineTransformMakeTranslation(0, yTranslation);
-            self.scrollView.backgroundColor = [UIColor colorWithWhite:0
-                                                                alpha:1 - (fabs(yTranslation) / translationThreshold)];
+            self.view.backgroundColor = [UIColor colorWithWhite:0
+                                                          alpha:1 - (fabs(yTranslation) / translationThreshold)];
             break;
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
@@ -417,15 +396,18 @@
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      visibleItemView.transform = CGAffineTransformIdentity;
-                                     self.scrollView.backgroundColor = [UIColor blackColor];
+                                     self.view.backgroundColor = [UIColor blackColor];
                                  }];
-            } else {
-                self.scrollView.backgroundColor = [UIColor clearColor];
-                if ([self.delegate respondsToSelector:@selector(dismissFullscreenGalleryController:)]) {
-                    [self.delegate dismissFullscreenGalleryController:self];
-                } else {
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                if ([self.delegate respondsToSelector:@selector(galleryViewControllerCancelledDismiss:)]) {
+                    [self.delegate galleryViewControllerCancelledDismiss:self];
                 }
+            } else {
+                self.view.backgroundColor = [UIColor clearColor];
+                [self dismissViewControllerAnimated:YES completion:^{
+                    if ([self.delegate respondsToSelector:@selector(galleryViewControllerDidDismiss:)]) {
+                        [self.delegate galleryViewControllerDidDismiss:self];
+                    }
+                }];
             }
 
             visibleItemView = nil;
@@ -436,11 +418,47 @@
     }
 }
 
-- (void)singleTapRecognized:(UITapGestureRecognizer *)recognizer {
-    if (!self.isFullscreen) {
-        if (self.parentViewController) {
-            [self expandInViewController:self.parentViewController];
+- (void)dismiss:(BOOL)animated {
+    if (!self.presentedViewController) {
+        return;
+    }
+
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerWillDismiss:)]) {
+        [self.delegate galleryViewControllerWillDismiss:self];
+    }
+
+    [self dismissViewControllerAnimated:animated completion:^{
+        if ([self.delegate respondsToSelector:@selector(galleryViewControllerDidDismiss:)]) {
+            [self.delegate galleryViewControllerDidDismiss:self];
         }
+
+        self.visibleItem.alpha = 1;
+    }];
+}
+
+- (void)galleryViewControllerWillDismiss:(__unused UCPhotoGalleryViewController *)galleryViewController {
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerWillDismiss:)]) {
+        [self.delegate galleryViewControllerWillDismiss:self];
+    }
+}
+
+- (void)galleryViewControllerCancelledDismiss:(__unused UCPhotoGalleryViewController *)galleryViewController {
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerCancelledDismiss:)]) {
+        [self.delegate galleryViewControllerCancelledDismiss:self];
+    }
+}
+
+- (void)galleryViewControllerDidDismiss:(__unused UCPhotoGalleryViewController *)galleryViewController {
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerDidDismiss:)]) {
+        [self.delegate galleryViewControllerDidDismiss:self];
+    }
+
+    self.visibleItem.alpha = 1;
+}
+
+- (void)singleTapRecognized:(__unused UITapGestureRecognizer *)recognizer {
+    if (!self.isFullscreen) {
+        [self expand:YES];
     }
 }
 
@@ -457,7 +475,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 #pragma mark - UCGalleryViewDelegate
-- (void)galleryView:(UCPhotoGalleryViewController *)galleryViewController
+- (void)galleryViewController:(__unused UCPhotoGalleryViewController *)galleryViewController
         pageChanged:(NSUInteger)page {
     self.visibleItem.alpha = 1;
     [self setCurrentIndex:page animated:NO];
@@ -466,12 +484,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if (self.visibleItem.imageView.image) {
         [self updateTransitionControllerWithSelectedView];
     }
-}
-
-- (void)dismissFullscreenGalleryController:(UCPhotoGalleryViewController *)galleryViewController {
-    [galleryViewController dismissViewControllerAnimated:YES completion:^{
-        self.visibleItem.alpha = 1;
-    }];
 }
 
 #pragma mark - UCGalleryItemDelegate
@@ -487,11 +499,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 - (void)galleryItemDidZoom:(__unused UCPhotoGalleryItemView *)galleryItem {
-    [self updateDoneButtonVisibility];
+    // TODO forward this
 }
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(__unused UIScrollView *)scrollView {
     if (self.performingLayout || self.rotating) {
         return;
     }
@@ -500,17 +512,15 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
     // Calculate current item
     CGRect visibleBounds = self.scrollView.bounds;
-    NSInteger index = (NSInteger)(floorf(CGRectGetMidX(visibleBounds) / CGRectGetWidth(visibleBounds)));
-    index = MIN(MAX(0, index), self.urls.count - 1);
+    NSUInteger index = (NSUInteger)(floorf(CGRectGetMidX(visibleBounds) / CGRectGetWidth(visibleBounds)));
+    index = MIN(MAX(0ul, index), self.urls.count - 1);
     NSUInteger previousIndex = self.currentIndex;
     _currentIndex = index; // use the ivar to avoid setter logic
 
     if (self.urls.count && self.currentIndex != previousIndex) {
-        [self updateDoneButtonVisibility];
-
         // Notify delegate of page change
-        if ([self.delegate respondsToSelector:@selector(galleryView:pageChanged:)]) {
-            [self.delegate galleryView:self pageChanged:index];
+        if ([self.delegate respondsToSelector:@selector(galleryViewController:pageChanged:)]) {
+            [self.delegate galleryViewController:self pageChanged:index];
         }
     }
 }

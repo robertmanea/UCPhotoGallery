@@ -34,23 +34,46 @@
  *  @param galleryViewController The gallery view controller
  *  @param page                  The now-visible page
  */
-- (void)galleryView:(UCPhotoGalleryViewController *)galleryViewController
+- (void)galleryViewController:(UCPhotoGalleryViewController *)galleryViewController
         pageChanged:(NSUInteger)page;
 
 /**
- *  Allows the delegate to control the dismissal of a full-screen gallery controller
+ *  Notifies that the dismissal of a full-screen gallery controller has begun
  *
  *  @param galleryViewController The full-screen gallery controller
  */
-- (void)dismissFullscreenGalleryController:(UCPhotoGalleryViewController *)galleryViewController;
+- (void)galleryViewControllerWillDismiss:(UCPhotoGalleryViewController *)galleryViewController;
+
+/**
+ *  Notifies that the dismissal of a full-screen gallery controller was cancelled
+ *
+ *  @param galleryViewController The dismissing gallery view controller
+ */
+- (void)galleryViewControllerCancelledDismiss:(UCPhotoGalleryViewController *)galleryViewController;
+
+/**
+ *  Notifies that the dismissal of a full-screen gallery controller finished
+ *
+ *  @param galleryViewController The dismissing gallery view controller
+ */
+- (void)galleryViewControllerDidDismiss:(UCPhotoGalleryViewController *)galleryViewController;
+
+/**
+ *  Notifies that this controller will trigger a transition to a full-screen gallery view controller
+ *
+ *  @param galleryViewController The full-screen gallery view controller
+ */
+- (void)willPresentGalleryViewController:(UCPhotoGalleryViewController *)galleryViewController;
+
+/**
+ *  Notifies that this controller completed a transition to a full-screen gallery view controller
+ *
+ *  @param galleryViewController The full-screen gallery view controller
+ */
+- (void)didPresentGalleryViewController:(UCPhotoGalleryViewController *)galleryViewController;
 @end
 
 @interface UCPhotoGalleryViewController : UIViewController
-
-/**
- *  The background color of the gallery's scroll view
- */
-@property (readonly) UIColor *backgroundColor;
 
 /**
  *  The current visible gallery item
@@ -63,9 +86,18 @@
 @property (nonatomic) NSUInteger currentIndex;
 
 /**
- *  Whether the gallery view is in an expanded state (showing a done button, etc.)
+ *  If a full-screen gallery is present, dismisses it
+ *
+ *  @param animated Whether the dismiss transition is animated
  */
-@property (nonatomic) BOOL isFullscreen;
+- (void)dismiss:(BOOL)animated;
+
+/**
+ *  Creates a new full-screen gallery view controller
+ *
+ *  @param animated Whether to animate the transition
+ */
+- (void)expand:(BOOL)animated;
 
 @property (weak, nonatomic) NSObject<UCGalleryViewDataSource>* dataSource;
 @property (weak, nonatomic) NSObject<UCGalleryViewDelegate>* delegate;
@@ -74,13 +106,6 @@
  *  Reload image URLs from the dataSource and reset gallery items layout
  */
 - (void)reloadData;
-
-/**
- *  Creates a new full-screen gallery view controller and displays it in viewController
- *
- *  @param viewController The host view controller for display
- */
-- (void)expandInViewController:(UIViewController *)viewController;
 
 /**
  *  The frame of the image in the gallery view's superview

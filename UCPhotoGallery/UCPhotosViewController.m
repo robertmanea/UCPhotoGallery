@@ -8,6 +8,7 @@
 @property (nonatomic) CGRect selectedPhotoRect;
 @property (nonatomic) NSUInteger selectedIndex;
 @property (nonatomic) NSCache *heightCache;
+@property (nonatomic) UCPhotoGalleryViewController *fullscreenGalleryController;
 @end
 
 @implementation UCPhotosViewController
@@ -71,6 +72,21 @@
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
+- (void)dismiss:(BOOL)animated {
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerWillDismiss:)]) {
+        [self.delegate galleryViewControllerWillDismiss:self.fullscreenGalleryController];
+    }
+
+    [self dismissViewControllerAnimated:animated completion:^{
+        if ([self.delegate respondsToSelector:@selector(galleryViewControllerDidDismiss:)]) {
+            [self.delegate galleryViewControllerDidDismiss:self.fullscreenGalleryController];
+        }
+
+        self.selectedCell.alpha = 1;
+        self.selectedIndex = NSNotFound;
+    }];
+}
+
 #pragma mark - UICollectionView
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,13 +135,11 @@
 - (void)collectionView:(__unused UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndex = (NSUInteger)indexPath.row;
-    UIViewController *container = self.parentViewController;
     UCPhotoGalleryViewController *galleryVC = ({
         UCPhotoGalleryViewController *presentVC = [UCPhotoGalleryViewController new];
-        presentVC.isFullscreen = YES;
         presentVC.dataSource = self.dataSource;
         presentVC.delegate = self;
-        presentVC.view.frame = container.view.bounds;
+        presentVC.view.frame = [[[UIApplication sharedApplication] delegate] window].bounds;
         presentVC.currentIndex = (NSUInteger)indexPath.row;
         presentVC.transitioningDelegate = self;
         presentVC.modalPresentationStyle = UIModalPresentationCustom;
@@ -134,9 +148,17 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     [self updateTransitionControllerWithSelectedView];
 
-    [container presentViewController:galleryVC
+    if ([self.delegate respondsToSelector:@selector(willPresentGalleryViewController:)]) {
+        [self.delegate willPresentGalleryViewController:galleryVC];
+    }
+
+    [self presentViewController:galleryVC
                             animated:YES
-                          completion:nil];
+                          completion:^{
+                              if ([self.delegate respondsToSelector:@selector(didPresentGalleryViewController:)]) {
+                                  [self.delegate didPresentGalleryViewController:galleryVC];
+                              }
+                          }];
 
     // Give the animation a little time to begin to avoid the image briefly disappearing
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -155,16 +177,12 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 #pragma mark - UCGalleryDelegate
-- (void)dismissFullscreenGalleryController:(UCPhotoGalleryViewController *)galleryViewController {
-    UCPhotoCell *selectedCell = [self selectedCell];
-    [galleryViewController dismissViewControllerAnimated:YES completion:^{
-        selectedCell.alpha = 1;
-        self.selectedIndex = NSNotFound;
-    }];
-}
-
-- (void)galleryView:(__unused UCPhotoGalleryViewController *)galleryViewController
+- (void)galleryViewController:(UCPhotoGalleryViewController *)galleryViewController
         pageChanged:(NSUInteger)page {
+    if ([self.delegate respondsToSelector:@selector(galleryViewController:pageChanged:)]) {
+        [self.delegate galleryViewController:galleryViewController pageChanged:page];
+    }
+
     UCPhotoCell *previouslySelectedCell = [self selectedCell];
     previouslySelectedCell.alpha = 1;
 
@@ -176,6 +194,27 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
                                 atScrollPosition:UICollectionViewScrollPositionNone
                                         animated:NO];
     [self updateTransitionControllerWithSelectedView];
+}
+
+- (void)galleryViewControllerWillDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerWillDismiss:)]) {
+        [self.delegate galleryViewControllerWillDismiss:galleryViewController];
+    }
+}
+
+- (void)galleryViewControllerCancelledDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerCancelledDismiss:)]) {
+        [self.delegate galleryViewControllerCancelledDismiss:galleryViewController];
+    }
+}
+
+- (void)galleryViewControllerDidDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerDidDismiss:)]) {
+        [self.delegate galleryViewControllerDidDismiss:galleryViewController];
+    }
+
+    self.selectedCell.alpha = 1;
+    self.selectedIndex = NSNotFound;
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

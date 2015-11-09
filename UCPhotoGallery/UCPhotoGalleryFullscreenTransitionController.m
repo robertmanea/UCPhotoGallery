@@ -58,7 +58,7 @@
                              [context completeTransition:finished];
                          }];
     } else {
-        shadowboxView.backgroundColor = [fullscreenGalleryController backgroundColor];
+        shadowboxView.backgroundColor = [fullscreenGalleryController.view backgroundColor];
 
         startRect = [fullscreenGalleryController imageFrameInSuperview];
         startRect = CGRectOffset(startRect, 0, [fullscreenGalleryController visibleItem].transform.ty);

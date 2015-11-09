@@ -15,6 +15,9 @@
 @property UCPhotoGalleryViewController *galleryVC;
 @property UCPhotosViewController *photosVC;
 @property NSMutableArray *inactiveURLs;
+
+@property UIButton *doneButton;
+@property UILabel *pageLabel;
 @end
 
 @implementation ViewController
@@ -78,6 +81,7 @@
 //        frame.origin.y = 64;
         vc.view.frame = frame;
         vc.dataSource = self;
+        vc.delegate = self;
         vc.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         vc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
         [self addChildViewController:vc];
@@ -89,6 +93,11 @@
 //    self.photosVC.view.hidden = YES;
 }
 
+- (void)buttonPressed:(UIButton *)button {
+//    [self.galleryVC dismiss:YES];
+    [self.photosVC dismiss:YES];
+}
+
 #pragma mark - UCGalleryView
 // data source
 - (NSArray *)imageURLsForGalleryView:(UCPhotoGalleryViewController *)galleryViewController {
@@ -96,9 +105,41 @@
 }
 
 // delegate
-- (void)galleryView:(UCPhotoGalleryViewController *)galleryViewController
+- (void)didPresentGalleryViewController:(UCPhotoGalleryViewController *)galleryViewController {
+    self.doneButton = ({
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:@"DONE" forState:UIControlStateNormal];
+        [galleryViewController.view addSubview:button];
+        button;
+    });
+
+    self.pageLabel = ({
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 30, 100, 30)];
+        label.text = [NSString stringWithFormat:@"%@/%@", @(1), @(self.photoURLs.count)];
+        label.textColor = [UIColor whiteColor];
+        label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin;
+        [galleryViewController.view addSubview:label];
+        label;
+    });
+}
+
+- (void)galleryViewController:(UCPhotoGalleryViewController *)galleryViewController
         pageChanged:(NSUInteger)page {
-    NSLog(@"gallery view page changed to %@", @(page));
+    self.pageLabel.text = [NSString stringWithFormat:@"%@/%@", @(page + 1), @(self.photoURLs.count)];
+}
+
+- (void)galleryViewControllerCancelledDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+    self.doneButton.alpha = 1;
+
+}
+
+- (void)galleryViewControllerWillDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+    self.doneButton.alpha = 0;
+}
+
+- (void)galleryViewControllerDidDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+    self.doneButton = nil;
 }
 
 @end
