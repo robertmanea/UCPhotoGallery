@@ -243,15 +243,15 @@
     }
 
     CGRect visibleBounds = self.scrollView.bounds;
-    NSUInteger firstVisibleIndex = (NSUInteger)floorf(CGRectGetMinX(visibleBounds) / CGRectGetWidth(visibleBounds));
-    NSUInteger lastVisibleIndex  = (NSUInteger)floorf(CGRectGetMaxX(visibleBounds) / CGRectGetWidth(visibleBounds));
+    NSInteger firstVisibleIndex = (NSInteger)floorf(CGRectGetMinX(visibleBounds) / CGRectGetWidth(visibleBounds));
+    NSInteger lastVisibleIndex  = (NSInteger)floorf(CGRectGetMaxX(visibleBounds) / CGRectGetWidth(visibleBounds));
 
     // Ensure both indexes are within the url array bounds
-    firstVisibleIndex = MIN(MAX(0ul, firstVisibleIndex), self.urls.count - 1);
-    lastVisibleIndex = MIN(MAX(0ul, lastVisibleIndex), self.urls.count - 1);
+    firstVisibleIndex = MIN(MAX(0, firstVisibleIndex), (NSInteger) self.urls.count - 1);
+    lastVisibleIndex = MIN(MAX(0, lastVisibleIndex), (NSInteger) self.urls.count - 1);
 
     // Move non-visible items to the reuse pool
-    NSUInteger index;
+    NSInteger index;
     for (UCPhotoGalleryItemView *item in self.visibleItems) {
         index = item.index;
         if (index < firstVisibleIndex || index > lastVisibleIndex) {
