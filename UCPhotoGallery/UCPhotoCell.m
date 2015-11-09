@@ -53,8 +53,8 @@
 
     _url = url;
     [self.photoImageView sd_setImageWithURL:url
-                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                      self.photoImageView.image = image;
+                                  completed:^(__unused UIImage *image, __unused NSError *error,
+                                              __unused SDImageCacheType cacheType, __unused NSURL *imageURL) {
                                       if ([self.delegate respondsToSelector:@selector(imageLoadedForPhotoCell:)]) {
                                           [self.delegate imageLoadedForPhotoCell:self];
                                       }

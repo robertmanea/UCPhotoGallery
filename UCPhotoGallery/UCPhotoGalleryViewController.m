@@ -67,7 +67,7 @@
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.scrollView = ({
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
         scrollView.autoresizingMask = (UIViewAutoresizingFlexibleWidth|
@@ -87,7 +87,7 @@
             [scrollView addGestureRecognizer:recognizer];
             recognizer;
         });
-        
+
         [self.view addSubview:scrollView];
         scrollView;
     });
@@ -247,7 +247,7 @@
     if (!self.urls.count) {
         return;
     }
-    
+
     CGRect visibleBounds = self.scrollView.bounds;
     NSInteger firstVisibleIndex = (NSInteger)floorf(CGRectGetMinX(visibleBounds) / CGRectGetWidth(visibleBounds));
     NSInteger lastVisibleIndex  = (NSInteger)floorf(CGRectGetMaxX(visibleBounds) / CGRectGetWidth(visibleBounds));
@@ -264,7 +264,7 @@
             [self.recycledItems addObject:item];
             [item prepareForReuse];
             [item removeFromSuperview];
-//            NSLog(@"Removed item at index %lu", (unsigned long)index);
+            //            NSLog(@"Removed item at index %lu", (unsigned long)index);
         }
     }
 
@@ -288,7 +288,7 @@
             [self.visibleItems addObject:item];
             [self configureItemView:item forIndex:index];
             [self.scrollView addSubview:item];
-//            NSLog(@"Added item at index %lu", (unsigned long)index);
+            //            NSLog(@"Added item at index %lu", (unsigned long)index);
         }
     }
 
@@ -352,7 +352,7 @@
 }
 
 /**
- *  Shows or hides the done button based on whether the gallery is full-screen and whether the 
+ *  Shows or hides the done button based on whether the gallery is full-screen and whether the
  *  currently visible item is zoomed in at all
  */
 - (void)updateDoneButtonVisibility {

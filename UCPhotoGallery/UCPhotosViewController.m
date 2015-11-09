@@ -55,7 +55,7 @@
 
 - (UCPhotoCell *)selectedCell {
     if (self.selectedIndex != NSNotFound) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedIndex inSection:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)self.selectedIndex inSection:0];
         return (UCPhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     }
 
@@ -77,14 +77,14 @@
     UCPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[UCPhotoCell reuseIdentifier]
                                                                   forIndexPath:indexPath];
     cell.delegate = self;
-    cell.url = self.urls[indexPath.row];
-    cell.alpha = (self.selectedIndex == indexPath.row) ? 0 : 1;
+    cell.url = self.urls[(NSUInteger)indexPath.row];
+    cell.alpha = (self.selectedIndex == (NSUInteger)indexPath.row) ? 0 : 1;
     return cell;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView
-     numberOfItemsInSection:(NSInteger)section {
-    return self.urls.count;
+- (NSInteger)collectionView:(__unused UICollectionView *)collectionView
+     numberOfItemsInSection:(__unused NSInteger)section {
+    return (NSInteger)self.urls.count;
 }
 
 - (CGFloat)cachedHeightForImageAtURL:(NSURL *)url {
@@ -97,13 +97,13 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
+                  layout:(__unused UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     UCPhotoCell *cell = (UCPhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
     CGSize ret = CGSizeMake(collectionView.bounds.size.width, 250);
-    NSURL *url = self.urls[indexPath.row];
+    NSURL *url = self.urls[(NSUInteger)indexPath.row];
     CGFloat cachedHeight = [self cachedHeightForImageAtURL:url];
-    if (cachedHeight) {
+    if (cachedHeight != 0) {
         ret.height = cachedHeight;
     } else if (cell.image) {
         CGSize imageSize = cell.image.size;
@@ -116,9 +116,9 @@
     return ret;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView
+- (void)collectionView:(__unused UICollectionView *)collectionView
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedIndex = indexPath.row;
+    self.selectedIndex = (NSUInteger)indexPath.row;
     UIViewController *container = self.parentViewController;
     UCPhotoGalleryViewController *galleryVC = ({
         UCPhotoGalleryViewController *presentVC = [UCPhotoGalleryViewController new];
@@ -126,7 +126,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
         presentVC.dataSource = self.dataSource;
         presentVC.delegate = self;
         presentVC.view.frame = container.view.bounds;
-        presentVC.currentIndex = indexPath.row;
+        presentVC.currentIndex = (NSUInteger)indexPath.row;
         presentVC.transitioningDelegate = self;
         presentVC.modalPresentationStyle = UIModalPresentationCustom;
         presentVC;
@@ -163,7 +163,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     }];
 }
 
-- (void)galleryView:(UCPhotoGalleryViewController *)galleryViewController
+- (void)galleryView:(__unused UCPhotoGalleryViewController *)galleryViewController
         pageChanged:(NSUInteger)page {
     UCPhotoCell *previouslySelectedCell = [self selectedCell];
     previouslySelectedCell.alpha = 1;
@@ -171,7 +171,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // Keep the collection view in sync with the full-screen gallery view
     self.selectedIndex = page;
 
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:page inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(NSInteger)page inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath
                                 atScrollPosition:UICollectionViewScrollPositionNone
                                         animated:NO];

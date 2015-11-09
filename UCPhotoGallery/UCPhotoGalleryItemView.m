@@ -36,7 +36,8 @@
 - (void)setUrl:(NSURL *)url {
     _url = url;
     [self.imageView sd_setImageWithURL:url
-                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+                             completed:^(__unused UIImage *image, __unused NSError *error,
+                                         __unused SDImageCacheType cacheType, __unused NSURL *imageURL)
      {
          [self displayImage];
          if ([self.galleryItemDelegate respondsToSelector:@selector(imageLoadedForGalleryItem:)]) {
@@ -101,14 +102,14 @@
 
     // Horizontally
     if (frameToCenter.size.width < boundsSize.width) {
-        frameToCenter.origin.x = floorf((boundsSize.width - frameToCenter.size.width) / 2.0);
+        frameToCenter.origin.x = floor((boundsSize.width - frameToCenter.size.width) / 2.0);
     } else {
         frameToCenter.origin.x = 0;
     }
 
     // Vertically
     if (frameToCenter.size.height < boundsSize.height) {
-        frameToCenter.origin.y = floorf((boundsSize.height - frameToCenter.size.height) / 2.0);
+        frameToCenter.origin.y = floor((boundsSize.height - frameToCenter.size.height) / 2.0);
     } else {
         frameToCenter.origin.y = 0;
     }
@@ -171,15 +172,15 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+- (UIView *)viewForZoomingInScrollView:(__unused UIScrollView *)scrollView {
     return self.imageView;
 }
 
-- (void)scrollViewWillBeginZooming:(UIScrollView *)scrollView withView:(UIView *)view {
+- (void)scrollViewWillBeginZooming:(__unused UIScrollView *)scrollView withView:(__unused UIView *)view {
     self.scrollEnabled = YES;
 }
 
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+- (void)scrollViewDidZoom:(__unused UIScrollView *)scrollView {
     [self setNeedsLayout];
     [self layoutIfNeeded];
     if ([self.galleryItemDelegate respondsToSelector:@selector(galleryItemDidZoom:)]) {
