@@ -142,4 +142,8 @@
     self.doneButton = nil;
 }
 
+- (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem {
+    self.doneButton.hidden = (galleryItem.zoomScale > galleryItem.minimumZoomScale);
+}
+
 @end

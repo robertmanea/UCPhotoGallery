@@ -217,6 +217,12 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndex = NSNotFound;
 }
 
+- (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem {
+    if ([self.delegate respondsToSelector:@selector(galleryItemDidZoom:)]) {
+        [self.delegate galleryItemDidZoom:galleryItem];
+    }
+}
+
 #pragma mark - UIViewControllerTransitioningDelegate
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(__unused UIViewController *)presented
                                                                    presentingController:(__unused UIViewController *)presenting

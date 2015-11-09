@@ -498,8 +498,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
 }
 
-- (void)galleryItemDidZoom:(__unused UCPhotoGalleryItemView *)galleryItem {
-    // TODO forward this
+- (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem {
+    if ([self.delegate respondsToSelector:@selector(galleryItemDidZoom:)]) {
+        [self.delegate galleryItemDidZoom:galleryItem];
+    }
 }
 
 #pragma mark - UIScrollViewDelegate

@@ -71,6 +71,14 @@
  *  @param galleryViewController The full-screen gallery view controller
  */
 - (void)didPresentGalleryViewController:(UCPhotoGalleryViewController *)galleryViewController;
+
+/**
+ *  Notifies that an item is being zoomed in a full-screen gallery view contorller 
+ *  (forwards from UCPhotoGalleryItemView)
+ *
+ *  @param galleryItem The zoomed item
+ */
+- (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem;
 @end
 
 @interface UCPhotoGalleryViewController : UIViewController
