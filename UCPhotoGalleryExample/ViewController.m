@@ -76,9 +76,9 @@
     self.photosVC = ({
         UCPhotosViewController *vc = [UCPhotosViewController new];
         CGRect frame = self.view.bounds;
-//        frame.size.width = 175;
-//        frame.origin.x = 100;
-//        frame.origin.y = 64;
+        frame.size.width = 175;
+        frame.origin.x = 100;
+        frame.origin.y = 64;
         vc.view.frame = frame;
         vc.dataSource = self;
         vc.delegate = self;

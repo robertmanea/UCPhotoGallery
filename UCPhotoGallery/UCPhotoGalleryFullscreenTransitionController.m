@@ -3,12 +3,6 @@
 
 @implementation UCPhotoGalleryFullscreenTransitionController
 
-- (void)setPresentFromRect:(CGRect)presentFromRect {
-    _presentFromRect = presentFromRect;
-    NSLog(@"present from rect is %@", NSStringFromCGRect(presentFromRect));
-    NSLog(@"");
-}
-
 - (NSTimeInterval)transitionDuration:(__unused id <UIViewControllerContextTransitioning>)transitionContext {
     return 0.35f;
 }
