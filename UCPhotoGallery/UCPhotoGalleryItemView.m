@@ -102,14 +102,14 @@
 
     // Horizontally
     if (frameToCenter.size.width < boundsSize.width) {
-        frameToCenter.origin.x = floor((boundsSize.width - frameToCenter.size.width) / 2.0);
+        frameToCenter.origin.x = floor((boundsSize.width - frameToCenter.size.width) / 2.0f);
     } else {
         frameToCenter.origin.x = 0;
     }
 
     // Vertically
     if (frameToCenter.size.height < boundsSize.height) {
-        frameToCenter.origin.y = floor((boundsSize.height - frameToCenter.size.height) / 2.0);
+        frameToCenter.origin.y = floor((boundsSize.height - frameToCenter.size.height) / 2.0f);
     } else {
         frameToCenter.origin.y = 0;
     }

@@ -33,7 +33,7 @@
         shadowboxView.alpha = 0;
 
         startRect = self.presentFromRect;
-        endRect = [fullscreenGalleryController imageFrameInSuperview];
+        endRect = [fullscreenGalleryController imageFrameInRootView];
 
         transitionImageView = [[UIImageView alloc] initWithImage:self.transitionImage];
         transitionImageView.frame = startRect;
@@ -54,7 +54,7 @@
     } else {
         shadowboxView.backgroundColor = [fullscreenGalleryController.view backgroundColor];
 
-        startRect = [fullscreenGalleryController imageFrameInSuperview];
+        startRect = [fullscreenGalleryController imageFrameInRootView];
         startRect = CGRectOffset(startRect, 0, [fullscreenGalleryController visibleItem].transform.ty);
         endRect = self.presentFromRect;
 

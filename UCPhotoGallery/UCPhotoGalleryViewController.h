@@ -89,6 +89,11 @@
 @property (readonly) UCPhotoGalleryItemView *visibleItem;
 
 /**
+ *  Whether a single tap will cause the gallery to expand into a full-screen mode
+ */
+@property (nonatomic) BOOL canExpand;
+
+/**
  *  The index of the currently visible item
  */
 @property (nonatomic) NSUInteger currentIndex;
@@ -109,6 +114,7 @@
 
 @property (weak, nonatomic) NSObject<UCGalleryViewDataSource>* dataSource;
 @property (weak, nonatomic) NSObject<UCGalleryViewDelegate>* delegate;
+@property (nonatomic) BOOL isFullscreen;
 
 /**
  *  Reload image URLs from the dataSource and reset gallery items layout
@@ -120,7 +126,7 @@
  *
  *  @return (see above)
  */
-- (CGRect)imageFrameInSuperview;
+- (CGRect)imageFrameInRootView;
 
 /**
  *  A setter for currentIndex with an optional animation parameter

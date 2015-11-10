@@ -2,6 +2,7 @@
 #import "UCPhotoGalleryItemView.h"
 #import "UCPhotoGalleryFullscreenTransitionController.h"
 #import <UCDirectionalPanGestureRecognizer/UCDirectionalPanGestureRecognizer.h>
+#import "tgmath.h"
 
 @interface UCPhotoGalleryViewController () <UCGalleryViewDelegate, UCGalleryItemDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UIViewControllerTransitioningDelegate>
 
@@ -13,8 +14,11 @@
 @property BOOL rotating;
 
 @property (nonatomic) UIScrollView *scrollView;
+@property (nonatomic) UITapGestureRecognizer *singleTapRecognizer;
 @property (nonatomic) UCDirectionalPanGestureRecognizer *scrollDismissRecognizer;
 @property (nonatomic) UCPhotoGalleryFullscreenTransitionController *transitionController;
+
+@property (nonatomic) UCPhotoGalleryViewController *fullscreenGalleryController;
 
 @end
 
@@ -23,6 +27,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        self.canExpand = YES;
         self.transitionController = [UCPhotoGalleryFullscreenTransitionController new];
         self.currentIndex = 0;
         self.rotating = NO;
@@ -43,13 +48,25 @@
 }
 
 #pragma mark - Getters/Setters
+- (void)setCanExpand:(BOOL)canExpand {
+    _canExpand = canExpand;
+    self.singleTapRecognizer.enabled = canExpand;
+}
+
 - (void)setCurrentIndex:(NSUInteger)currentIndex {
     [self setCurrentIndex:currentIndex animated:NO];
 }
 
 - (void)setCurrentIndex:(NSUInteger)currentIndex
                animated:(BOOL)animated {
+    if (_currentIndex == currentIndex) {
+        return;
+    }
+
     _currentIndex = currentIndex;
+    [self.fullscreenGalleryController setCurrentIndex:currentIndex
+                                             animated:animated];
+
     if (currentIndex < self.urls.count) {
         CGRect frame = [self frameForItemAtIndex:currentIndex];
         [self.scrollView setContentOffset:CGPointMake(frame.origin.x, 0)
@@ -65,8 +82,9 @@
     [self reloadData];
 }
 
-- (BOOL)isFullscreen {
-    return self.presentingViewController != nil;
+- (void)setIsFullscreen:(BOOL)isFullscreen {
+    _isFullscreen = isFullscreen;
+    self.scrollDismissRecognizer.enabled = isFullscreen;
 }
 
 #pragma mark - View Lifecycle
@@ -90,6 +108,7 @@
                                                                action:@selector(scrollViewPanned:)];
             recognizer.direction = UCGestureRecognizerDirectionVertical;
             recognizer.delegate = self;
+            recognizer.enabled = self.isFullscreen;
             [scrollView addGestureRecognizer:recognizer];
             recognizer;
         });
@@ -98,16 +117,12 @@
         scrollView;
     });
 
-    [self.view addGestureRecognizer:
-     [[UITapGestureRecognizer alloc] initWithTarget:self
-                                             action:@selector(singleTapRecognized:)]];
+    self.singleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                       action:@selector(singleTapRecognized:)];
+    self.singleTapRecognizer.enabled = self.canExpand;
+    [self.view addGestureRecognizer:self.singleTapRecognizer];
 
     [self reloadData];
-}
-
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
-    [self layoutVisibleItems];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -144,7 +159,7 @@
         return;
     }
 
-    self.transitionController.presentFromRect = [self imageFrameInSuperview];
+    self.transitionController.presentFromRect = [self imageFrameInRootView];
     self.transitionController.transitionImage = self.visibleItem.imageView.image;
 }
 
@@ -167,8 +182,9 @@
     }
 
     // Create a fullscreen gallery view controller
-    UCPhotoGalleryViewController *galleryVC = ({
+    self.fullscreenGalleryController = ({
         UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
+        gallery.isFullscreen = YES;
         gallery.view.frame = [[[UIApplication sharedApplication] delegate] window].bounds;
         gallery.currentIndex = self.currentIndex;
         gallery.dataSource = self.dataSource;
@@ -181,14 +197,14 @@
     [self updateTransitionControllerWithSelectedView];
 
     if ([self.delegate respondsToSelector:@selector(willPresentGalleryViewController:)]) {
-        [self.delegate willPresentGalleryViewController:galleryVC];
+        [self.delegate willPresentGalleryViewController:self.fullscreenGalleryController];
     }
 
-    [self presentViewController:galleryVC
+    [self presentViewController:self.fullscreenGalleryController
                        animated:animated
                      completion:^{
                          if ([self.delegate respondsToSelector:@selector(didPresentGalleryViewController:)]) {
-                             [self.delegate didPresentGalleryViewController:galleryVC];
+                             [self.delegate didPresentGalleryViewController:self.fullscreenGalleryController];
                          }
                      }];
 
@@ -208,10 +224,11 @@
     return nil;
 }
 
-- (CGRect)imageFrameInSuperview {
+- (CGRect)imageFrameInRootView {
     UCPhotoGalleryItemView *visibleItem = [self visibleItem];
-    CGRect ret = [self.view.superview convertRect:visibleItem.imageView.frame
-                                         fromView:self.view];
+    UIView *rootView = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] view];
+    CGRect ret = [rootView convertRect:visibleItem.imageView.frame
+                              fromView:self.view];
     return ret;
 }
 
@@ -243,17 +260,16 @@
     }
 
     CGRect visibleBounds = self.scrollView.bounds;
-    NSInteger firstVisibleIndex = (NSInteger)floorf(CGRectGetMinX(visibleBounds) / CGRectGetWidth(visibleBounds));
-    NSInteger lastVisibleIndex  = (NSInteger)floorf(CGRectGetMaxX(visibleBounds) / CGRectGetWidth(visibleBounds));
+    NSInteger firstVisibleIndex = (NSInteger)floor(CGRectGetMinX(visibleBounds) / CGRectGetWidth(visibleBounds));
+    NSInteger lastVisibleIndex  = (NSInteger)floor(CGRectGetMaxX(visibleBounds) / CGRectGetWidth(visibleBounds));
 
     // Ensure both indexes are within the url array bounds
     firstVisibleIndex = MIN(MAX(0, firstVisibleIndex), (NSInteger) self.urls.count - 1);
     lastVisibleIndex = MIN(MAX(0, lastVisibleIndex), (NSInteger) self.urls.count - 1);
 
     // Move non-visible items to the reuse pool
-    NSInteger index;
     for (UCPhotoGalleryItemView *item in self.visibleItems) {
-        index = item.index;
+        NSInteger index = (NSInteger)item.index;
         if (index < firstVisibleIndex || index > lastVisibleIndex) {
             [self.recycledItems addObject:item];
             [item prepareForReuse];
@@ -375,7 +391,7 @@
 - (void)scrollViewPanned:(UCDirectionalPanGestureRecognizer *)recognizer {
     static UCPhotoGalleryItemView *visibleItemView = nil;
     CGFloat yTranslation = [recognizer translationInView:self.view].y;
-    CGFloat translationThreshold = 175;
+    CGFloat translationThreshold = 175.0f;
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
             visibleItemView = [self visibleItem];
@@ -386,7 +402,7 @@
         case UIGestureRecognizerStateChanged:
             visibleItemView.transform = CGAffineTransformMakeTranslation(0, yTranslation);
             self.view.backgroundColor = [UIColor colorWithWhite:0
-                                                          alpha:1 - (fabs(yTranslation) / translationThreshold)];
+                                                          alpha:1.0f - (fabs(yTranslation) / translationThreshold)];
             break;
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
@@ -453,6 +469,7 @@
         [self.delegate galleryViewControllerDidDismiss:self];
     }
 
+    self.fullscreenGalleryController = nil;
     self.visibleItem.alpha = 1;
 }
 
@@ -514,15 +531,15 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
     // Calculate current item
     CGRect visibleBounds = self.scrollView.bounds;
-    NSUInteger index = (NSUInteger)(floorf(CGRectGetMidX(visibleBounds) / CGRectGetWidth(visibleBounds)));
-    index = MIN(MAX(0ul, index), self.urls.count - 1);
+    NSInteger index = (NSInteger)(floor(CGRectGetMidX(visibleBounds) / CGRectGetWidth(visibleBounds)));
+    index = MIN(MAX(0, index), (NSInteger)self.urls.count - 1);
     NSUInteger previousIndex = self.currentIndex;
-    _currentIndex = index; // use the ivar to avoid setter logic
+    _currentIndex = (NSUInteger)index; // use the ivar to avoid setter logic
 
     if (self.urls.count && self.currentIndex != previousIndex) {
         // Notify delegate of page change
         if ([self.delegate respondsToSelector:@selector(galleryViewController:pageChanged:)]) {
-            [self.delegate galleryViewController:self pageChanged:index];
+            [self.delegate galleryViewController:self pageChanged:_currentIndex];
         }
     }
 }

@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.collectionView.backgroundColor = [UIColor clearColor];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
     [self.collectionView registerClass:[UCPhotoCell class]
             forCellWithReuseIdentifier:[UCPhotoCell reuseIdentifier]];
 }
@@ -106,7 +106,7 @@
 - (CGFloat)cachedHeightForImageAtURL:(NSURL *)url {
     NSNumber *heightNumber = [self.heightCache objectForKey:url.absoluteString];
     if (heightNumber) {
-        return heightNumber.doubleValue;
+        return heightNumber.floatValue;
     }
 
     return 0;
@@ -136,14 +136,14 @@
 didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndex = (NSUInteger)indexPath.row;
     UCPhotoGalleryViewController *galleryVC = ({
-        UCPhotoGalleryViewController *presentVC = [UCPhotoGalleryViewController new];
-        presentVC.dataSource = self.dataSource;
-        presentVC.delegate = self;
-        presentVC.view.frame = [[[UIApplication sharedApplication] delegate] window].bounds;
-        presentVC.currentIndex = (NSUInteger)indexPath.row;
-        presentVC.transitioningDelegate = self;
-        presentVC.modalPresentationStyle = UIModalPresentationCustom;
-        presentVC;
+        UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
+        gallery.dataSource = self.dataSource;
+        gallery.isFullscreen = YES;
+        gallery.view.frame = [[[UIApplication sharedApplication] delegate] window].bounds;
+        gallery.currentIndex = (NSUInteger)indexPath.row;
+        gallery.transitioningDelegate = self;
+        gallery.modalPresentationStyle = UIModalPresentationCustom;
+        gallery;
     });
 
     [self updateTransitionControllerWithSelectedView];
@@ -155,6 +155,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self presentViewController:galleryVC
                             animated:YES
                           completion:^{
+                              galleryVC.delegate = self;
                               if ([self.delegate respondsToSelector:@selector(didPresentGalleryViewController:)]) {
                                   [self.delegate didPresentGalleryViewController:galleryVC];
                               }
