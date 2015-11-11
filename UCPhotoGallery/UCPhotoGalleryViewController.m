@@ -139,6 +139,8 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
+    self.scrollView.contentSize = [self contentSizeForScrollView];
+
     // Annoying hacky way to ensure the layout is actually 100% finished before attempting to pass this info
     // on to the transition controller.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -606,7 +608,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         self.scrollDismissRecognizer.enabled = NO;
         [self updateOverlaysWithAlpha:0];
     } else {
-        self.scrollDismissRecognizer.enabled = YES;
+        if (self.isFullscreen) {
+            self.scrollDismissRecognizer.enabled = YES;
+        }
+        
         [self updateOverlaysWithAlpha:1];
     }
 }
