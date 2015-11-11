@@ -103,6 +103,7 @@
         scrollView.pagingEnabled = YES;
         scrollView.showsHorizontalScrollIndicator = NO;
         scrollView.showsVerticalScrollIndicator = NO;
+        scrollView.scrollsToTop = NO;
 
         self.scrollDismissRecognizer = ({
             UCDirectionalPanGestureRecognizer *recognizer =
