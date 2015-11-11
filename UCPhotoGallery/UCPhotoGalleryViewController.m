@@ -169,7 +169,7 @@
 }
 
 - (void)updateTransitionControllerWithSelectedView {
-    if (self.isFullscreen || !self.parentViewController) {
+    if (self.isFullscreen) {
         return;
     }
 
