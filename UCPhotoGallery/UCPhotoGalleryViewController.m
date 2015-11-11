@@ -7,12 +7,14 @@
 @interface UCPhotoGalleryViewController () <UCGalleryViewDelegate, UCGalleryItemDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property NSUInteger indexBeforeRotation;
+@property NSMutableSet *mutableOverlayViews;
 @property NSMutableSet *visibleItems;
 @property NSMutableSet *recycledItems;
-@property (nonatomic) NSMutableArray *urls;
+@property NSArray *urls;
 @property BOOL performingLayout;
 @property BOOL rotating;
 
+@property (nonatomic) UIButton *doneButton;
 @property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic) UITapGestureRecognizer *singleTapRecognizer;
 @property (nonatomic) UCDirectionalPanGestureRecognizer *scrollDismissRecognizer;
@@ -31,20 +33,14 @@
         self.transitionController = [UCPhotoGalleryFullscreenTransitionController new];
         self.currentIndex = 0;
         self.rotating = NO;
+        self.mutableOverlayViews = [NSMutableSet new];
         self.visibleItems = [NSMutableSet new];
         self.recycledItems = [NSMutableSet new];
+
+        [self reloadData];
     }
 
     return self;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    for (UCPhotoGalleryItemView *item in self.visibleItems) {
-        item.userInteractionEnabled = self.isFullscreen;
-    }
-
-    self.scrollDismissRecognizer.enabled = self.isFullscreen;
 }
 
 #pragma mark - Getters/Setters
@@ -82,9 +78,15 @@
     [self reloadData];
 }
 
+- (void)setDelegate:(NSObject<UCGalleryViewDelegate> *)delegate {
+    _delegate = delegate;
+    [self updateDoneButton];
+}
+
 - (void)setIsFullscreen:(BOOL)isFullscreen {
     _isFullscreen = isFullscreen;
     self.scrollDismissRecognizer.enabled = isFullscreen;
+    [self updateDoneButton];
 }
 
 #pragma mark - View Lifecycle
@@ -125,6 +127,15 @@
     [self reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    for (UCPhotoGalleryItemView *item in self.visibleItems) {
+        item.userInteractionEnabled = self.isFullscreen;
+    }
+
+    self.scrollDismissRecognizer.enabled = self.isFullscreen;
+}
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
@@ -163,8 +174,24 @@
     self.transitionController.transitionImage = self.visibleItem.imageView.image;
 }
 
+- (void)registerOverlayView:(UIView *)overlayView {
+    if (overlayView) {
+        [self.mutableOverlayViews addObject:overlayView];
+    }
+}
+
+- (void)deregisterOverlayView:(UIView *)overlayView {
+    if (overlayView) {
+        [self.mutableOverlayViews removeObject:overlayView];
+    }
+}
+
+- (NSSet *)overlayViews {
+    return self.mutableOverlayViews;
+}
+
 - (void)reloadData {
-    self.urls = [[self.dataSource imageURLsForGalleryView:self] mutableCopy];
+    self.urls = [self.dataSource imageURLsForGalleryView:self];
     while (self.scrollView.subviews.count) {
         [[self.scrollView.subviews firstObject] removeFromSuperview];
     }
@@ -230,6 +257,10 @@
     CGRect ret = [rootView convertRect:visibleItem.imageView.frame
                               fromView:self.view];
     return ret;
+}
+
+- (void)doneButtonTapped:(__unused UIButton *)button {
+    [self dismiss:YES];
 }
 
 #pragma mark - Helpers
@@ -387,6 +418,41 @@
     return CGPointMake(newOffset, 0);
 }
 
+- (void)updateDoneButton {
+    if (!self.isFullscreen) {
+        self.doneButton.hidden = YES;
+        return;
+    }
+
+    [self deregisterOverlayView:self.doneButton];
+    [self.doneButton removeFromSuperview];
+    self.doneButton = nil;
+
+    if ([self.delegate respondsToSelector:@selector(doneButtonForFullscreenGalleryController:)]) {
+        self.doneButton = [self.delegate doneButtonForFullscreenGalleryController:self];
+    }
+
+    if (!self.doneButton) {
+        self.doneButton = ({
+            UIButton *button = [UIButton new];
+            [button setTitle:@"Done" forState:UIControlStateNormal];
+            button;
+        });
+    }
+
+    [self registerOverlayView:self.doneButton];
+    [self.view addSubview:self.doneButton];
+    [self.doneButton addTarget:self
+                        action:@selector(doneButtonTapped:)
+              forControlEvents:UIControlEventTouchUpInside];
+    self.doneButton.hidden = NO;
+    [self.doneButton sizeToFit];
+    CGPoint origin = CGPointMake(self.view.bounds.size.width - self.doneButton.frame.size.width - 20, 30);
+    self.doneButton.frame = (CGRect) { origin, self.doneButton.bounds.size };
+    self.doneButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleBottomMargin;
+    [self.view bringSubviewToFront:self.doneButton];
+}
+
 #pragma mark - Gesture Recognizers
 - (void)scrollViewPanned:(UCDirectionalPanGestureRecognizer *)recognizer {
     static UCPhotoGalleryItemView *visibleItemView = nil;
@@ -399,10 +465,13 @@
                 [self.delegate galleryViewControllerWillDismiss:self];
             }
             break;
-        case UIGestureRecognizerStateChanged:
+        case UIGestureRecognizerStateChanged: {
             visibleItemView.transform = CGAffineTransformMakeTranslation(0, yTranslation);
+            CGFloat alpha = 1.0f - (fabs(yTranslation) / translationThreshold);
             self.view.backgroundColor = [UIColor colorWithWhite:0
-                                                          alpha:1.0f - (fabs(yTranslation) / translationThreshold)];
+                                                          alpha:alpha];
+            [self updateOverlaysWithAlpha:alpha];
+        }
             break;
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
@@ -412,7 +481,9 @@
                 [UIView animateWithDuration:0.2
                                  animations:^{
                                      visibleItemView.transform = CGAffineTransformIdentity;
-                                     self.view.backgroundColor = [UIColor blackColor];
+                                     [self updateOverlaysWithAlpha:1];
+                                     self.view.backgroundColor = [UIColor colorWithWhite:0
+                                                                                   alpha:1];
                                  }];
                 if ([self.delegate respondsToSelector:@selector(galleryViewControllerCancelledDismiss:)]) {
                     [self.delegate galleryViewControllerCancelledDismiss:self];
@@ -434,11 +505,13 @@
     }
 }
 
-- (void)dismiss:(BOOL)animated {
-    if (!self.presentedViewController) {
-        return;
+- (void)updateOverlaysWithAlpha:(CGFloat)alpha {
+    for (UIView *overlayView in self.overlayViews) {
+        overlayView.alpha = alpha;
     }
+}
 
+- (void)dismiss:(BOOL)animated {
     if ([self.delegate respondsToSelector:@selector(galleryViewControllerWillDismiss:)]) {
         [self.delegate galleryViewControllerWillDismiss:self];
     }
@@ -448,6 +521,7 @@
             [self.delegate galleryViewControllerDidDismiss:self];
         }
 
+        [self.mutableOverlayViews removeAllObjects];
         self.visibleItem.alpha = 1;
     }];
 }
@@ -492,6 +566,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 #pragma mark - UCGalleryViewDelegate
+- (UIButton *)doneButtonForFullscreenGalleryController:(UCPhotoGalleryViewController *)galleryViewController {
+    if ([self.delegate respondsToSelector:@selector(doneButtonForFullscreenGalleryController:)]) {
+        return [self.delegate doneButtonForFullscreenGalleryController:galleryViewController];
+    }
+
+    return nil;
+}
+
 - (void)galleryViewController:(__unused UCPhotoGalleryViewController *)galleryViewController
         pageChanged:(NSUInteger)page {
     self.visibleItem.alpha = 1;
@@ -518,6 +600,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem {
     if ([self.delegate respondsToSelector:@selector(galleryItemDidZoom:)]) {
         [self.delegate galleryItemDidZoom:galleryItem];
+    }
+
+    if (galleryItem.zoomScale > galleryItem.minimumZoomScale) {
+        self.scrollDismissRecognizer.enabled = NO;
+        [self updateOverlaysWithAlpha:0];
+    } else {
+        self.scrollDismissRecognizer.enabled = YES;
+        [self updateOverlaysWithAlpha:1];
     }
 }
 

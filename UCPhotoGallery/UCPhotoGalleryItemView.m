@@ -20,6 +20,7 @@
         self.imageView = ({
             UIImageView *imageView = [UIImageView new];
             imageView.contentMode = UIViewContentModeCenter;
+            imageView.autoresizingMask = UIViewAutoresizingNone;
             [self addSubview:imageView];
             imageView;
         });

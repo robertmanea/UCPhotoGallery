@@ -18,7 +18,7 @@
  *
  *  @param galleryViewController The requesting gallery view
  *
- *  @return An array of NSURL objects representing image URLs
+ *  @return An array of NSURL objects
  */
 - (NSArray *)imageURLsForGalleryView:(UCPhotoGalleryViewController *)galleryViewController;
 @end
@@ -28,6 +28,14 @@
  */
 @protocol UCGalleryViewDelegate<NSObject>
 @optional
+
+/**
+ *  A button to use in place of the default done button for the full-screen gallery
+ *
+ *  @return A done button
+ */
+- (UIButton *)doneButtonForFullscreenGalleryController:(UCPhotoGalleryViewController *)galleryViewController;
+
 /**
  *  Notifies the delegate when the gallery view has been paged
  *
@@ -115,6 +123,25 @@
 @property (weak, nonatomic) NSObject<UCGalleryViewDataSource>* dataSource;
 @property (weak, nonatomic) NSObject<UCGalleryViewDelegate>* delegate;
 @property (nonatomic) BOOL isFullscreen;
+
+/**
+ *  Registers overlayView for animations during interactive dismissal
+ *
+ *  @param overlayView The view to be registered
+ */
+- (void)registerOverlayView:(UIView *)overlayView;
+
+/**
+ *  Deregisters overlayView for animations during interactive dismissal
+ *
+ *  @param overlayView The view to be deregistered
+ */
+- (void)deregisterOverlayView:(UIView *)overlayView;
+
+/**
+ *  The set of all views that have been registered as overlay views
+ */
+@property (nonatomic, readonly) NSSet *overlayViews;
 
 /**
  *  Reload image URLs from the dataSource and reset gallery items layout
