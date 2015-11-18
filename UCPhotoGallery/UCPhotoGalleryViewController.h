@@ -122,6 +122,9 @@
 
 @property (weak, nonatomic) NSObject<UCGalleryViewDataSource>* dataSource;
 @property (weak, nonatomic) NSObject<UCGalleryViewDelegate>* delegate;
+
+@property (nonatomic) UIViewContentMode imageContentMode;
+
 @property (nonatomic) BOOL isFullscreen;
 
 /**
