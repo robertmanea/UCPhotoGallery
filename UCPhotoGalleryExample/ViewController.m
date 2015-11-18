@@ -16,7 +16,6 @@
 @property UCPhotosViewController *photosVC;
 @property NSMutableArray *inactiveURLs;
 
-@property UIButton *doneButton;
 @property UILabel *pageLabel;
 @end
 
@@ -106,14 +105,6 @@
 
 // delegate
 - (void)didPresentGalleryViewController:(UCPhotoGalleryViewController *)galleryViewController {
-    self.doneButton = ({
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-        [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:@"DONE" forState:UIControlStateNormal];
-        [galleryViewController.view addSubview:button];
-        button;
-    });
-
     self.pageLabel = ({
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 30, 100, 30)];
         label.text = [NSString stringWithFormat:@"%@/%@", @(1), @(self.photoURLs.count)];
@@ -130,20 +121,15 @@
 }
 
 - (void)galleryViewControllerCancelledDismiss:(UCPhotoGalleryViewController *)galleryViewController {
-    self.doneButton.alpha = 1;
-
 }
 
 - (void)galleryViewControllerWillDismiss:(UCPhotoGalleryViewController *)galleryViewController {
-    self.doneButton.alpha = 0;
 }
 
 - (void)galleryViewControllerDidDismiss:(UCPhotoGalleryViewController *)galleryViewController {
-    self.doneButton = nil;
 }
 
 - (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem {
-    self.doneButton.hidden = (galleryItem.zoomScale > galleryItem.minimumZoomScale);
 }
 
 @end
