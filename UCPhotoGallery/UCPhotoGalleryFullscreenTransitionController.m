@@ -36,7 +36,10 @@
         endRect = [fullscreenGalleryController imageFrameInRootView];
 
         transitionImageView = [[UIImageView alloc] initWithImage:self.transitionImage];
+        transitionImageView.contentMode = UIViewContentModeScaleAspectFill;
+        transitionImageView.clipsToBounds = YES;
         transitionImageView.frame = startRect;
+//        NSLog(@"in start:%@ end:%@", NSStringFromCGRect(startRect), NSStringFromCGRect(endRect));
         [containerView addSubview:transitionImageView];
 
         [UIView animateWithDuration:[self transitionDuration:context]
@@ -59,7 +62,10 @@
         endRect = self.presentFromRect;
 
         transitionImageView = [[UIImageView alloc] initWithImage:self.transitionImage];
+        transitionImageView.contentMode = UIViewContentModeScaleAspectFill;
+        transitionImageView.clipsToBounds = YES;
         transitionImageView.frame = startRect;
+//        NSLog(@"out start:%@ end:%@", NSStringFromCGRect(startRect), NSStringFromCGRect(endRect));
         [containerView addSubview:transitionImageView];
 
         [UIView animateWithDuration:[self transitionDuration:context]

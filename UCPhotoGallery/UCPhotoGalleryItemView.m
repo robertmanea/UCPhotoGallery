@@ -2,15 +2,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import <WebImage/UIImageView+WebCache.h>
 
+CGFloat aspectRatio(CGRect rect);
+CGFloat aspectRatio(CGRect rect) {
+    return rect.size.width / rect.size.height;
+};
+
 @interface UCPhotoGalleryItemView () <UIScrollViewDelegate>
 @end
 
 @implementation UCPhotoGalleryItemView
-
-+ (NSString *)reuseId {
-    static NSString *reuseId = @"UCPhotoGalleryItemView";
-    return reuseId;
-}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -33,6 +33,7 @@
 
     return self;
 }
+
 
 - (void)setUrl:(NSURL *)url {
     _url = url;
@@ -71,7 +72,7 @@
     self.maximumZoomScale = 1;
     self.minimumZoomScale = 1;
     self.zoomScale = 1;
-    self.contentSize = CGSizeMake(0, 0);
+    self.contentSize = CGSizeZero;
 
     // Get image from browser as it handles ordering of fetching
     UIImage *img = self.imageView.image;
@@ -80,11 +81,16 @@
         self.imageView.hidden = NO;
 
         // Setup photo frame
-        CGRect photoImageViewFrame;
-        photoImageViewFrame.origin = CGPointZero;
-        photoImageViewFrame.size = img.size;
-        self.imageView.frame = photoImageViewFrame;
-        self.contentSize = photoImageViewFrame.size;
+        if (self.imageView.contentMode == UIViewContentModeScaleAspectFill) {
+            self.imageView.frame = [self aspectFillFrameForImage:img];
+        } else {
+            CGRect photoImageViewFrame;
+            photoImageViewFrame.origin = CGPointZero;
+            photoImageViewFrame.size = img.size;
+            self.imageView.frame = photoImageViewFrame;
+        }
+
+        self.contentSize = self.imageView.bounds.size;
 
         // Set zoom to minimum zoom
         [self setMaxMinZoomScalesForCurrentBounds];
@@ -93,31 +99,73 @@
     [self setNeedsLayout];
 }
 
+- (CGRect)aspectFillFrameForImage:(UIImage *)image {
+    if (!image) {
+        return CGRectZero;
+    }
+
+    CGRect aspectFitFrame = AVMakeRectWithAspectRatioInsideRect(image.size, self.bounds);
+    if (CGSizeEqualToSize(aspectFitFrame.size, CGSizeZero)) {
+        return self.bounds;
+    }
+
+    CGRect ret = CGRectZero;
+    if (aspectRatio(self.bounds) > aspectRatio(aspectFitFrame)) {
+        CGFloat widthDiff = floor(self.bounds.size.width - aspectFitFrame.size.width);
+        if (widthDiff > 0) {
+            CGFloat diffPerc = widthDiff / aspectFitFrame.size.width;
+            ret.size.width = self.bounds.size.width;
+            ret.size.height = floor(aspectFitFrame.size.height * diffPerc);
+            ret.origin.y = floor((self.bounds.size.height - ret.size.height) / 2);
+        } else {
+            ret = aspectFitFrame;
+        }
+    } else {
+        CGFloat heightDiff = floor(self.bounds.size.height - aspectFitFrame.size.height);
+        if (heightDiff > 0) {
+            CGFloat diffPerc = heightDiff / aspectFitFrame.size.height;
+            ret.size.height = self.bounds.size.height;
+            ret.size.width = floor(aspectFitFrame.size.width * diffPerc);
+            ret.origin.x = floor((self.bounds.size.width - ret.size.width) / 2);
+        } else {
+            ret = aspectFitFrame;
+        }
+    }
+
+//    NSLog(@"returning %@ for image size %@", NSStringFromCGRect(ret), NSStringFromCGSize(image.size));
+    return ret;
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
 
-    // Center the image as it becomes smaller than the size of the screen
-    CGSize boundsSize = self.bounds.size;
-    CGRect frameToCenter = self.imageView.frame;
+    CGRect imageViewFrame;
 
-    // Horizontally
-    if (frameToCenter.size.width < boundsSize.width) {
-        frameToCenter.origin.x = floor((boundsSize.width - frameToCenter.size.width) / 2.0f);
+    if (self.imageView.contentMode == UIViewContentModeScaleAspectFill) {
+        imageViewFrame = [self aspectFillFrameForImage:self.imageView.image];
     } else {
-        frameToCenter.origin.x = 0;
+        // Center the image as it becomes smaller than the size of the screen
+        CGSize boundsSize = self.bounds.size;
+        imageViewFrame = self.imageView.frame;
+
+        // Horizontally
+        if (imageViewFrame.size.width < boundsSize.width) {
+            imageViewFrame.origin.x = floor((boundsSize.width - imageViewFrame.size.width) / 2.0f);
+        } else {
+            imageViewFrame.origin.x = 0;
+        }
+
+        // Vertically
+        if (imageViewFrame.size.height < boundsSize.height) {
+            imageViewFrame.origin.y = floor((boundsSize.height - imageViewFrame.size.height) / 2.0f);
+        } else {
+            imageViewFrame.origin.y = 0;
+        }
     }
 
-    // Vertically
-    if (frameToCenter.size.height < boundsSize.height) {
-        frameToCenter.origin.y = floor((boundsSize.height - frameToCenter.size.height) / 2.0f);
-    } else {
-        frameToCenter.origin.y = 0;
-    }
-
-    // Center
-    if (!CGRectEqualToRect(self.imageView.frame, frameToCenter)) {
-        self.imageView.frame = frameToCenter;
+    if (!CGRectEqualToRect(self.imageView.frame, imageViewFrame)) {
+        self.imageView.frame = imageViewFrame;
     }
 }
 
@@ -127,6 +175,12 @@
         self.maximumZoomScale = 1;
         self.minimumZoomScale = 1;
         self.zoomScale = 1;
+        return;
+    }
+
+    if (self.imageView.contentMode == UIViewContentModeScaleAspectFill) {
+        self.zoomScale = 1;
+        self.imageView.frame = [self aspectFillFrameForImage:self.imageView.image];
         return;
     }
 
@@ -140,7 +194,12 @@
     // Calculate Min
     CGFloat xScale = boundsSize.width / imageSize.width;    // the scale needed to perfectly fit the image width-wise
     CGFloat yScale = boundsSize.height / imageSize.height;  // the scale needed to perfectly fit the image height-wise
-    CGFloat minScale = MIN(xScale, yScale);                 // use minimum of these to allow the image to become fully visible
+    CGFloat minScale;
+    if (self.imageView.contentMode == UIViewContentModeScaleAspectFill) {
+        minScale = MAX(xScale, yScale); // use maximum of these to allow the image to completely cover self
+    } else {
+        minScale = MIN(xScale, yScale); // use minimum of these to allow the image to become fully visible
+    }
 
     // Calculate Max
     CGFloat maxScale = 3;
@@ -150,7 +209,7 @@
     }
 
     // Image is smaller than screen so no zooming!
-    if (xScale >= 1 && yScale >= 1) {
+    if (self.imageView.contentMode == UIViewContentModeScaleAspectFill && xScale >= 1 && yScale >= 1) {
         minScale = 1.0;
     }
 

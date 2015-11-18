@@ -30,6 +30,7 @@
                    [NSURL URLWithString:@"http://urbancompass-development.s3.amazonaws.com/image-indexer/9ce5239218f928ce746d8230794ee6d2688d8a7b.jpg"],
                    [NSURL URLWithString:@"http://urbancompass-development.s3.amazonaws.com/image-indexer/81ed2ae54e3ccd7cc2d4ea506e639283455dfb60.jpg"],
                    [NSURL URLWithString:@"http://urbancompass-development.s3.amazonaws.com/image-indexer/61e3f3c76dcf978e6b30983c84430fc1f5cb9d3d.jpg"],
+                   [NSURL URLWithString:@"http://urbancompass-image-index.s3.amazonaws.com/5a39676e268b8fc7edd0a9273f2c5ef01d6c0632.jpg"],
                    [NSURL URLWithString:@"http://urbancompass-image-index.s3.amazonaws.com/fcbc833287a61e6b4f0c053b2e5db8361e0b54a4.jpg"],
                    [NSURL URLWithString:@"http://urbancompass-image-index.s3.amazonaws.com/32005d9cb6ca67c626cfd31bae50d963312e23ae.jpg"],
                    [NSURL URLWithString:@"http://urbancompass-image-index.s3.amazonaws.com/3d55c227a60f557268ce7b92d8db71e6c0b9f162.jpg"],
@@ -60,9 +61,10 @@
 
     self.galleryVC = ({
         CGRect galleryFrame = self.view.bounds ;
-        galleryFrame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame);
-        galleryFrame.size.height = 350;
+        galleryFrame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame) + [[UIApplication sharedApplication] statusBarFrame].size.height;
+        galleryFrame.size.height = 100;
         UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
+        gallery.imageContentMode = UIViewContentModeScaleAspectFill;
         gallery.dataSource = self;
         gallery.delegate = self;
         gallery.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;
@@ -88,13 +90,13 @@
         vc;
     });
 
-    self.galleryVC.view.hidden = YES;
-//    self.photosVC.view.hidden = YES;
+//    self.galleryVC.view.hidden = YES;
+    self.photosVC.view.hidden = YES;
 }
 
 - (void)buttonPressed:(UIButton *)button {
-//    [self.galleryVC dismiss:YES];
-    [self.photosVC dismiss:YES];
+    [self.galleryVC dismiss:YES];
+//    [self.photosVC dismiss:YES];
 }
 
 #pragma mark - UCGalleryView
@@ -121,15 +123,19 @@
 }
 
 - (void)galleryViewControllerCancelledDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)galleryViewControllerWillDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)galleryViewControllerDidDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem {
+//    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

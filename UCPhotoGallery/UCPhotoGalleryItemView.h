@@ -29,11 +29,6 @@
 @property (weak) id<UCGalleryItemDelegate> galleryItemDelegate;
 
 /**
- *  The image URL to load
- */
-@property (nonatomic) NSURL *url;
-
-/**
  *  The zooming image view
  */
 @property (nonatomic) UIImageView *imageView;
@@ -56,5 +51,10 @@
  *  Zooms out the scroll view such that one dimension of the image is equal to the scroll view's bounds
  */
 - (void)setMaxMinZoomScalesForCurrentBounds;
+
+/**
+ *  The image URL to load
+ */
+@property (nonatomic) NSURL *url;
 
 @end

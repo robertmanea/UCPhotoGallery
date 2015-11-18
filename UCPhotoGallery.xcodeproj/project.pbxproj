@@ -82,7 +82,6 @@
 		9376C5031BE958610097257C /* UCPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotosViewController.m; sourceTree = "<group>"; };
 		93C1CA4B1BEBBCBB006956E1 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCDirectionalPanGestureRecognizer.framework; path = Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework; sourceTree = "<group>"; };
-		AADA9F2A03B1C257AC17F729 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +110,6 @@
 			children = (
 				93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */,
 				93C1CA4B1BEBBCBB006956E1 /* WebImage.framework */,
-				AADA9F2A03B1C257AC17F729 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

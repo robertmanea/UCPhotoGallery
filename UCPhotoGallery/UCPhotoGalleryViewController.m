@@ -83,6 +83,15 @@
     [self updateDoneButton];
 }
 
+- (void)setImageContentMode:(UIViewContentMode)imageContentMode {
+    if (imageContentMode != UIViewContentModeScaleAspectFill && imageContentMode != UIViewContentModeCenter) {
+        @throw @"The only supported content modes are UIViewContentModeScaleAspectFill and UIViewContentModeCenter";
+    }
+
+    _imageContentMode = imageContentMode;
+    [self reloadData];
+}
+
 - (void)setIsFullscreen:(BOOL)isFullscreen {
     _isFullscreen = isFullscreen;
     self.scrollDismissRecognizer.enabled = isFullscreen;
@@ -255,10 +264,18 @@
 }
 
 - (CGRect)imageFrameInRootView {
-    UCPhotoGalleryItemView *visibleItem = [self visibleItem];
     UIView *rootView = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] view];
-    CGRect ret = [rootView convertRect:visibleItem.imageView.frame
-                              fromView:self.view];
+    CGRect ret;
+    if (self.imageContentMode == UIViewContentModeScaleAspectFill) {
+        ret = self.view.bounds;
+    } else {
+        UCPhotoGalleryItemView *visibleItem = [self visibleItem];
+        ret = visibleItem.imageView.frame;
+    }
+
+    ret = [rootView convertRect:ret
+                       fromView:self.view];
+
     return ret;
 }
 
@@ -404,6 +421,7 @@
 - (void)configureItemView:(UCPhotoGalleryItemView *)view
                  forIndex:(NSUInteger)index {
     view.frame = [self frameForItemAtIndex:index];
+    view.imageView.contentMode = self.imageContentMode;
     view.index = index;
     view.url = self.urls[index];
 }
