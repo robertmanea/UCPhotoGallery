@@ -7,8 +7,8 @@
 #import "UCPhotoGalleryItemView.h"
 
 typedef NS_ENUM(NSInteger, UCImageScalingMode) {
-    UCPhotoImageScalingModeFit,
-    UCPhotoImageScalingModeFill
+    UCImageScalingModeFit,
+    UCImageScalingModeFill
 };
 
 @class UCPhotoGalleryViewController;
