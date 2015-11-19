@@ -6,6 +6,11 @@
 #import <UIKit/UIKit.h>
 #import "UCPhotoGalleryItemView.h"
 
+typedef NS_ENUM(NSInteger, UCImageScalingMode) {
+    UCPhotoImageScalingModeFit,
+    UCPhotoImageScalingModeFill
+};
+
 @class UCPhotoGalleryViewController;
 
 /**
@@ -87,6 +92,14 @@
  *  @param galleryItem The zoomed item
  */
 - (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem;
+
+/**
+ *  Notifies that this controller will trigger a transition to a full-screen gallery view controller
+ *
+ *  @param galleryViewController The full-screen gallery view controller
+ */
+- (UCImageScalingMode)galleryViewController:(UCPhotoGalleryViewController *)galleryViewController
+                      scalingModeForImageAtIndex:(NSUInteger)index;
 @end
 
 @interface UCPhotoGalleryViewController : UIViewController
@@ -123,7 +136,12 @@
 @property (weak, nonatomic) NSObject<UCGalleryViewDataSource>* dataSource;
 @property (weak, nonatomic) NSObject<UCGalleryViewDelegate>* delegate;
 
-@property (nonatomic) UIViewContentMode imageContentMode;
+/**
+ *  Determines whether images are scaled to fit (full image visible, gallery background can show through) or
+ *  to fill (image completely fills gallery). Unused if the gallery's delegate implements 
+ *  galleryViewController:scalingModeForImageAtIndex:.
+ */
+@property (nonatomic) UCImageScalingMode imageScalingMode;
 
 @property (nonatomic) BOOL isFullscreen;
 

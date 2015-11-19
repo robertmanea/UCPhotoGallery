@@ -64,7 +64,7 @@
         galleryFrame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame) + [[UIApplication sharedApplication] statusBarFrame].size.height;
         galleryFrame.size.height = 100;
         UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
-        gallery.imageContentMode = UIViewContentModeScaleAspectFill;
+        gallery.imageScalingMode = UCPhotoImageScalingModeFill;
         gallery.dataSource = self;
         gallery.delegate = self;
         gallery.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;

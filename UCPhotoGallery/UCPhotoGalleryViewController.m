@@ -80,15 +80,12 @@
 
 - (void)setDelegate:(NSObject<UCGalleryViewDelegate> *)delegate {
     _delegate = delegate;
+    [self reloadData];
     [self updateDoneButton];
 }
 
-- (void)setImageContentMode:(UIViewContentMode)imageContentMode {
-    if (imageContentMode != UIViewContentModeScaleAspectFill && imageContentMode != UIViewContentModeCenter) {
-        @throw @"The only supported content modes are UIViewContentModeScaleAspectFill and UIViewContentModeCenter";
-    }
-
-    _imageContentMode = imageContentMode;
+- (void)setImageScalingMode:(UCImageScalingMode)imageScalingMode {
+    _imageScalingMode = imageScalingMode;
     [self reloadData];
 }
 
@@ -266,7 +263,7 @@
 - (CGRect)imageFrameInRootView {
     UIView *rootView = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] view];
     CGRect ret;
-    if (self.imageContentMode == UIViewContentModeScaleAspectFill) {
+    if ([self scalingModeForItemAtIndex:self.currentIndex] == UCPhotoImageScalingModeFill) {
         ret = self.view.bounds;
     } else {
         UCPhotoGalleryItemView *visibleItem = [self visibleItem];
@@ -358,6 +355,23 @@
 }
 
 /**
+ *  A convenience function that asks the delegate which scaling mode we should use and defaults to self.imageScalingMode
+ *  if the delegate does not provide that information.
+ *
+ *  @param index The index of the image to scale
+ *
+ *  @return The scaling mode
+ */
+- (UCImageScalingMode)scalingModeForItemAtIndex:(NSUInteger)index {
+    if ([self.delegate respondsToSelector:@selector(galleryViewController:scalingModeForImageAtIndex:)]) {
+        return [self.delegate galleryViewController:self
+                         scalingModeForImageAtIndex:index];
+    }
+
+    return self.imageScalingMode;
+}
+
+/**
  *  The scroll view's content size, based on bounds and number of URLs
  *
  *  @return The appropriate content size
@@ -421,7 +435,10 @@
 - (void)configureItemView:(UCPhotoGalleryItemView *)view
                  forIndex:(NSUInteger)index {
     view.frame = [self frameForItemAtIndex:index];
-    view.imageView.contentMode = self.imageContentMode;
+    UCImageScalingMode scalingMode = [self scalingModeForItemAtIndex:index];
+    view.imageView.contentMode = (scalingMode == UCPhotoImageScalingModeFill ?
+                                  UIViewContentModeScaleAspectFill :
+                                  UIViewContentModeCenter);
     view.index = index;
     view.url = self.urls[index];
 }
