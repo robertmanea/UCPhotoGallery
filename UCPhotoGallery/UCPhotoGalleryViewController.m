@@ -263,7 +263,7 @@
 - (CGRect)imageFrameInRootView {
     UIView *rootView = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] view];
     CGRect ret;
-    if ([self scalingModeForItemAtIndex:self.currentIndex] == UCPhotoImageScalingModeFill) {
+    if ([self scalingModeForItemAtIndex:self.currentIndex] == UCImageScalingModeFill) {
         ret = self.view.bounds;
     } else {
         UCPhotoGalleryItemView *visibleItem = [self visibleItem];
@@ -436,7 +436,7 @@
                  forIndex:(NSUInteger)index {
     view.frame = [self frameForItemAtIndex:index];
     UCImageScalingMode scalingMode = [self scalingModeForItemAtIndex:index];
-    view.imageView.contentMode = (scalingMode == UCPhotoImageScalingModeFill ?
+    view.imageView.contentMode = (scalingMode == UCImageScalingModeFill ?
                                   UIViewContentModeScaleAspectFill :
                                   UIViewContentModeCenter);
     view.index = index;
