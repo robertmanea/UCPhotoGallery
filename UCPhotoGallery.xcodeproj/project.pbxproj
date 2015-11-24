@@ -25,7 +25,6 @@
 		9376C50E1BE958610097257C /* UCPhotosViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5021BE958610097257C /* UCPhotosViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50F1BE958610097257C /* UCPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5031BE958610097257C /* UCPhotosViewController.m */; };
 		9376C5121BE958F60097257C /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9376C4D41BE958130097257C /* UCPhotoGallery.framework */; };
-		9376C5131BE958F60097257C /* UCPhotoGallery.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9376C4D41BE958130097257C /* UCPhotoGallery.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		93C1CAB11BEBD88E006956E1 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */; };
 		93C1CAB21BEBD8A1006956E1 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C1CA4B1BEBBCBB006956E1 /* WebImage.framework */; };
 /* End PBXBuildFile section */
@@ -47,7 +46,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9376C5131BE958F60097257C /* UCPhotoGallery.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
