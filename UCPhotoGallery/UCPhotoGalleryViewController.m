@@ -30,6 +30,7 @@
     self = [super init];
     if (self) {
         self.canExpand = YES;
+        self.imageScalingMode = UCImageScalingModeFit;
         self.transitionController = [UCPhotoGalleryFullscreenTransitionController new];
         self.currentIndex = 0;
         self.rotating = NO;
@@ -261,7 +262,15 @@
 }
 
 - (CGRect)imageFrameInRootView {
-    UIView *rootView = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] view];
+    UIView *rootView;
+    if (self.navigationController) {
+        rootView = self.navigationController.view;
+    } else if (self.presentingViewController) {
+        rootView = self.presentingViewController.view;
+    } else {
+        rootView = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] view];
+    }
+
     CGRect ret;
     if ([self scalingModeForItemAtIndex:self.currentIndex] == UCImageScalingModeFill) {
         ret = self.view.bounds;
