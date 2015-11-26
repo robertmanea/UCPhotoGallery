@@ -8,8 +8,7 @@
 
 #import "ViewController.h"
 
-#import "UCPhotoGalleryViewController.h"
-#import "UCPhotosViewController.h"
+#import <UCPhotoGallery/UCPhotoGallery.h>
 
 @interface ViewController () <UCGalleryViewDataSource, UCGalleryViewDelegate>
 @property UCPhotoGalleryViewController *galleryVC;
@@ -90,13 +89,13 @@
         vc;
     });
 
-//    self.galleryVC.view.hidden = YES;
+    //    self.galleryVC.view.hidden = YES;
     self.photosVC.view.hidden = YES;
 }
 
 - (void)buttonPressed:(UIButton *)button {
     [self.galleryVC dismiss:YES];
-//    [self.photosVC dismiss:YES];
+    //    [self.photosVC dismiss:YES];
 }
 
 #pragma mark - UCGalleryView
@@ -118,24 +117,25 @@
 }
 
 - (void)galleryViewController:(UCPhotoGalleryViewController *)galleryViewController
-        pageChanged:(NSUInteger)page {
+                  pageChanged:(NSUInteger)page {
     self.pageLabel.text = [NSString stringWithFormat:@"%@/%@", @(page + 1), @(self.photoURLs.count)];
 }
 
 - (void)galleryViewControllerCancelledDismiss:(UCPhotoGalleryViewController *)galleryViewController {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)galleryViewControllerWillDismiss:(UCPhotoGalleryViewController *)galleryViewController {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)galleryViewControllerDidDismiss:(UCPhotoGalleryViewController *)galleryViewController {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem {
-//    NSLog(@"%s", __PRETTY_FUNCTION__);
+    //    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end
+

@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9376C4D81BE958130097257C /* UCPhotoGallery.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4D71BE958130097257C /* UCPhotoGallery.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9376C4E71BE958520097257C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4E61BE958520097257C /* main.m */; };
-		9376C4EA1BE958520097257C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4E91BE958520097257C /* AppDelegate.m */; };
-		9376C4ED1BE958520097257C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4EC1BE958520097257C /* ViewController.m */; };
-		9376C4F01BE958520097257C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9376C4EE1BE958520097257C /* Main.storyboard */; };
-		9376C4F21BE958520097257C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9376C4F11BE958520097257C /* Assets.xcassets */; };
-		9376C4F51BE958520097257C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9376C4F31BE958520097257C /* LaunchScreen.storyboard */; };
 		9376C5061BE958610097257C /* UCPhotoCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FA1BE958610097257C /* UCPhotoCell.h */; };
 		9376C5071BE958610097257C /* UCPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FB1BE958610097257C /* UCPhotoCell.m */; };
 		9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */; };
@@ -24,33 +18,9 @@
 		9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */; };
 		9376C50E1BE958610097257C /* UCPhotosViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5021BE958610097257C /* UCPhotosViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50F1BE958610097257C /* UCPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5031BE958610097257C /* UCPhotosViewController.m */; };
-		9376C5121BE958F60097257C /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9376C4D41BE958130097257C /* UCPhotoGallery.framework */; };
 		93C1CAB11BEBD88E006956E1 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */; };
 		93C1CAB21BEBD8A1006956E1 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C1CA4B1BEBBCBB006956E1 /* WebImage.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		9376C5141BE958F60097257C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9376C4CB1BE958120097257C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9376C4D31BE958130097257C;
-			remoteInfo = UCPhotoGallery;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		9376C5161BE958F60097257C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		32597F25FE743D189783CF81 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -58,16 +28,6 @@
 		9376C4D41BE958130097257C /* UCPhotoGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UCPhotoGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9376C4D71BE958130097257C /* UCPhotoGallery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCPhotoGallery.h; sourceTree = "<group>"; };
 		9376C4D91BE958130097257C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9376C4E31BE958520097257C /* UCPhotoGalleryExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UCPhotoGalleryExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9376C4E61BE958520097257C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9376C4E81BE958520097257C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		9376C4E91BE958520097257C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9376C4EB1BE958520097257C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9376C4EC1BE958520097257C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		9376C4EF1BE958520097257C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9376C4F11BE958520097257C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9376C4F41BE958520097257C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9376C4F61BE958520097257C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9376C4FA1BE958610097257C /* UCPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoCell.h; sourceTree = "<group>"; };
 		9376C4FB1BE958610097257C /* UCPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoCell.m; sourceTree = "<group>"; };
 		9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoGalleryFullscreenTransitionController.h; sourceTree = "<group>"; };
@@ -83,14 +43,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9376C4E01BE958520097257C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9376C5121BE958F60097257C /* UCPhotoGallery.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		93C1CAB01BEBD87E006956E1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				9376C4D61BE958130097257C /* UCPhotoGallery */,
-				9376C4E41BE958520097257C /* UCPhotoGalleryExample */,
 				9376C4D51BE958130097257C /* Products */,
 				D48597AC44C57973E08FEB47 /* Pods */,
 				6AFA9388352EDC6A5119E2BC /* Frameworks */,
@@ -127,7 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				9376C4D41BE958130097257C /* UCPhotoGallery.framework */,
-				9376C4E31BE958520097257C /* UCPhotoGalleryExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,30 +99,6 @@
 				9376C5031BE958610097257C /* UCPhotosViewController.m */,
 			);
 			path = UCPhotoGallery;
-			sourceTree = "<group>";
-		};
-		9376C4E41BE958520097257C /* UCPhotoGalleryExample */ = {
-			isa = PBXGroup;
-			children = (
-				9376C4E81BE958520097257C /* AppDelegate.h */,
-				9376C4E91BE958520097257C /* AppDelegate.m */,
-				9376C4EB1BE958520097257C /* ViewController.h */,
-				9376C4EC1BE958520097257C /* ViewController.m */,
-				9376C4EE1BE958520097257C /* Main.storyboard */,
-				9376C4F11BE958520097257C /* Assets.xcassets */,
-				9376C4F31BE958520097257C /* LaunchScreen.storyboard */,
-				9376C4F61BE958520097257C /* Info.plist */,
-				9376C4E51BE958520097257C /* Supporting Files */,
-			);
-			path = UCPhotoGalleryExample;
-			sourceTree = "<group>";
-		};
-		9376C4E51BE958520097257C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9376C4E61BE958520097257C /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		D48597AC44C57973E08FEB47 /* Pods */ = {
@@ -222,25 +148,6 @@
 			productReference = 9376C4D41BE958130097257C /* UCPhotoGallery.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9376C4E21BE958520097257C /* UCPhotoGalleryExample */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9376C4F71BE958520097257C /* Build configuration list for PBXNativeTarget "UCPhotoGalleryExample" */;
-			buildPhases = (
-				9376C4DF1BE958520097257C /* Sources */,
-				9376C4E01BE958520097257C /* Frameworks */,
-				9376C4E11BE958520097257C /* Resources */,
-				9376C5161BE958F60097257C /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9376C5151BE958F60097257C /* PBXTargetDependency */,
-			);
-			name = UCPhotoGalleryExample;
-			productName = UCPhotoGalleryExample;
-			productReference = 9376C4E31BE958520097257C /* UCPhotoGalleryExample.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -251,9 +158,6 @@
 				ORGANIZATIONNAME = Compass;
 				TargetAttributes = {
 					9376C4D31BE958130097257C = {
-						CreatedOnToolsVersion = 7.0.1;
-					};
-					9376C4E21BE958520097257C = {
 						CreatedOnToolsVersion = 7.0.1;
 					};
 				};
@@ -272,7 +176,6 @@
 			projectRoot = "";
 			targets = (
 				9376C4D31BE958130097257C /* UCPhotoGallery */,
-				9376C4E21BE958520097257C /* UCPhotoGalleryExample */,
 			);
 		};
 /* End PBXProject section */
@@ -282,16 +185,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9376C4E11BE958520097257C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9376C4F51BE958520097257C /* LaunchScreen.storyboard in Resources */,
-				9376C4F21BE958520097257C /* Assets.xcassets in Resources */,
-				9376C4F01BE958520097257C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,44 +221,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9376C4DF1BE958520097257C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9376C4ED1BE958520097257C /* ViewController.m in Sources */,
-				9376C4EA1BE958520097257C /* AppDelegate.m in Sources */,
-				9376C4E71BE958520097257C /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9376C5151BE958F60097257C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9376C4D31BE958130097257C /* UCPhotoGallery */;
-			targetProxy = 9376C5141BE958F60097257C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		9376C4EE1BE958520097257C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9376C4EF1BE958520097257C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9376C4F31BE958520097257C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9376C4F41BE958520097257C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9376C4DA1BE958130097257C /* Debug */ = {
@@ -506,38 +362,6 @@
 			};
 			name = Release;
 		};
-		9376C4F81BE958520097257C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = UCPhotoGalleryExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.compass.UCPhotoGalleryExample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		9376C4F91BE958520097257C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = UCPhotoGalleryExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.compass.UCPhotoGalleryExample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -555,15 +379,6 @@
 			buildConfigurations = (
 				9376C4DD1BE958130097257C /* Debug */,
 				9376C4DE1BE958130097257C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9376C4F71BE958520097257C /* Build configuration list for PBXNativeTarget "UCPhotoGalleryExample" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9376C4F81BE958520097257C /* Debug */,
-				9376C4F91BE958520097257C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

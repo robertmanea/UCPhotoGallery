@@ -18,3 +18,4 @@ FOUNDATION_EXPORT const unsigned char UCPhotoGalleryVersionString[];
 
 #import <UCPhotoGallery/UCPhotoGalleryViewController.h>
 #import <UCPhotoGallery/UCPhotosViewController.h>
+//#import <WebImage/UIImageView+WebCache.h>
