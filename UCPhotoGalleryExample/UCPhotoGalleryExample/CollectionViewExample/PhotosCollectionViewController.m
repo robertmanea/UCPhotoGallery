@@ -63,7 +63,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.transitioningDelegate = self;
     self.collectionView.backgroundColor = [UIColor whiteColor];
 }
 
@@ -92,6 +91,7 @@
     return nil;
 }
 
+// Handle rotation
 - (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection
               withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super willTransitionToTraitCollection:newCollection
@@ -170,22 +170,10 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self updateTransitionControllerWithSelectedView];
 }
 
-- (void)galleryViewControllerWillDismiss:(UCPhotoGalleryViewController *)galleryViewController {
-    // TODO
-}
-
-- (void)galleryViewControllerCancelledDismiss:(UCPhotoGalleryViewController *)galleryViewController {
-    // TODO
-}
-
 - (void)galleryViewControllerDidDismiss:(UCPhotoGalleryViewController *)galleryViewController {
     self.selectedCell.alpha = 1;
     self.selectedIndex = NSNotFound;
     self.fullscreenGalleryController = nil;
-}
-
-- (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem {
-    // TODO
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
