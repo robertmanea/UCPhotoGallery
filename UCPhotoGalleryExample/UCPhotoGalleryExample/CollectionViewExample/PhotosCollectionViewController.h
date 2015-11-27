@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  PhotosCollectionViewController.h
 //  UCPhotoGalleryExample
 //
 //  Created by Bryan Oltman on 11/26/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface PhotosCollectionViewController : UICollectionViewController
 
 @end
-

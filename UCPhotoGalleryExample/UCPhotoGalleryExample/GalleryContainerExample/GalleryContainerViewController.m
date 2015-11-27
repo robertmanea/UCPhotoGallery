@@ -6,11 +6,11 @@
 //  Copyright © 2015 Compass. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "GalleryContainerViewController.h"
 
 #import <UCPhotoGallery/UCPhotoGallery.h>
 
-@interface ViewController () <UCGalleryViewDataSource, UCGalleryViewDelegate>
+@interface GalleryContainerViewController () <UCGalleryViewDataSource, UCGalleryViewDelegate>
 @property UCPhotoGalleryViewController *galleryVC;
 @property UCPhotosViewController *photosVC;
 @property NSMutableArray *inactiveURLs;
@@ -18,7 +18,7 @@
 @property UILabel *pageLabel;
 @end
 
-@implementation ViewController
+@implementation GalleryContainerViewController
 
 - (NSArray *)photoURLs {
     static NSArray *photos = nil;

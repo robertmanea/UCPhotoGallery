@@ -10,7 +10,7 @@
 		9376C4D81BE958130097257C /* UCPhotoGallery.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4D71BE958130097257C /* UCPhotoGallery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C5061BE958610097257C /* UCPhotoCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FA1BE958610097257C /* UCPhotoCell.h */; };
 		9376C5071BE958610097257C /* UCPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FB1BE958610097257C /* UCPhotoCell.m */; };
-		9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */; };
+		9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C5091BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FD1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m */; };
 		9376C50A1BE958610097257C /* UCPhotoGalleryItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FE1BE958610097257C /* UCPhotoGalleryItemView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */; };
