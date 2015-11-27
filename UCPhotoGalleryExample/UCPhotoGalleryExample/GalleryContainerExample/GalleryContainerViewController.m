@@ -8,11 +8,10 @@
 
 #import "GalleryContainerViewController.h"
 
-#import <UCPhotoGallery/UCPhotoGallery.h>
+@import UCPhotoGallery;
 
 @interface GalleryContainerViewController () <UCGalleryViewDataSource, UCGalleryViewDelegate>
 @property UCPhotoGalleryViewController *galleryVC;
-@property UCPhotosViewController *photosVC;
 @property NSMutableArray *inactiveURLs;
 
 @property UILabel *pageLabel;
@@ -60,8 +59,8 @@
 
     self.galleryVC = ({
         CGRect galleryFrame = self.view.bounds ;
-        galleryFrame.origin.y = CGRectGetMaxY(self.navigationController.navigationBar.frame) + [[UIApplication sharedApplication] statusBarFrame].size.height;
-        galleryFrame.size.height = 100;
+        galleryFrame.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
+        galleryFrame.size.height = 200;
         UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
         gallery.imageScalingMode = UCImageScalingModeFill;
         gallery.dataSource = self;
@@ -72,30 +71,10 @@
         [self.view addSubview:gallery.view];
         gallery;
     });
-
-    self.photosVC = ({
-        UCPhotosViewController *vc = [UCPhotosViewController new];
-        CGRect frame = self.view.bounds;
-        frame.size.width = 175;
-        frame.origin.x = 100;
-        frame.origin.y = 64;
-        vc.view.frame = frame;
-        vc.dataSource = self;
-        vc.delegate = self;
-        vc.view.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        vc.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
-        [self addChildViewController:vc];
-        [self.view addSubview:vc.view];
-        vc;
-    });
-
-    //    self.galleryVC.view.hidden = YES;
-    self.photosVC.view.hidden = YES;
 }
 
 - (void)buttonPressed:(UIButton *)button {
     [self.galleryVC dismiss:YES];
-    //    [self.photosVC dismiss:YES];
 }
 
 #pragma mark - UCGalleryView
@@ -108,7 +87,7 @@
 - (void)didPresentGalleryViewController:(UCPhotoGalleryViewController *)galleryViewController {
     self.pageLabel = ({
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - 30, 100, 30)];
-        label.text = [NSString stringWithFormat:@"%@/%@", @(1), @(self.photoURLs.count)];
+        label.text = [NSString stringWithFormat:@"%@/%@", @(galleryViewController.currentIndex + 1), @(self.photoURLs.count)];
         label.textColor = [UIColor whiteColor];
         label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin;
         [galleryViewController.view addSubview:label];

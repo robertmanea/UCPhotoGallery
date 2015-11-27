@@ -8,9 +8,9 @@
 
 #import "PhotosCollectionViewController.h"
 #import "PhotoCell.h"
-#import <UCPhotoGallery/UCPhotoGallery.h>
+@import UCPhotoGallery;
 
-@interface PhotosCollectionViewController () <UCGalleryViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate>
+@interface PhotosCollectionViewController () <UCGalleryViewDataSource, UCGalleryViewDelegate, UICollectionViewDelegateFlowLayout, UIViewControllerTransitioningDelegate>
 @property (nonatomic) UCPhotoGalleryFullscreenTransitionController *transitionController;
 @property (nonatomic) CGRect selectedPhotoRect;
 @property (nonatomic) NSUInteger selectedIndex;
@@ -52,19 +52,18 @@
     return photos;
 }
 
-- (instancetype)init {
-    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    self = [super initWithCollectionViewLayout:layout];
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
         self.selectedIndex = NSNotFound;
         self.transitionController = [UCPhotoGalleryFullscreenTransitionController new];
     }
-
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.transitioningDelegate = self;
     self.collectionView.backgroundColor = [UIColor whiteColor];
 }
 
@@ -74,14 +73,14 @@
 }
 
 - (void)updateTransitionControllerWithSelectedView {
-//    UCPhotoCell *selectedCell = [self selectedCell];
-//    if (selectedCell) {
-//        UIViewController *container = self.parentViewController;
-//        self.transitionController.presentFromRect = [container.view convertRect:[selectedCell imageFrame]
-//                                                                       fromView:selectedCell.contentView];
-//        self.transitionController.transitionImage = selectedCell.image;
-//        selectedCell.alpha = 0;
-//    }
+    PhotoCell *selectedCell = [self selectedCell];
+    if (selectedCell) {
+        UIViewController *container = self.parentViewController;
+        self.transitionController.presentFromRect = [container.view convertRect:selectedCell.bounds
+                                                                       fromView:selectedCell.contentView];
+        self.transitionController.transitionImage = selectedCell.image;
+        selectedCell.alpha = 0;
+    }
 }
 
 - (PhotoCell *)selectedCell {
@@ -101,28 +100,12 @@
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
-- (void)dismiss:(BOOL)animated {
-//    if ([self.delegate respondsToSelector:@selector(galleryViewControllerWillDismiss:)]) {
-//        [self.delegate galleryViewControllerWillDismiss:self.fullscreenGalleryController];
-//    }
-//
-//    [self dismissViewControllerAnimated:animated completion:^{
-//        if ([self.delegate respondsToSelector:@selector(galleryViewControllerDidDismiss:)]) {
-//            [self.delegate galleryViewControllerDidDismiss:self.fullscreenGalleryController];
-//        }
-//
-//        self.selectedCell.alpha = 1;
-//        self.selectedIndex = NSNotFound;
-//    }];
-}
-
 #pragma mark - UICollectionView
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:[PhotoCell reuseIdentifier]
                                                                 forIndexPath:indexPath];
-//    cell.delegate = self;
-//    cell.url = self.urls[(NSUInteger)indexPath.row];
+    NSURL *url = self.photoURLs[(NSUInteger)indexPath.row];
     cell.alpha = (self.selectedIndex == (NSUInteger)indexPath.row) ? 0 : 1;
     [cell.photoImageView sd_setImageWithURL:url];
     return cell;
@@ -163,19 +146,13 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     // Give the animation a little time to begin to avoid the image briefly disappearing
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        self.selectedCell.alpha = 0;
+        self.selectedCell.alpha = 0;
     });
 }
 
-#pragma mark - UCPhotoCellDelegate
-//- (void)imageLoadedForPhotoCell:(UCPhotoCell *)cell {
-//    // If an image loads and the host cell is improperly sized, update the collection view's layout
-//    if ([self cachedHeightForImageAtURL:cell.url] != cell.bounds.size.height) {
-//        // NOTE: This was previously animated, but the collection view is not interactive during the animations,
-//        // so non-animated it is
-//        [self.collectionView.collectionViewLayout invalidateLayout];
-//    }
-//}
+- (NSArray *)imageURLsForGalleryView:(UCPhotoGalleryViewController *)galleryViewController {
+    return self.photoURLs;
+}
 
 #pragma mark - UCGalleryDelegate
 - (void)galleryViewController:(UCPhotoGalleryViewController *)galleryViewController
@@ -194,18 +171,21 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (void)galleryViewControllerWillDismiss:(UCPhotoGalleryViewController *)galleryViewController {
-// TODO
+    // TODO
 }
 
 - (void)galleryViewControllerCancelledDismiss:(UCPhotoGalleryViewController *)galleryViewController {
+    // TODO
 }
 
 - (void)galleryViewControllerDidDismiss:(UCPhotoGalleryViewController *)galleryViewController {
     self.selectedCell.alpha = 1;
     self.selectedIndex = NSNotFound;
+    self.fullscreenGalleryController = nil;
 }
 
 - (void)galleryItemDidZoom:(UCPhotoGalleryItemView *)galleryItem {
+    // TODO
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

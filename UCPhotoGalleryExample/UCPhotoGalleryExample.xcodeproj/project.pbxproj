@@ -16,6 +16,7 @@
 		935E59FE1C07DAAE0063D6D7 /* PhotosCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FA1C07DAAE0063D6D7 /* PhotosCollectionViewController.m */; };
 		935E59FF1C07DAAE0063D6D7 /* GalleryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FD1C07DAAE0063D6D7 /* GalleryContainerViewController.m */; };
 		935E5A021C07DB280063D6D7 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E5A011C07DB280063D6D7 /* PhotoCell.m */; };
+		935E5A091C0819C70063D6D7 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935E5A081C0819C70063D6D7 /* WebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		935E59FD1C07DAAE0063D6D7 /* GalleryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryContainerViewController.m; sourceTree = "<group>"; };
 		935E5A001C07DB280063D6D7 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		935E5A011C07DB280063D6D7 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		935E5A081C0819C70063D6D7 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Frameworks/WebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				935E59ED1C07D0FE0063D6D7 /* UCPhotoGallery.framework in Frameworks */,
+				935E5A091C0819C70063D6D7 /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +95,7 @@
 		935E59EE1C07D1040063D6D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				935E5A081C0819C70063D6D7 /* WebImage.framework */,
 				935E59EC1C07D0FE0063D6D7 /* UCPhotoGallery.framework */,
 			);
 			name = Frameworks;
@@ -303,8 +307,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = UCPhotoGalleryExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(PROJECT_DIR)/Frameworks @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.compass.UCPhotoGalleryExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -314,8 +322,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = UCPhotoGalleryExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(PROJECT_DIR)/Frameworks @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.compass.UCPhotoGalleryExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

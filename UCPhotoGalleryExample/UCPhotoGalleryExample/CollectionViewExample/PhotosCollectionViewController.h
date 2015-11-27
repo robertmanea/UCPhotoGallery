@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebImage/UIImageView+WebCache.h>
 
 @interface PhotosCollectionViewController : UICollectionViewController
 

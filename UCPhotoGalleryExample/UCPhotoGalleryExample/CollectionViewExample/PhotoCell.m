@@ -1,4 +1,5 @@
 #import "PhotoCell.h"
+@import WebImage;
 
 @interface PhotoCell ()
 @end
@@ -9,8 +10,8 @@
     return NSStringFromClass(self);
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
         self.photoImageView = ({
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
@@ -21,7 +22,6 @@
             imageView;
         });
     }
-
     return self;
 }
 
@@ -30,28 +30,13 @@
     [super prepareForReuse];
 
     self.url = nil;
-//    [self.photoImageView sd_cancelCurrentImageLoad];
+    [self.photoImageView sd_cancelCurrentImageLoad];
     self.photoImageView.image = nil;
     self.photoImageView.frame = self.contentView.bounds;
 }
 
 - (UIImage *)image {
     return self.photoImageView.image;
-}
-
-- (void)setUrl:(NSURL *)url {
-    if ([url isEqual:_url]) {
-        return;
-    }
-
-    _url = url;
-//    [self.photoImageView sd_setImageWithURL:url
-//                                  completed:^(__unused UIImage *image, __unused NSError *error,
-//                                              __unused SDImageCacheType cacheType, __unused NSURL *imageURL) {
-//                                      if ([self.delegate respondsToSelector:@selector(imageLoadedForPhotoCell:)]) {
-//                                          [self.delegate imageLoadedForPhotoCell:self];
-//                                      }
-//    }];
 }
 
 @end

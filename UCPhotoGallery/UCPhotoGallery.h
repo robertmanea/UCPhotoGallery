@@ -15,5 +15,4 @@ FOUNDATION_EXPORT double UCPhotoGalleryVersionNumber;
 FOUNDATION_EXPORT const unsigned char UCPhotoGalleryVersionString[];
 
 #import <UCPhotoGallery/UCPhotoGalleryViewController.h>
-#import <UCPhotoGallery/UCPhotosViewController.h>
 #import <UCPhotoGallery/UCPhotoGalleryFullscreenTransitionController.h>

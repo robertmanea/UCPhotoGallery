@@ -8,16 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		9376C4D81BE958130097257C /* UCPhotoGallery.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4D71BE958130097257C /* UCPhotoGallery.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9376C5061BE958610097257C /* UCPhotoCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FA1BE958610097257C /* UCPhotoCell.h */; };
-		9376C5071BE958610097257C /* UCPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FB1BE958610097257C /* UCPhotoCell.m */; };
 		9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C5091BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FD1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m */; };
 		9376C50A1BE958610097257C /* UCPhotoGalleryItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FE1BE958610097257C /* UCPhotoGalleryItemView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */; };
 		9376C50C1BE958610097257C /* UCPhotoGalleryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */; };
-		9376C50E1BE958610097257C /* UCPhotosViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5021BE958610097257C /* UCPhotosViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9376C50F1BE958610097257C /* UCPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5031BE958610097257C /* UCPhotosViewController.m */; };
 		93C1CAB11BEBD88E006956E1 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */; };
 		93C1CAB21BEBD8A1006956E1 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C1CA4B1BEBBCBB006956E1 /* WebImage.framework */; };
 /* End PBXBuildFile section */
@@ -28,16 +24,12 @@
 		9376C4D41BE958130097257C /* UCPhotoGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UCPhotoGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9376C4D71BE958130097257C /* UCPhotoGallery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCPhotoGallery.h; sourceTree = "<group>"; };
 		9376C4D91BE958130097257C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9376C4FA1BE958610097257C /* UCPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoCell.h; sourceTree = "<group>"; };
-		9376C4FB1BE958610097257C /* UCPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoCell.m; sourceTree = "<group>"; };
 		9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoGalleryFullscreenTransitionController.h; sourceTree = "<group>"; };
 		9376C4FD1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryFullscreenTransitionController.m; sourceTree = "<group>"; };
 		9376C4FE1BE958610097257C /* UCPhotoGalleryItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoGalleryItemView.h; sourceTree = "<group>"; };
 		9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryItemView.m; sourceTree = "<group>"; };
 		9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoGalleryViewController.h; sourceTree = "<group>"; };
 		9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryViewController.m; sourceTree = "<group>"; };
-		9376C5021BE958610097257C /* UCPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotosViewController.h; sourceTree = "<group>"; };
-		9376C5031BE958610097257C /* UCPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotosViewController.m; sourceTree = "<group>"; };
 		93C1CA4B1BEBBCBB006956E1 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCDirectionalPanGestureRecognizer.framework; path = Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,8 +78,6 @@
 			isa = PBXGroup;
 			children = (
 				9376C4D91BE958130097257C /* Info.plist */,
-				9376C4FA1BE958610097257C /* UCPhotoCell.h */,
-				9376C4FB1BE958610097257C /* UCPhotoCell.m */,
 				9376C4D71BE958130097257C /* UCPhotoGallery.h */,
 				9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */,
 				9376C4FD1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m */,
@@ -95,8 +85,6 @@
 				9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */,
 				9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */,
 				9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */,
-				9376C5021BE958610097257C /* UCPhotosViewController.h */,
-				9376C5031BE958610097257C /* UCPhotosViewController.m */,
 			);
 			path = UCPhotoGallery;
 			sourceTree = "<group>";
@@ -118,11 +106,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9376C4D81BE958130097257C /* UCPhotoGallery.h in Headers */,
-				9376C50E1BE958610097257C /* UCPhotosViewController.h in Headers */,
 				9376C50C1BE958610097257C /* UCPhotoGalleryViewController.h in Headers */,
 				9376C50A1BE958610097257C /* UCPhotoGalleryItemView.h in Headers */,
 				9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */,
-				9376C5061BE958610097257C /* UCPhotoCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,9 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */,
-				9376C5071BE958610097257C /* UCPhotoCell.m in Sources */,
 				9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */,
-				9376C50F1BE958610097257C /* UCPhotosViewController.m in Sources */,
 				9376C5091BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
