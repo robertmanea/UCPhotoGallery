@@ -6,27 +6,37 @@
 [![License](https://img.shields.io/cocoapods/l/UCPhotoGallery.svg?style=flat)](http://cocoadocs.org/docsets/UCPhotoGallery)
 [![Platform](https://img.shields.io/cocoapods/p/UCPhotoGallery.svg?style=flat)](http://cocoadocs.org/docsets/UCPhotoGallery)
 
-This project aims to create a drop-in image gallery UI component with a simple interface.
-
-There are two view controllers (`UCPhotoGalleryViewController`, which provides a horizontal gallery,  and `UCPhotosViewController`, which provides a vertical gallery) that lay out photos in different ways. Both of these interface with a `UCGalleryViewDataSource` and a `UCGalleryViewDelegate` to turn a simple array of `NSURL` objects into a gallery of image views. Both of these also provide an animated transition to a full-screen `UCPhotoGalleryViewController`.
+This project provides a drop-in image gallery UI component with a simple interface, as well as a full-screen photo viewer with a drag-to-dismis interaction.
 
 ## Usage
-To run the example project, clone the repo and run `pod install`.
 
+### Option 1: Embed the UCPhotoGallery's view in your view 
+1. Instantiate a `UCPhotoGallery`
+2. Add it as a child view controller
+3. Add its subview to your view
 
+See the "Embedded" tab in the sample app (backed by the `GalleryContainerViewController`) for an example.
 
-1. Create an instance of whichever controller you would like to use
-2. Add it as a child view controller of the owning view
-3. Add its view to the parent view controller's view
-4. Implement `UCGalleryViewDataSource` (currently just the `imageURLsForGalleryView:` function)
-5. That's it!
+### Option 2: Transition to a full-screen UCPhotoGallery from your image
+This option is a little more invovled, but allows you to display non-full-screen images however you would like and smoothly transition to a full-screen gallery.
+1. Create a `UCPhotoGalleryFullscreenTransitionController` and set `isFullscreen` to `YES`
+2. Implement the `UIViewControllerTransitioningDelegate` protocol, returning the transition controller created in step 1
+3. When transitioning to full-screen mode, create a `UCPhotoGalleryController`, set its `transitioningDelegate` to your view controller, and set its `modalPresentationStyle` to `UIModalPresentationCustom`
+4. Any time the gallery's current page changes, you'll need to update your images UI to ensure that a smooth transition back is possible. You will need to keep `presentFromRect` and `transitionImage` in sync (see `PhotosCollectionViewController.m` in the example project)
+
+See the "Transition" tab in the sample app (backed by the `PhotosCollectionViewController` class) for an example.
+
+### UCGalleryViewDataSource
+UCGalleryViewDataSource has a very simple, one-method interface: `imageURLsForGalleryView:`. Simply provide an `NSArray` of image URLs and the gallery can do the rest.
+
+### UCGalleryViewDelegate
+
 
 ## Running the example project
 
 ```shell
 $ git clone https://github.com/UrbanCompass/UCPhotoGallery.git
 $ cd UCPhotoGallery
-$ pod install
 $ open UCPhotoGallery.xcworkspace
 ```
 

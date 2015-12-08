@@ -10,6 +10,5 @@
 
 @interface GalleryContainerViewController : UIViewController
 
-
 @end
 

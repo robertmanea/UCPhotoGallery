@@ -55,10 +55,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.tabBarItem.title = @"Embedded";
+
     self.view.backgroundColor = [UIColor whiteColor];
 
     self.galleryVC = ({
-        CGRect galleryFrame = self.view.bounds ;
+        CGRect galleryFrame = self.view.bounds;
         galleryFrame.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
         galleryFrame.size.height = 200;
         UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
@@ -67,10 +69,11 @@
         gallery.delegate = self;
         gallery.view.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;
         gallery.view.frame = galleryFrame;
-        [self addChildViewController:gallery];
-        [self.view addSubview:gallery.view];
         gallery;
     });
+
+    [self addChildViewController:self.galleryVC];
+    [self.view addSubview:self.galleryVC.view];
 }
 
 - (void)buttonPressed:(UIButton *)button {

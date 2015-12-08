@@ -55,6 +55,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        self.tabBarItem.title = @"Transition";
         self.selectedIndex = NSNotFound;
         self.transitionController = [UCPhotoGalleryFullscreenTransitionController new];
     }
