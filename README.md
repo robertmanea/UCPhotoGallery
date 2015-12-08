@@ -15,7 +15,13 @@ This project provides a drop-in image gallery UI component with a simple interfa
 2. Add it as a child view controller
 3. Add its subview to your view
 
-See the "Embedded" tab in the sample app (code in `GalleryContainerViewController.m`) for an example.
+```objc
+UCPhotoGalleryViewController *galleryVC = [UCPhotoGalleryViewController new];
+galleryVC.dataSource = self;
+[self addChildViewController:self.galleryVC];
+[self.view addSubview:self.galleryVC.view];
+```
+See the "Embedded" tab in the sample app (code in `GalleryContainerViewController.m`) for a working example.
 
 ### Option 2: Transition to a full-screen UCPhotoGallery from your image
 This option is a little more invovled, but allows you to display non-full-screen images however you would like and smoothly transition to a full-screen gallery.
@@ -27,7 +33,7 @@ This option is a little more invovled, but allows you to display non-full-screen
 5. Call `presentViewController:animated:completed:` to present the full-screen gallery controller created in step 3.
 4. When you're ready to transition to your view controller, update the trasition controller to reflect gallery's page changes wi, you'll need to update your images UI to ensure that a smooth transition back is possible. You will need to keepin sync (see `PhotosCollectionViewController.m` in the example project)
 
-See the "Transition" tab in the sample app (code in `PhotosCollectionViewController.m`) for an example.
+See the "Transition" tab in the sample app (code in `PhotosCollectionViewController.m`) for a working example.
 
 ### UCGalleryViewDataSource
 `UCGalleryViewDataSource` has a very simple, one-method interface: `imageURLsForGalleryView:`. Simply provide an `NSArray` of image URLs and the gallery can do the rest.
