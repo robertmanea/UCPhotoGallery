@@ -11,26 +11,32 @@ This project provides a drop-in image gallery UI component with a simple interfa
 ## Usage
 
 ### Option 1: Embed the UCPhotoGallery's view in your view 
-1. Instantiate a `UCPhotoGallery`
+1. Instantiate a `UCPhotoGalleryViewController`
 2. Add it as a child view controller
 3. Add its subview to your view
 
-See the "Embedded" tab in the sample app (backed by the `GalleryContainerViewController`) for an example.
+See the "Embedded" tab in the sample app (code in `GalleryContainerViewController.m`) for an example.
 
 ### Option 2: Transition to a full-screen UCPhotoGallery from your image
 This option is a little more invovled, but allows you to display non-full-screen images however you would like and smoothly transition to a full-screen gallery.
-1. Create a `UCPhotoGalleryFullscreenTransitionController` and set `isFullscreen` to `YES`
-2. Implement the `UIViewControllerTransitioningDelegate` protocol, returning the transition controller created in step 1
-3. When transitioning to full-screen mode, create a `UCPhotoGalleryController`, set its `transitioningDelegate` to your view controller, and set its `modalPresentationStyle` to `UIModalPresentationCustom`
-4. Any time the gallery's current page changes, you'll need to update your images UI to ensure that a smooth transition back is possible. You will need to keep `presentFromRect` and `transitionImage` in sync (see `PhotosCollectionViewController.m` in the example project)
 
-See the "Transition" tab in the sample app (backed by the `PhotosCollectionViewController` class) for an example.
+1. Create a `UCPhotoGalleryFullscreenTransitionController`
+2. Implement the `UIViewControllerTransitioningDelegate` protocol, returning the transition controller created in step 1
+3. When you want to transition to the full-screen gallery, create a `UCPhotoGalleryViewController`, set `isFullscreen` to `YES` and its `transitioningDelegate` to your view controller, and set its `modalPresentationStyle` to `UIModalPresentationCustom`
+4. Before presenting the full-screen gallery, set the transition controller's `presentFromRect` and `transitionImage` properties. `presentFromRect` is the selected image's frame relative to the screen and `transitionImage` is the image itself.
+5. Call `presentViewController:animated:completed:` to present the full-screen gallery controller created in step 3.
+4. When you're ready to transition to your view controller, update the trasition controller to reflect gallery's page changes wi, you'll need to update your images UI to ensure that a smooth transition back is possible. You will need to keepin sync (see `PhotosCollectionViewController.m` in the example project)
+
+See the "Transition" tab in the sample app (code in `PhotosCollectionViewController.m`) for an example.
 
 ### UCGalleryViewDataSource
-UCGalleryViewDataSource has a very simple, one-method interface: `imageURLsForGalleryView:`. Simply provide an `NSArray` of image URLs and the gallery can do the rest.
+`UCGalleryViewDataSource` has a very simple, one-method interface: `imageURLsForGalleryView:`. Simply provide an `NSArray` of image URLs and the gallery can do the rest.
 
 ### UCGalleryViewDelegate
+`UCGalleryViewDelegate` provides a handful of optional functions that allow the delegate to customize the gallery controller and respond to its actions. 
 
+## Other notes
+`UCPhotoGalleryViewController` supports two different ways of displaying images: aspect fit and aspect fill. Aspect fit is the default, but this can be set a) for all images by setting `imageScalingMode` to either `UCImageScalingModeFit` or `UCImageScalingModeFill` b) for individual images by implementing `galleryViewController:scalingModeForImageAtIndex:` on your `UCGalleryViewDelegate`.
 
 ## Running the example project
 
@@ -41,5 +47,3 @@ $ open UCPhotoGallery.xcworkspace
 ```
 
 Once in Xcode, ensure the target is `UCPhotoGalleryExample`, build, and run.
-
-The same project is capable of demonstrating both the `UCPhotoGalleryViewController` and the `UCPhotosViewController`. Switching between them can be done by commenting/uncommenting the appropriate lines in `ViewController.m`'s `viewDidLoad` function. 
