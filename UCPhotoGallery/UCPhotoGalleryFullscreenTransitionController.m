@@ -1,5 +1,6 @@
 #import "UCPhotoGalleryFullscreenTransitionController.h"
 #import "UCPhotoGalleryViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation UCPhotoGalleryFullscreenTransitionController
 
@@ -33,7 +34,7 @@
         shadowboxView.alpha = 0;
 
         startRect = self.presentFromRect;
-        endRect = [fullscreenGalleryController imageFrameInRootView];
+        endRect = AVMakeRectWithAspectRatioInsideRect(self.transitionImage.size, containerView.bounds);
 
         transitionImageView = [[UIImageView alloc] initWithImage:self.transitionImage];
         transitionImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -57,7 +58,7 @@
     } else {
         shadowboxView.backgroundColor = [fullscreenGalleryController.view backgroundColor];
 
-        startRect = [fullscreenGalleryController imageFrameInRootView];
+        startRect = AVMakeRectWithAspectRatioInsideRect(self.transitionImage.size, containerView.bounds);
         startRect = CGRectOffset(startRect, 0, [fullscreenGalleryController visibleItem].transform.ty);
         endRect = self.presentFromRect;
 

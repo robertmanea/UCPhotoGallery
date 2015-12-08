@@ -261,6 +261,11 @@
     return nil;
 }
 
+/**
+ *  The frame of the image in the gallery view's superview
+ *
+ *  @return (see above)
+ */
 - (CGRect)imageFrameInRootView {
     UIView *rootView;
     if (self.navigationController) {

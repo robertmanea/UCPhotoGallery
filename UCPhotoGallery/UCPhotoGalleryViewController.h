@@ -170,13 +170,6 @@ typedef NS_ENUM(NSInteger, UCImageScalingMode) {
 - (void)reloadData;
 
 /**
- *  The frame of the image in the gallery view's superview
- *
- *  @return (see above)
- */
-- (CGRect)imageFrameInRootView;
-
-/**
  *  A setter for currentIndex with an optional animation parameter
  *
  *  @param currentPageIndex The new current index
