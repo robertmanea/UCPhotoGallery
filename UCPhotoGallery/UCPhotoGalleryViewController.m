@@ -171,8 +171,11 @@
 
 - (void)didRotateFromInterfaceOrientation:(__unused UIInterfaceOrientation)fromInterfaceOrientation {
     self.rotating = NO;
-
     [self layoutVisibleItems];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 - (void)updateTransitionControllerWithSelectedView {

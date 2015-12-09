@@ -7,19 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9306C1D91C18ADAC009A4A9C /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9306C1D71C18ADA0009A4A9C /* UCPhotoGallery.framework */; };
+		9306C1DA1C18ADAC009A4A9C /* UCPhotoGallery.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9306C1D71C18ADA0009A4A9C /* UCPhotoGallery.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		935E59D71C07D0E70063D6D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59D61C07D0E70063D6D7 /* main.m */; };
 		935E59DA1C07D0E70063D6D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59D91C07D0E70063D6D7 /* AppDelegate.m */; };
 		935E59E01C07D0E70063D6D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 935E59DE1C07D0E70063D6D7 /* Main.storyboard */; };
 		935E59E21C07D0E70063D6D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 935E59E11C07D0E70063D6D7 /* Assets.xcassets */; };
 		935E59E51C07D0E70063D6D7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 935E59E31C07D0E70063D6D7 /* LaunchScreen.storyboard */; };
-		935E59ED1C07D0FE0063D6D7 /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935E59EC1C07D0FE0063D6D7 /* UCPhotoGallery.framework */; };
 		935E59FE1C07DAAE0063D6D7 /* PhotosCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FA1C07DAAE0063D6D7 /* PhotosCollectionViewController.m */; };
 		935E59FF1C07DAAE0063D6D7 /* GalleryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FD1C07DAAE0063D6D7 /* GalleryContainerViewController.m */; };
 		935E5A021C07DB280063D6D7 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E5A011C07DB280063D6D7 /* PhotoCell.m */; };
 		935E5A091C0819C70063D6D7 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935E5A081C0819C70063D6D7 /* WebImage.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		9306C1DB1C18ADAC009A4A9C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9306C1DA1C18ADAC009A4A9C /* UCPhotoGallery.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		9306C1D71C18ADA0009A4A9C /* UCPhotoGallery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCPhotoGallery.framework; path = "../DerivedData/UCPhotoGallery/Build/Products/Debug-iphoneos/UCPhotoGallery.framework"; sourceTree = "<group>"; };
 		935E59D21C07D0E70063D6D7 /* UCPhotoGalleryExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UCPhotoGalleryExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		935E59D61C07D0E70063D6D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		935E59D81C07D0E70063D6D7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -43,7 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				935E59ED1C07D0FE0063D6D7 /* UCPhotoGallery.framework in Frameworks */,
+				9306C1D91C18ADAC009A4A9C /* UCPhotoGallery.framework in Frameworks */,
 				935E5A091C0819C70063D6D7 /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +111,7 @@
 		935E59EE1C07D1040063D6D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9306C1D71C18ADA0009A4A9C /* UCPhotoGallery.framework */,
 				935E5A081C0819C70063D6D7 /* WebImage.framework */,
 				935E59EC1C07D0FE0063D6D7 /* UCPhotoGallery.framework */,
 			);
@@ -131,6 +148,8 @@
 				935E59CE1C07D0E70063D6D7 /* Sources */,
 				935E59CF1C07D0E70063D6D7 /* Frameworks */,
 				935E59D01C07D0E70063D6D7 /* Resources */,
+				9306C1DB1C18ADAC009A4A9C /* Embed Frameworks */,
+				9306C1DC1C18ADC2009A4A9C /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -185,6 +204,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9306C1DC1C18ADC2009A4A9C /* Carthage Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/../Carthage/Build/iOS/WebImage.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework",
+			);
+			name = "Carthage Copy Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		935E59CE1C07D0E70063D6D7 /* Sources */ = {
