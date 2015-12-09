@@ -53,3 +53,7 @@ $ open UCPhotoGallery.xcworkspace
 ```
 
 Once in Xcode, ensure the target is `UCPhotoGalleryExample`, build, and run.
+
+## License
+
+This project is available under the MIT license. See the LICENSE file for more info.
