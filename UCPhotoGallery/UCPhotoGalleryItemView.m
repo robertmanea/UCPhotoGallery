@@ -2,9 +2,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <WebImage/UIImageView+WebCache.h>
 
-CGFloat aspectRatio(CGRect rect);
-CGFloat aspectRatio(CGRect rect) {
-    return rect.size.width / rect.size.height;
+CGFloat aspectRatio(CGSize size);
+CGFloat aspectRatio(CGSize size) {
+    return size.width / size.height;
 };
 
 @interface UCPhotoGalleryItemView () <UIScrollViewDelegate>
@@ -100,39 +100,25 @@ CGFloat aspectRatio(CGRect rect) {
 }
 
 - (CGRect)aspectFillFrameForImage:(UIImage *)image {
-    if (!image) {
+    if (!image || CGSizeEqualToSize(image.size, CGSizeZero)) {
         return CGRectZero;
     }
 
-    CGRect aspectFitFrame = AVMakeRectWithAspectRatioInsideRect(image.size, self.bounds);
-    if (CGSizeEqualToSize(aspectFitFrame.size, CGSizeZero)) {
-        return self.bounds;
-    }
-
     CGRect ret = CGRectZero;
-    if (aspectRatio(self.bounds) > aspectRatio(aspectFitFrame)) {
-        CGFloat widthDiff = floor(self.bounds.size.width - aspectFitFrame.size.width);
-        if (widthDiff > 0) {
-            CGFloat diffPerc = widthDiff / aspectFitFrame.size.width;
-            ret.size.width = self.bounds.size.width;
-            ret.size.height = floor(aspectFitFrame.size.height * diffPerc);
-            ret.origin.y = floor((self.bounds.size.height - ret.size.height) / 2);
-        } else {
-            ret = aspectFitFrame;
-        }
+    CGFloat selfAspectRatio = aspectRatio(self.bounds.size);
+    CGFloat imageAspectRatio = aspectRatio(image.size);
+    if (selfAspectRatio > imageAspectRatio) {
+        // self wider than image
+        ret.size.width = self.bounds.size.width;
+        ret.size.height = ret.size.width / imageAspectRatio;
+        ret.origin.y = floor((self.bounds.size.height - ret.size.height) / 2);
     } else {
-        CGFloat heightDiff = floor(self.bounds.size.height - aspectFitFrame.size.height);
-        if (heightDiff > 0) {
-            CGFloat diffPerc = heightDiff / aspectFitFrame.size.height;
-            ret.size.height = self.bounds.size.height;
-            ret.size.width = floor(aspectFitFrame.size.width * diffPerc);
-            ret.origin.x = floor((self.bounds.size.width - ret.size.width) / 2);
-        } else {
-            ret = aspectFitFrame;
-        }
+        // image wider than self
+        ret.size.height = self.bounds.size.height;
+        ret.size.width = ret.size.height * imageAspectRatio;
+        ret.origin.x = floor((self.bounds.size.width - ret.size.width) / 2);
     }
 
-//    NSLog(@"returning %@ for image size %@", NSStringFromCGRect(ret), NSStringFromCGSize(image.size));
     return ret;
 }
 
