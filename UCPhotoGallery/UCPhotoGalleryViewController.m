@@ -13,6 +13,7 @@
 @property NSArray *urls;
 @property BOOL performingLayout;
 @property BOOL rotating;
+@property (getter=isDisappearing) BOOL disappearing;
 
 @property (nonatomic) UIButton *doneButton;
 @property (nonatomic) UIScrollView *scrollView;
@@ -175,7 +176,7 @@
 }
 
 - (BOOL)prefersStatusBarHidden {
-    return YES;
+    return self.isFullscreen && !self.isDisappearing;
 }
 
 - (void)updateTransitionControllerWithSelectedView {
@@ -270,15 +271,6 @@
  *  @return (see above)
  */
 - (CGRect)imageFrameInRootView {
-    UIView *rootView;
-    if (self.navigationController) {
-        rootView = self.navigationController.view;
-    } else if (self.presentingViewController) {
-        rootView = self.presentingViewController.view;
-    } else {
-        rootView = [[[[[UIApplication sharedApplication] delegate] window] rootViewController] view];
-    }
-
     CGRect ret;
     if ([self scalingModeForItemAtIndex:self.currentIndex] == UCImageScalingModeFill) {
         ret = self.view.bounds;
@@ -287,13 +279,15 @@
         ret = visibleItem.imageView.frame;
     }
 
+    UIView *rootView = [[[UIApplication sharedApplication] delegate] window];
     ret = [rootView convertRect:ret
                        fromView:self.view];
-
     return ret;
 }
 
 - (void)doneButtonTapped:(__unused UIButton *)button {
+    self.disappearing = YES;
+    [self setNeedsStatusBarAppearanceUpdate];
     [self dismiss:YES];
 }
 
@@ -581,27 +575,6 @@
     }];
 }
 
-- (void)galleryViewControllerWillDismiss:(__unused UCPhotoGalleryViewController *)galleryViewController {
-    if ([self.delegate respondsToSelector:@selector(galleryViewControllerWillDismiss:)]) {
-        [self.delegate galleryViewControllerWillDismiss:self];
-    }
-}
-
-- (void)galleryViewControllerCancelledDismiss:(__unused UCPhotoGalleryViewController *)galleryViewController {
-    if ([self.delegate respondsToSelector:@selector(galleryViewControllerCancelledDismiss:)]) {
-        [self.delegate galleryViewControllerCancelledDismiss:self];
-    }
-}
-
-- (void)galleryViewControllerDidDismiss:(__unused UCPhotoGalleryViewController *)galleryViewController {
-    if ([self.delegate respondsToSelector:@selector(galleryViewControllerDidDismiss:)]) {
-        [self.delegate galleryViewControllerDidDismiss:self];
-    }
-
-    self.fullscreenGalleryController = nil;
-    self.visibleItem.alpha = 1;
-}
-
 - (void)singleTapRecognized:(__unused UITapGestureRecognizer *)recognizer {
     if (!self.isFullscreen) {
         [self expand:YES];
@@ -634,10 +607,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     self.visibleItem.alpha = 1;
     [self setCurrentIndex:page animated:NO];
     self.visibleItem.alpha = 0;
-
-    if (self.visibleItem.imageView.image) {
-        [self updateTransitionControllerWithSelectedView];
-    }
 }
 
 #pragma mark - UCGalleryItemDelegate
@@ -667,6 +636,28 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         
         [self updateOverlaysWithAlpha:1];
     }
+}
+
+- (void)galleryViewControllerWillDismiss:(__unused UCPhotoGalleryViewController *)galleryViewController {
+    [self updateTransitionControllerWithSelectedView];
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerWillDismiss:)]) {
+        [self.delegate galleryViewControllerWillDismiss:self];
+    }
+}
+
+- (void)galleryViewControllerCancelledDismiss:(__unused UCPhotoGalleryViewController *)galleryViewController {
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerCancelledDismiss:)]) {
+        [self.delegate galleryViewControllerCancelledDismiss:self];
+    }
+}
+
+- (void)galleryViewControllerDidDismiss:(__unused UCPhotoGalleryViewController *)galleryViewController {
+    if ([self.delegate respondsToSelector:@selector(galleryViewControllerDidDismiss:)]) {
+        [self.delegate galleryViewControllerDidDismiss:self];
+    }
+
+    self.fullscreenGalleryController = nil;
+    self.visibleItem.alpha = 1;
 }
 
 #pragma mark - UIScrollViewDelegate

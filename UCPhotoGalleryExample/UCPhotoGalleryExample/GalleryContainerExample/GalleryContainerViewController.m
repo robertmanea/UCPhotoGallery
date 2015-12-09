@@ -33,8 +33,10 @@
 
     self.galleryVC = ({
         CGRect galleryFrame = self.view.bounds;
-        galleryFrame.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height;
-        galleryFrame.size.height = 200;
+        galleryFrame.origin.y = [[UIApplication sharedApplication] statusBarFrame].size.height +
+            self.navigationController.navigationBar.bounds.size.height;
+        galleryFrame.size.height = self.view.bounds.size.height - 350;
+        galleryFrame.size.height = 300;
         UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
         gallery.imageScalingMode = UCImageScalingModeFill;
         gallery.dataSource = self;
