@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "UCPhotoGallery"
-  s.version          = "0.2.2"
+  s.version          = "0.2.3"
   s.summary          = "A drop-in image gallery UI component"
   s.description      = <<-DESC
                        UCPhotoGallery provides two view controllers that both turn a collection of URLs into a photo gallery
@@ -15,10 +15,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'UCPhotoGallery'
-  s.public_header_files = 'UCPhotoGallery/UCPhotoGallery.h', 
-			  'UCPhotoGallery/UCPhotoGalleryViewController.h',
-			  'UCPhotoGallery/UCPhotoGalleryFullscreenTransitionController.h'
-
+  s.public_header_files = 'UCPhotoGallery/*.h'
   s.frameworks = 'UIKit'
   s.preserve_paths = 'Frameworks/*.framework'
   s.vendored_frameworks = 'Frameworks/WebImage.framework', 'Frameworks/UCDirectionalPanGestureRecognizer.framework'
