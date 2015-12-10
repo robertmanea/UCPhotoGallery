@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "UCPhotoGallery"
-  s.version          = "0.2.1"
+  s.version          = "0.2.2"
   s.summary          = "A drop-in image gallery UI component"
   s.description      = <<-DESC
                        UCPhotoGallery provides two view controllers that both turn a collection of URLs into a photo gallery
