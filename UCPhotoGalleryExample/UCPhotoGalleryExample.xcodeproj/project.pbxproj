@@ -15,8 +15,8 @@
 		935E59FE1C07DAAE0063D6D7 /* PhotosCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FA1C07DAAE0063D6D7 /* PhotosCollectionViewController.m */; };
 		935E59FF1C07DAAE0063D6D7 /* GalleryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FD1C07DAAE0063D6D7 /* GalleryContainerViewController.m */; };
 		935E5A021C07DB280063D6D7 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E5A011C07DB280063D6D7 /* PhotoCell.m */; };
-		935E5A091C0819C70063D6D7 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935E5A081C0819C70063D6D7 /* WebImage.framework */; };
 		93A0597D1C19FDD100E12F2F /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A0597C1C19FDD100E12F2F /* UCPhotoGallery.framework */; };
+		93A0597F1C1A007200E12F2F /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A0597E1C1A007200E12F2F /* WebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,8 +47,8 @@
 		935E59FD1C07DAAE0063D6D7 /* GalleryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryContainerViewController.m; sourceTree = "<group>"; };
 		935E5A001C07DB280063D6D7 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		935E5A011C07DB280063D6D7 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
-		935E5A081C0819C70063D6D7 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Frameworks/WebImage.framework; sourceTree = "<group>"; };
 		93A0597C1C19FDD100E12F2F /* UCPhotoGallery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCPhotoGallery.framework; path = "../build/Debug-iphoneos/UCPhotoGallery.framework"; sourceTree = "<group>"; };
+		93A0597E1C1A007200E12F2F /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Frameworks/WebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93A0597D1C19FDD100E12F2F /* UCPhotoGallery.framework in Frameworks */,
-				935E5A091C0819C70063D6D7 /* WebImage.framework in Frameworks */,
+				93A0597F1C1A007200E12F2F /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +108,8 @@
 		935E59EE1C07D1040063D6D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				93A0597E1C1A007200E12F2F /* WebImage.framework */,
 				93A0597C1C19FDD100E12F2F /* UCPhotoGallery.framework */,
-				935E5A081C0819C70063D6D7 /* WebImage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -145,7 +145,6 @@
 				935E59CF1C07D0E70063D6D7 /* Frameworks */,
 				935E59D01C07D0E70063D6D7 /* Resources */,
 				9306C1DB1C18ADAC009A4A9C /* Embed Frameworks */,
-				9306C1DC1C18ADC2009A4A9C /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,25 +199,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		9306C1DC1C18ADC2009A4A9C /* Carthage Copy Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/../Carthage/Build/iOS/WebImage.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework",
-			);
-			name = "Carthage Copy Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		935E59CE1C07D0E70063D6D7 /* Sources */ = {

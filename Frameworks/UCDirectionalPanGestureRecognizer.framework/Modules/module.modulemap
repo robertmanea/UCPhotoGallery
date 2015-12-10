@@ -1,0 +1,6 @@
+framework module UCDirectionalPanGestureRecognizer {
+  umbrella header "UCDirectionalPanGestureRecognizer.h"
+
+  export *
+  module * { export * }
+}

@@ -14,13 +14,11 @@
 		9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */; };
 		9376C50C1BE958610097257C /* UCPhotoGalleryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */; };
-		93C1CAB11BEBD88E006956E1 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */; };
-		93C1CAB21BEBD8A1006956E1 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C1CA4B1BEBBCBB006956E1 /* WebImage.framework */; };
+		93A059891C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A059871C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework */; };
+		93A0598A1C1A029500E12F2F /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A059881C1A029500E12F2F /* WebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		32597F25FE743D189783CF81 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		5F5E9E6EBBFBE58ABC3A2749 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		9376C4D41BE958130097257C /* UCPhotoGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UCPhotoGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9376C4D71BE958130097257C /* UCPhotoGallery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCPhotoGallery.h; sourceTree = "<group>"; };
 		9376C4D91BE958130097257C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -30,17 +28,17 @@
 		9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryItemView.m; sourceTree = "<group>"; };
 		9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoGalleryViewController.h; sourceTree = "<group>"; };
 		9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryViewController.m; sourceTree = "<group>"; };
-		93C1CA4B1BEBBCBB006956E1 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
-		93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCDirectionalPanGestureRecognizer.framework; path = Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework; sourceTree = "<group>"; };
+		93A059871C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCDirectionalPanGestureRecognizer.framework; path = Frameworks/UCDirectionalPanGestureRecognizer.framework; sourceTree = "<group>"; };
+		93A059881C1A029500E12F2F /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Frameworks/WebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		93C1CAB01BEBD87E006956E1 /* Frameworks */ = {
+		93A059801C1A00C900E12F2F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93C1CAB21BEBD8A1006956E1 /* WebImage.framework in Frameworks */,
-				93C1CAB11BEBD88E006956E1 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */,
+				93A059891C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework in Frameworks */,
+				93A0598A1C1A029500E12F2F /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,8 +48,8 @@
 		6AFA9388352EDC6A5119E2BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				93C1CA601BEBBF56006956E1 /* UCDirectionalPanGestureRecognizer.framework */,
-				93C1CA4B1BEBBCBB006956E1 /* WebImage.framework */,
+				93A059871C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework */,
+				93A059881C1A029500E12F2F /* WebImage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -61,7 +59,6 @@
 			children = (
 				9376C4D61BE958130097257C /* UCPhotoGallery */,
 				9376C4D51BE958130097257C /* Products */,
-				D48597AC44C57973E08FEB47 /* Pods */,
 				6AFA9388352EDC6A5119E2BC /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -89,15 +86,6 @@
 			path = UCPhotoGallery;
 			sourceTree = "<group>";
 		};
-		D48597AC44C57973E08FEB47 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5F5E9E6EBBFBE58ABC3A2749 /* Pods.debug.xcconfig */,
-				32597F25FE743D189783CF81 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -122,8 +110,7 @@
 				9376C4CF1BE958130097257C /* Sources */,
 				9376C4D11BE958130097257C /* Headers */,
 				9376C4D21BE958130097257C /* Resources */,
-				93C1CA4D1BEBBDB8006956E1 /* ShellScript */,
-				93C1CAB01BEBD87E006956E1 /* Frameworks */,
+				93A059801C1A00C900E12F2F /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -175,24 +162,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		93C1CA4D1BEBBDB8006956E1 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9376C4CF1BE958130097257C /* Sources */ = {
@@ -305,12 +274,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = UCPhotoGallery/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Frameworks";
 				OTHER_CFLAGS = (
 					"-Wextra",
 					"-Wall",
@@ -330,12 +299,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = UCPhotoGallery/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Frameworks";
 				OTHER_CFLAGS = (
 					"-Wextra",
 					"-Wall",

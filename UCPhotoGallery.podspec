@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
 			  'UCPhotoGallery/UCPhotoGalleryFullscreenTransitionController.h'
 
   s.frameworks = 'UIKit'
-  s.preserve_paths = 'Carthage/Build/iOS/*'
-  s.vendored_frameworks = 'Carthage/Build/iOS/*.framework'
+  s.preserve_paths = 'Frameworks/*'
+  s.vendored_frameworks = 'Frameworks/*.framework'
 end
