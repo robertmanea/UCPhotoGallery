@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "UCPhotoGallery"
-  s.version          = "0.1"
+  s.version          = "0.2"
   s.summary          = "A drop-in image gallery UI component"
   s.description      = <<-DESC
                        UCPhotoGallery provides two view controllers that both turn a collection of URLs into a photo gallery
@@ -20,5 +20,6 @@ Pod::Spec.new do |s|
 			  'UCPhotoGallery/UCPhotoGalleryFullscreenTransitionController.h'
 
   s.frameworks = 'UIKit'
+  s.preserve_paths = 'Carthage/Build/iOS/*'
   s.vendored_frameworks = 'Carthage/Build/iOS/*.framework'
 end
