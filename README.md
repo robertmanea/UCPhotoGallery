@@ -8,6 +8,13 @@
 
 This project provides a drop-in image gallery UI component with a simple interface, as well as a full-screen photo viewer with a drag-to-dismis interaction.
 
+## Installation
+
+This project is available through [CocoaPods](http://cocoapods.org). To install
+it, simply add the following line to your Podfile:
+
+    pod "UCPhotoGallery"
+
 ## Usage
 
 ### Option 1: Embed the UCPhotoGallery's view in your view 
