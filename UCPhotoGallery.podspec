@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
 			  'UCPhotoGallery/UCPhotoGalleryFullscreenTransitionController.h'
 
   s.frameworks = 'UIKit'
-  s.preserve_paths = 'Frameworks/*'
-  s.vendored_frameworks = 'Frameworks/*.framework'
+  s.preserve_paths = 'Frameworks/*.framework'
+  s.vendored_frameworks = 'Frameworks/WebImage.framework', 'Frameworks/UCDirectionalPanGestureRecognizer.framework'
 end
