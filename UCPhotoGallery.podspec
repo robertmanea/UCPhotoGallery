@@ -15,12 +15,10 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'UCPhotoGallery'
-  s.public_header_files = 'UCPhotoGallery/**/*.h'
+  s.public_header_files = 'UCPhotoGallery/UCPhotoGallery.h', 
+			  'UCPhotoGallery/UCPhotoGalleryViewController.h',
+			  'UCPhotoGallery/UCPhotoGalleryFullscreenTransitionController.h'
 
   s.frameworks = 'UIKit'
-  s.subspec "SDWebImage" do |ss|
-      ss.dependency "SDWebImage"
-      ss.xcconfig = { "FRAMEWORK_SEARCH_PATHS" => "$(PODS_ROOT)/SDWebImage"}
-  end
-
+  s.vendored_frameworks = 'Carthage/Build/iOS/*.framework'
 end
