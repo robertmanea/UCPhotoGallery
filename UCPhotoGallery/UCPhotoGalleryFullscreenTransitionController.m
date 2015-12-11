@@ -24,7 +24,9 @@
     UCPhotoGalleryViewController *fullscreenGalleryController =
         (UCPhotoGalleryViewController *)(isPresenting ? toController : fromController);
 
-    UIImageView *transitionImageView;
+    UIImageView *transitionImageView = [[UIImageView alloc] initWithImage:self.transitionImage];
+    transitionImageView.contentMode = UIViewContentModeScaleAspectFill;
+    transitionImageView.clipsToBounds = YES;
     CGRect startRect, endRect;
     fullscreenGalleryController.view.alpha = 0;
     if (isPresenting) {
@@ -35,10 +37,6 @@
 
         startRect = self.presentFromRect;
         endRect = AVMakeRectWithAspectRatioInsideRect(self.transitionImage.size, containerView.bounds);
-
-        transitionImageView = [[UIImageView alloc] initWithImage:self.transitionImage];
-        transitionImageView.contentMode = UIViewContentModeScaleAspectFill;
-        transitionImageView.clipsToBounds = YES;
         transitionImageView.frame = startRect;
 //        NSLog(@"in start:%@ end:%@", NSStringFromCGRect(startRect), NSStringFromCGRect(endRect));
         [containerView addSubview:transitionImageView];
@@ -61,10 +59,6 @@
         startRect = AVMakeRectWithAspectRatioInsideRect(self.transitionImage.size, containerView.bounds);
         startRect = CGRectOffset(startRect, 0, [fullscreenGalleryController visibleItem].transform.ty);
         endRect = self.presentFromRect;
-
-        transitionImageView = [[UIImageView alloc] initWithImage:self.transitionImage];
-        transitionImageView.contentMode = UIViewContentModeScaleAspectFill;
-        transitionImageView.clipsToBounds = YES;
         transitionImageView.frame = startRect;
 //        NSLog(@"out start:%@ end:%@", NSStringFromCGRect(startRect), NSStringFromCGRect(endRect));
         [containerView addSubview:transitionImageView];
