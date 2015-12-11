@@ -137,6 +137,15 @@ typedef NS_ENUM(NSInteger, UCImageScalingMode) {
 @property (weak, nonatomic) NSObject<UCGalleryViewDelegate>* delegate;
 
 /**
+ *  If the gallery item at the provided index is visible, return its image.
+ *
+ *  @param index The desired index
+ *
+ *  @return The UIImage loaded at index, nil if the image is not loaded
+ */
+- (UIImage *)imageAtIndex:(NSUInteger)index;
+
+/**
  *  Determines whether images are scaled to fit (full image visible, gallery background can show through) or
  *  to fill (image completely fills gallery). Unused if the gallery's delegate implements 
  *  galleryViewController:scalingModeForImageAtIndex:.

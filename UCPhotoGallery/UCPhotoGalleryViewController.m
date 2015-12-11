@@ -392,6 +392,16 @@
                       self.view.bounds.size.height);
 }
 
+- (UIImage *)imageAtIndex:(NSUInteger)index {
+    for (UCPhotoGalleryItemView *view in [self visibleItems]) {
+        if (view.index == index) {
+            return view.imageView.image;
+        }
+    }
+
+    return nil;
+}
+
 /**
  *  Creates a frame for the gallery item at the provided index
  *
