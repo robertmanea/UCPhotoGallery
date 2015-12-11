@@ -10,14 +10,24 @@ This project provides a drop-in image gallery UI component with a simple interfa
 
 ## Installation
 
+### CocoaPods
+
 This project is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
     pod "UCPhotoGallery"
 
+### Carthage
+
+To integrate UCPhotoGallery into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), specify it in your `Cartfile`:
+
+```ogdl
+github "UrbanCompass/UCPhotoGallery"
+```
+
 ## Usage
 
-### Option 1: Embed the UCPhotoGallery's view in your view 
+### Option 1: Embed the UCPhotoGallery's view in your view
 1. Instantiate a `UCPhotoGalleryViewController`
 2. Add it as a child view controller
 3. Add its subview to your view
@@ -46,7 +56,7 @@ See the "Transition" tab in the sample app (code in `PhotosCollectionViewControl
 `UCGalleryViewDataSource` has a very simple, one-method interface: `imageURLsForGalleryView:`. Simply provide an `NSArray` of image URLs and the gallery can do the rest.
 
 ### UCGalleryViewDelegate
-`UCGalleryViewDelegate` provides a handful of optional functions that allow the delegate to customize the gallery controller and respond to its actions. 
+`UCGalleryViewDelegate` provides a handful of optional functions that allow the delegate to customize the gallery controller and respond to its actions.
 
 ## Other notes
 `UCPhotoGalleryViewController` supports two different ways of displaying images: aspect fit and aspect fill. Aspect fit is the default, but this can be set a) for all images by setting `imageScalingMode` to either `UCImageScalingModeFit` or `UCImageScalingModeFill` b) for individual images by implementing `galleryViewController:scalingModeForImageAtIndex:` on your `UCGalleryViewDelegate`.
