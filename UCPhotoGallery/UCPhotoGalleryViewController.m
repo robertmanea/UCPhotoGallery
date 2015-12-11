@@ -184,7 +184,7 @@
         return;
     }
 
-    self.transitionController.presentFromRect = [self imageFrameInRootView];
+    self.transitionController.presentFromRect = [self visibleImageFrameInApplicationWindow];
     self.transitionController.transitionImage = self.visibleItem.imageView.image;
 }
 
@@ -202,6 +202,10 @@
 
 - (NSSet *)overlayViews {
     return self.mutableOverlayViews;
+}
+
+- (UIImage *)visibleImage {
+    return [self imageAtIndex:self.currentIndex];
 }
 
 - (void)reloadData {
@@ -265,12 +269,7 @@
     return nil;
 }
 
-/**
- *  The frame of the image in the gallery view's superview
- *
- *  @return (see above)
- */
-- (CGRect)imageFrameInRootView {
+- (CGRect)visibleImageFrameInApplicationWindow {
     CGRect ret;
     if ([self scalingModeForItemAtIndex:self.currentIndex] == UCImageScalingModeFill) {
         ret = self.view.bounds;

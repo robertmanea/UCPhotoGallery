@@ -146,6 +146,13 @@ typedef NS_ENUM(NSInteger, UCImageScalingMode) {
 - (UIImage *)imageAtIndex:(NSUInteger)index;
 
 /**
+ *  The frame of the image in the gallery view's superview
+ *
+ *  @return (see above)
+ */
+- (CGRect)visibleImageFrameInApplicationWindow;
+
+/**
  *  Determines whether images are scaled to fit (full image visible, gallery background can show through) or
  *  to fill (image completely fills gallery). Unused if the gallery's delegate implements 
  *  galleryViewController:scalingModeForImageAtIndex:.
@@ -186,5 +193,12 @@ typedef NS_ENUM(NSInteger, UCImageScalingMode) {
  */
 - (void)setCurrentIndex:(NSUInteger)currentPageIndex
                animated:(BOOL)animated;
+
+/**
+ *  A convenience function to return the currently visible image
+ *
+ *  @return The currently visible image
+ */
+- (UIImage *)visibleImage;
 
 @end
