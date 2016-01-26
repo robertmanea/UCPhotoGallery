@@ -12,6 +12,7 @@ typedef NS_ENUM(NSInteger, UCImageScalingMode) {
 };
 
 @class UCPhotoGalleryViewController;
+@class SDImageCache;
 
 /**
  *  Provides URLs to the gallery view
@@ -151,6 +152,13 @@ typedef NS_ENUM(NSInteger, UCImageScalingMode) {
  *  @return (see above)
  */
 - (CGRect)visibleImageFrameInApplicationWindow;
+
+/**
+ *  The image cache used by the photo gallery
+ *
+ *  @return The gallery's image cache
+ */
+@property (strong, nonatomic) SDImageCache *imageCache;
 
 /**
  *  Determines whether images are scaled to fit (full image visible, gallery background can show through) or

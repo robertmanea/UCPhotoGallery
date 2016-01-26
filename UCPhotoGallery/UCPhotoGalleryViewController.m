@@ -2,6 +2,7 @@
 #import "UCPhotoGalleryItemView.h"
 #import "UCPhotoGalleryFullscreenTransitionController.h"
 #import <UCDirectionalPanGestureRecognizer/UCDirectionalPanGestureRecognizer.h>
+#import <WebImage/SDImageCache.h>
 #import "tgmath.h"
 
 @interface UCPhotoGalleryViewController () <UCGalleryViewDelegate, UCGalleryItemDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UIViewControllerTransitioningDelegate>
@@ -32,6 +33,7 @@
     if (self) {
         self.canExpand = YES;
         self.imageScalingMode = UCImageScalingModeFit;
+        self.imageCache = [SDImageCache sharedImageCache];
         self.transitionController = [UCPhotoGalleryFullscreenTransitionController new];
         self.currentIndex = 0;
         self.rotating = NO;
@@ -348,6 +350,7 @@
             if (!item) {
                 item = [UCPhotoGalleryItemView new];
                 item.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+                item.imageCache = self.imageCache;
                 item.galleryItemDelegate = self;
                 item.translatesAutoresizingMaskIntoConstraints = NO;
                 item.userInteractionEnabled = self.isFullscreen;

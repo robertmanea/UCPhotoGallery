@@ -1,5 +1,6 @@
 #import "UCPhotoGalleryItemView.h"
 #import <AVFoundation/AVFoundation.h>
+#import <WebImage/SDImageCache.h>
 #import <WebImage/UIImageView+WebCache.h>
 
 CGFloat aspectRatio(CGSize size);
@@ -37,13 +38,19 @@ CGFloat aspectRatio(CGSize size) {
 
 - (void)setUrl:(NSURL *)url {
     _url = url;
+    if (!url) {
+        return;
+    }
+
+    __weak typeof(self) weakself = self;
     [self.imageView sd_setImageWithURL:url
-                             completed:^(__unused UIImage *image, __unused NSError *error,
+                             completed:^(UIImage *image, __unused NSError *error,
                                          __unused SDImageCacheType cacheType, __unused NSURL *imageURL)
      {
-         [self displayImage];
-         if ([self.galleryItemDelegate respondsToSelector:@selector(imageLoadedForGalleryItem:)]) {
-             [self.galleryItemDelegate imageLoadedForGalleryItem:self];
+         [weakself.imageCache storeImage:image forKey:url.absoluteString];
+         [weakself displayImage];
+         if ([weakself.galleryItemDelegate respondsToSelector:@selector(imageLoadedForGalleryItem:)]) {
+             [weakself.galleryItemDelegate imageLoadedForGalleryItem:weakself];
          }
      }];
 }

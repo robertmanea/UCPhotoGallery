@@ -5,6 +5,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class SDImageCache;
 @class UCPhotoGalleryItemView;
 
 @protocol UCGalleryItemDelegate <NSObject>
@@ -27,6 +28,11 @@
 @interface UCPhotoGalleryItemView : UIScrollView
 
 @property (weak) id<UCGalleryItemDelegate> galleryItemDelegate;
+
+/**
+ * The shared image cache
+ */
+@property (strong, nonatomic) SDImageCache *imageCache;
 
 /**
  *  The zooming image view

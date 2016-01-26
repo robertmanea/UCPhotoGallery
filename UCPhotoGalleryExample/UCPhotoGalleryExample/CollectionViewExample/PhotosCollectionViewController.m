@@ -16,6 +16,7 @@
 @property (nonatomic) CGRect selectedPhotoRect;
 @property (nonatomic) NSUInteger selectedIndex;
 @property (nonatomic) UCPhotoGalleryViewController *fullscreenGalleryController;
+@property (nonatomic) SDImageCache *imageCache;
 @end
 
 @implementation PhotosCollectionViewController
@@ -27,6 +28,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
+        self.imageCache = [[SDImageCache alloc] initWithNamespace:@"UCPhotoGallery"];
         self.tabBarItem.title = @"Transition";
         self.selectedIndex = NSNotFound;
         self.transitionController = [UCPhotoGalleryFullscreenTransitionController new];
@@ -80,7 +82,18 @@
                                                                 forIndexPath:indexPath];
     NSURL *url = self.photoURLs[(NSUInteger)indexPath.row];
     cell.alpha = (self.selectedIndex == (NSUInteger)indexPath.row) ? 0 : 1;
-    [cell.photoImageView sd_setImageWithURL:url];
+    [self.imageCache queryDiskCacheForKey:url.absoluteString
+                                     done:^(UIImage *image, SDImageCacheType cacheType) {
+                                         if (image) {
+                                             cell.photoImageView.image = image;
+                                         } else {
+                                             [cell.photoImageView sd_setImageWithURL:url
+                                                                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                                               [self.imageCache storeImage:image forKey:url.absoluteString];
+                                                                               cell.photoImageView.image = image;
+                                                                           }];
+                                         }
+                                     }];
     return cell;
 }
 
@@ -100,6 +113,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndex = (NSUInteger)indexPath.row;
     UCPhotoGalleryViewController *galleryVC = ({
         UCPhotoGalleryViewController *gallery = [UCPhotoGalleryViewController new];
+        gallery.imageCache = self.imageCache;
         gallery.dataSource = self;
         gallery.isFullscreen = YES;
         gallery.view.frame = [[[UIApplication sharedApplication] delegate] window].bounds;
