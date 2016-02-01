@@ -14,8 +14,8 @@
 		9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */; };
 		9376C50C1BE958610097257C /* UCPhotoGalleryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */; };
-		93A059891C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A059871C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework */; };
-		93A0598A1C1A029500E12F2F /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A059881C1A029500E12F2F /* WebImage.framework */; };
+		93929D251C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93929D231C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework */; };
+		93929D261C5FD44B002E1E63 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93929D241C5FD44B002E1E63 /* WebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +28,8 @@
 		9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryItemView.m; sourceTree = "<group>"; };
 		9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoGalleryViewController.h; sourceTree = "<group>"; };
 		9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryViewController.m; sourceTree = "<group>"; };
-		93A059871C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCDirectionalPanGestureRecognizer.framework; path = Frameworks/UCDirectionalPanGestureRecognizer.framework; sourceTree = "<group>"; };
-		93A059881C1A029500E12F2F /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Frameworks/WebImage.framework; sourceTree = "<group>"; };
+		93929D231C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCDirectionalPanGestureRecognizer.framework; path = Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework; sourceTree = "<group>"; };
+		93929D241C5FD44B002E1E63 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,8 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93A059891C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework in Frameworks */,
-				93A0598A1C1A029500E12F2F /* WebImage.framework in Frameworks */,
+				93929D251C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */,
+				93929D261C5FD44B002E1E63 /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,8 +48,8 @@
 		6AFA9388352EDC6A5119E2BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				93A059871C1A029500E12F2F /* UCDirectionalPanGestureRecognizer.framework */,
-				93A059881C1A029500E12F2F /* WebImage.framework */,
+				93929D231C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework */,
+				93929D241C5FD44B002E1E63 /* WebImage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -276,7 +276,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = UCPhotoGallery/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -301,7 +301,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = UCPhotoGallery/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

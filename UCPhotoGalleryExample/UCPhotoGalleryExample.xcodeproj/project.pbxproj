@@ -15,8 +15,8 @@
 		935E59FE1C07DAAE0063D6D7 /* PhotosCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FA1C07DAAE0063D6D7 /* PhotosCollectionViewController.m */; };
 		935E59FF1C07DAAE0063D6D7 /* GalleryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FD1C07DAAE0063D6D7 /* GalleryContainerViewController.m */; };
 		935E5A021C07DB280063D6D7 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E5A011C07DB280063D6D7 /* PhotoCell.m */; };
-		93A0597D1C19FDD100E12F2F /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A0597C1C19FDD100E12F2F /* UCPhotoGallery.framework */; };
-		93A0597F1C1A007200E12F2F /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93A0597E1C1A007200E12F2F /* WebImage.framework */; };
+		93929D2A1C5FD489002E1E63 /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93929D291C5FD489002E1E63 /* UCPhotoGallery.framework */; };
+		93929D2D1C5FD984002E1E63 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93929D2B1C5FD491002E1E63 /* WebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,8 +47,8 @@
 		935E59FD1C07DAAE0063D6D7 /* GalleryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryContainerViewController.m; sourceTree = "<group>"; };
 		935E5A001C07DB280063D6D7 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		935E5A011C07DB280063D6D7 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
-		93A0597C1C19FDD100E12F2F /* UCPhotoGallery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCPhotoGallery.framework; path = "../build/Debug-iphoneos/UCPhotoGallery.framework"; sourceTree = "<group>"; };
-		93A0597E1C1A007200E12F2F /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Frameworks/WebImage.framework; sourceTree = "<group>"; };
+		93929D291C5FD489002E1E63 /* UCPhotoGallery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCPhotoGallery.framework; path = "../build/Debug-iphoneos/UCPhotoGallery.framework"; sourceTree = "<group>"; };
+		93929D2B1C5FD491002E1E63 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = ../Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93A0597D1C19FDD100E12F2F /* UCPhotoGallery.framework in Frameworks */,
-				93A0597F1C1A007200E12F2F /* WebImage.framework in Frameworks */,
+				93929D2A1C5FD489002E1E63 /* UCPhotoGallery.framework in Frameworks */,
+				93929D2D1C5FD984002E1E63 /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +108,8 @@
 		935E59EE1C07D1040063D6D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				93A0597E1C1A007200E12F2F /* WebImage.framework */,
-				93A0597C1C19FDD100E12F2F /* UCPhotoGallery.framework */,
+				93929D2B1C5FD491002E1E63 /* WebImage.framework */,
+				93929D291C5FD489002E1E63 /* UCPhotoGallery.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -323,10 +323,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Frameworks/**",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS/**",
 				);
 				INFOPLIST_FILE = UCPhotoGalleryExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(PROJECT_DIR)/Frameworks @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(PROJECT_DIR)/Frameworks $(PROJECT_DIR)/../Carthage/Build/iOS/";
 				PRODUCT_BUNDLE_IDENTIFIER = com.compass.UCPhotoGalleryExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -338,10 +339,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Frameworks/**",
+					"$(PROJECT_DIR)/../Carthage/Build/iOS/**",
 				);
 				INFOPLIST_FILE = UCPhotoGalleryExample/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(PROJECT_DIR)/Frameworks @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(PROJECT_DIR)/Frameworks $(PROJECT_DIR)/../Carthage/Build/iOS/";
 				PRODUCT_BUNDLE_IDENTIFIER = com.compass.UCPhotoGalleryExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

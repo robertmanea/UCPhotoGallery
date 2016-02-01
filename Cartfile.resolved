@@ -1,0 +1,2 @@
+github "rs/SDWebImage" "3.7.3"
+github "bryanoltman/UCDirectionalPanGestureRecognizer" "a3c8e73f4a89984bb34083d1a0d43fbb819d69c5"
