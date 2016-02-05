@@ -1,0 +1,48 @@
+BCSymbolMap Version: 1.0
+-[UCDirectionalPanGestureRecognizer touchesMoved:withEvent:]
+-[UCDirectionalPanGestureRecognizer direction]
+-[UCDirectionalPanGestureRecognizer setDirection:]
+OBJC_CLASSLIST_SUP_REFS_$_
+OBJC_METH_VAR_NAME_
+OBJC_SELECTOR_REFERENCES_
+OBJC_METH_VAR_NAME_1
+OBJC_SELECTOR_REFERENCES_2
+OBJC_METH_VAR_NAME_3
+OBJC_SELECTOR_REFERENCES_4
+OBJC_METH_VAR_NAME_5
+OBJC_SELECTOR_REFERENCES_6
+OBJC_METH_VAR_NAME_7
+OBJC_SELECTOR_REFERENCES_8
+OBJC_METH_VAR_NAME_9
+OBJC_SELECTOR_REFERENCES_10
+OBJC_IVAR_$_UCDirectionalPanGestureRecognizer._direction
+OBJC_CLASS_NAME_
+l_OBJC_METACLASS_RO_$_UCDirectionalPanGestureRecognizer
+OBJC_METH_VAR_TYPE_
+OBJC_METH_VAR_TYPE_11
+OBJC_METH_VAR_NAME_12
+OBJC_METH_VAR_TYPE_13
+l_OBJC_$_INSTANCE_METHODS_UCDirectionalPanGestureRecognizer
+OBJC_METH_VAR_NAME_14
+OBJC_METH_VAR_TYPE_15
+l_OBJC_$_INSTANCE_VARIABLES_UCDirectionalPanGestureRecognizer
+OBJC_PROP_NAME_ATTR_
+OBJC_PROP_NAME_ATTR_16
+l_OBJC_$_PROP_LIST_UCDirectionalPanGestureRecognizer
+l_OBJC_CLASS_RO_$_UCDirectionalPanGestureRecognizer
+OBJC_LABEL_CLASS_$
+Apple LLVM version 7.0.2 (clang-700.1.81)
+/Users/bryan/Library/Developer/Xcode/DerivedData/ModuleCache/2FPR6GNLESQOE/CoreGraphics-1YQ59ILDR3NYI.pcm
+CoreGraphics
+/Users/bryan/Library/Developer/Xcode/DerivedData/ModuleCache/2FPR6GNLESQOE/Foundation-A3SOD99KJ0S9.pcm
+Foundation
+/Users/bryan/Library/Developer/Xcode/DerivedData/ModuleCache/2FPR6GNLESQOE/UIKit-2LM3EQU7VVY4O.pcm
+UIKit
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.2.sdk/System/Library/Frameworks/UIKit.framework
+-[UCDirectionalPanGestureRecognizer setDirection:]
+/Users/bryan/Documents/Code/UCPhotoGallery/Carthage/Checkouts/UCDirectionalPanGestureRecognizer/UCDirectionalPanGestureRecognizer/UCDirectionalPanGestureRecognizer.h
+/Users/bryan/Documents/Code/UCPhotoGallery/Carthage/Checkouts/UCDirectionalPanGestureRecognizer
+-[UCDirectionalPanGestureRecognizer direction]
+-[UCDirectionalPanGestureRecognizer touchesMoved:withEvent:]
+/Users/bryan/Documents/Code/UCPhotoGallery/Carthage/Checkouts/UCDirectionalPanGestureRecognizer/UCDirectionalPanGestureRecognizer/UCDirectionalPanGestureRecognizer.m
+/Users/bryan/Library/Developer/Xcode/DerivedData/UCDirectionalPanGestureRecognizer-ebngdowyayvrgpcaxmxzcfkbwcbg/Build/Intermediates/UCDirectionalPanGestureRecognizer.build/Release-iphoneos/UCDirectionalPanGestureRecognizer.build/DerivedSources/UCDirectionalPanGestureRecognizer_vers.c
