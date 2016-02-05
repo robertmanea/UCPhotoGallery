@@ -5,6 +5,10 @@
 @implementation UCPhotoGalleryFullscreenTransitionController
 
 - (NSTimeInterval)transitionDuration:(__unused id <UIViewControllerContextTransitioning>)transitionContext {
+    if (!self.transitionImage) {
+        return 0;
+    }
+
     return 0.35f;
 }
 
@@ -36,7 +40,9 @@
         shadowboxView.alpha = 0;
 
         startRect = self.presentFromRect;
-        endRect = AVMakeRectWithAspectRatioInsideRect(self.transitionImage.size, containerView.bounds);
+        if (self.transitionImage) {
+            endRect = AVMakeRectWithAspectRatioInsideRect(self.transitionImage.size, containerView.bounds);
+        }
         transitionImageView.frame = startRect;
 //        NSLog(@"in start:%@ end:%@", NSStringFromCGRect(startRect), NSStringFromCGRect(endRect));
         [containerView addSubview:transitionImageView];
@@ -56,8 +62,11 @@
     } else {
         shadowboxView.backgroundColor = [fullscreenGalleryController.view backgroundColor];
 
-        startRect = AVMakeRectWithAspectRatioInsideRect(self.transitionImage.size, containerView.bounds);
-        startRect = CGRectOffset(startRect, 0, [fullscreenGalleryController visibleItem].transform.ty);
+        if (self.transitionImage) {
+            startRect = AVMakeRectWithAspectRatioInsideRect(self.transitionImage.size, containerView.bounds);
+            startRect = CGRectOffset(startRect, 0, [fullscreenGalleryController visibleItem].transform.ty);
+        }
+
         endRect = self.presentFromRect;
         transitionImageView.frame = startRect;
 //        NSLog(@"out start:%@ end:%@", NSStringFromCGRect(startRect), NSStringFromCGRect(endRect));

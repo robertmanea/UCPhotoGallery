@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		934810CF1C6549C000FC490A /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934810CE1C6549C000FC490A /* WebImage.framework */; };
+		934810D51C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934810D41C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework */; };
 		9376C4D81BE958130097257C /* UCPhotoGallery.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4D71BE958130097257C /* UCPhotoGallery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C5091BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FD1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m */; };
@@ -14,11 +16,11 @@
 		9376C50B1BE958610097257C /* UCPhotoGalleryItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */; };
 		9376C50C1BE958610097257C /* UCPhotoGalleryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C50D1BE958610097257C /* UCPhotoGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */; };
-		93929D251C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93929D231C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework */; };
-		93929D261C5FD44B002E1E63 /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93929D241C5FD44B002E1E63 /* WebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		934810CE1C6549C000FC490A /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
+		934810D41C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCDirectionalPanGestureRecognizer.framework; path = Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework; sourceTree = "<group>"; };
 		9376C4D41BE958130097257C /* UCPhotoGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UCPhotoGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9376C4D71BE958130097257C /* UCPhotoGallery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCPhotoGallery.h; sourceTree = "<group>"; };
 		9376C4D91BE958130097257C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -28,8 +30,6 @@
 		9376C4FF1BE958610097257C /* UCPhotoGalleryItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryItemView.m; sourceTree = "<group>"; };
 		9376C5001BE958610097257C /* UCPhotoGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UCPhotoGalleryViewController.h; sourceTree = "<group>"; };
 		9376C5011BE958610097257C /* UCPhotoGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UCPhotoGalleryViewController.m; sourceTree = "<group>"; };
-		93929D231C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCDirectionalPanGestureRecognizer.framework; path = Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework; sourceTree = "<group>"; };
-		93929D241C5FD44B002E1E63 /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,8 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93929D251C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework in Frameworks */,
-				93929D261C5FD44B002E1E63 /* WebImage.framework in Frameworks */,
+				934810CF1C6549C000FC490A /* WebImage.framework in Frameworks */,
+				934810D51C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,8 +48,8 @@
 		6AFA9388352EDC6A5119E2BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				93929D231C5FD44B002E1E63 /* UCDirectionalPanGestureRecognizer.framework */,
-				93929D241C5FD44B002E1E63 /* WebImage.framework */,
+				934810D41C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework */,
+				934810CE1C6549C000FC490A /* WebImage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -111,6 +111,7 @@
 				9376C4D11BE958130097257C /* Headers */,
 				9376C4D21BE958130097257C /* Resources */,
 				93A059801C1A00C900E12F2F /* Frameworks */,
+				934810D31C6549F800FC490A /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -162,6 +163,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		934810D31C6549F800FC490A /* Carthage Copy Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework",
+			);
+			name = "Carthage Copy Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9376C4CF1BE958130097257C /* Sources */ = {
@@ -281,7 +301,7 @@
 				INFOPLIST_FILE = UCPhotoGallery/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				OTHER_CFLAGS = (
 					"-Wextra",
 					"-Wall",
@@ -306,7 +326,7 @@
 				INFOPLIST_FILE = UCPhotoGallery/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(PROJECT_DIR)/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				OTHER_CFLAGS = (
 					"-Wextra",
 					"-Wall",
