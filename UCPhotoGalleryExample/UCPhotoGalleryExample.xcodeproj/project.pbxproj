@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		930987DB1C7CEDDE000A4AB9 /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 930987D71C7CEC83000A4AB9 /* UCPhotoGallery.framework */; };
+		930987DC1C7CEDDE000A4AB9 /* UCPhotoGallery.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 930987D71C7CEC83000A4AB9 /* UCPhotoGallery.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		934810D11C6549C500FC490A /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934810D01C6549C500FC490A /* WebImage.framework */; };
 		935E59D71C07D0E70063D6D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59D61C07D0E70063D6D7 /* main.m */; };
 		935E59DA1C07D0E70063D6D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59D91C07D0E70063D6D7 /* AppDelegate.m */; };
@@ -16,18 +18,16 @@
 		935E59FE1C07DAAE0063D6D7 /* PhotosCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FA1C07DAAE0063D6D7 /* PhotosCollectionViewController.m */; };
 		935E59FF1C07DAAE0063D6D7 /* GalleryContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E59FD1C07DAAE0063D6D7 /* GalleryContainerViewController.m */; };
 		935E5A021C07DB280063D6D7 /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E5A011C07DB280063D6D7 /* PhotoCell.m */; };
-		CBB4625F1C65534B00660C44 /* UCPhotoGallery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB4625E1C65534B00660C44 /* UCPhotoGallery.framework */; };
-		CBB462601C65535500660C44 /* UCPhotoGallery.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CBB4625E1C65534B00660C44 /* UCPhotoGallery.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9306C1DB1C18ADAC009A4A9C /* Embed Frameworks */ = {
+		930987DD1C7CEDDE000A4AB9 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CBB462601C65535500660C44 /* UCPhotoGallery.framework in Embed Frameworks */,
+				930987DC1C7CEDDE000A4AB9 /* UCPhotoGallery.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -35,7 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		934810C91C65497400FC490A /* UCPhotoGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = UCPhotoGallery.framework; path = "/Users/bryan/Documents/Code/UCPhotoGallery/DerivedData/UCPhotoGallery/Build/Products/Debug-iphoneos/UCPhotoGallery.framework"; sourceTree = "<absolute>"; };
+		930987D71C7CEC83000A4AB9 /* UCPhotoGallery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCPhotoGallery.framework; path = "../../../../Library/Developer/Xcode/DerivedData/UCPhotoGallery-creypqpfyfwshpegvxwczbitnbir/Build/Products/Debug-iphoneos/UCPhotoGallery.framework"; sourceTree = "<group>"; };
 		934810D01C6549C500FC490A /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = ../Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
 		935E59D21C07D0E70063D6D7 /* UCPhotoGalleryExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UCPhotoGalleryExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		935E59D61C07D0E70063D6D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -51,7 +51,6 @@
 		935E59FD1C07DAAE0063D6D7 /* GalleryContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryContainerViewController.m; sourceTree = "<group>"; };
 		935E5A001C07DB280063D6D7 /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		935E5A011C07DB280063D6D7 /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
-		CBB4625E1C65534B00660C44 /* UCPhotoGallery.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCPhotoGallery.framework; path = "../../../Library/Developer/Xcode/DerivedData/UCPhotoGallery-bsgqcrfxfmwuddepwkisdgrtmkyz/Build/Products/Debug-iphoneos/UCPhotoGallery.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBB4625F1C65534B00660C44 /* UCPhotoGallery.framework in Frameworks */,
+				930987DB1C7CEDDE000A4AB9 /* UCPhotoGallery.framework in Frameworks */,
 				934810D11C6549C500FC490A /* WebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,9 +110,8 @@
 		935E59EE1C07D1040063D6D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CBB4625E1C65534B00660C44 /* UCPhotoGallery.framework */,
+				930987D71C7CEC83000A4AB9 /* UCPhotoGallery.framework */,
 				934810D01C6549C500FC490A /* WebImage.framework */,
-				934810C91C65497400FC490A /* UCPhotoGallery.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -148,8 +146,8 @@
 				935E59CE1C07D0E70063D6D7 /* Sources */,
 				935E59CF1C07D0E70063D6D7 /* Frameworks */,
 				935E59D01C07D0E70063D6D7 /* Resources */,
-				9306C1DB1C18ADAC009A4A9C /* Embed Frameworks */,
 				934810D21C6549CF00FC490A /* Carthage Copy Frameworks */,
+				930987DD1C7CEDDE000A4AB9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -213,6 +211,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/../Carthage/Build/iOS/WebImage.framework",
+				"$(SRCROOT)/../Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
