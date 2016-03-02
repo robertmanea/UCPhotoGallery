@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		934810CF1C6549C000FC490A /* WebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934810CE1C6549C000FC490A /* WebImage.framework */; };
-		934810D51C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 934810D41C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework */; };
 		9376C4D81BE958130097257C /* UCPhotoGallery.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4D71BE958130097257C /* UCPhotoGallery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C5081BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9376C4FC1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9376C5091BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9376C4FD1BE958610097257C /* UCPhotoGalleryFullscreenTransitionController.m */; };
@@ -19,8 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		934810CE1C6549C000FC490A /* WebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebImage.framework; path = Carthage/Build/iOS/WebImage.framework; sourceTree = "<group>"; };
-		934810D41C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UCDirectionalPanGestureRecognizer.framework; path = Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework; sourceTree = "<group>"; };
 		9376C4D41BE958130097257C /* UCPhotoGallery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UCPhotoGallery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9376C4D71BE958130097257C /* UCPhotoGallery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCPhotoGallery.h; sourceTree = "<group>"; };
 		9376C4D91BE958130097257C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,8 +33,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				934810CF1C6549C000FC490A /* WebImage.framework in Frameworks */,
-				934810D51C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,8 +42,6 @@
 		6AFA9388352EDC6A5119E2BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				934810D41C654B0800FC490A /* UCDirectionalPanGestureRecognizer.framework */,
-				934810CE1C6549C000FC490A /* WebImage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
