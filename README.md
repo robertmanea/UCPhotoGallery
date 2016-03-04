@@ -22,7 +22,7 @@ it, simply add the following line to your Podfile:
 To integrate UCPhotoGallery into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), specify it in your `Cartfile`:
 
 ```ogdl
-github "UrbanCompass/UCPhotoGallery"
+github "UrbanCompass/UCPhotoGallery" "carthage"
 ```
 
 ## Usage
