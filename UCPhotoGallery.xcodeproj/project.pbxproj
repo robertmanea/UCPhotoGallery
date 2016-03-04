@@ -39,19 +39,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6AFA9388352EDC6A5119E2BC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		9376C4CA1BE958120097257C = {
 			isa = PBXGroup;
 			children = (
 				9376C4D61BE958130097257C /* UCPhotoGallery */,
 				9376C4D51BE958130097257C /* Products */,
-				6AFA9388352EDC6A5119E2BC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
