@@ -103,7 +103,6 @@
 				9376C4D11BE958130097257C /* Headers */,
 				9376C4D21BE958130097257C /* Resources */,
 				93A059801C1A00C900E12F2F /* Frameworks */,
-				934810D31C6549F800FC490A /* Carthage Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -155,25 +154,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		934810D31C6549F800FC490A /* Carthage Copy Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/WebImage.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/UCDirectionalPanGestureRecognizer.framework",
-			);
-			name = "Carthage Copy Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9376C4CF1BE958130097257C /* Sources */ = {
