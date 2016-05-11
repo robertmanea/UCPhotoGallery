@@ -1,7 +1,7 @@
 #import "UCPhotoGalleryItemView.h"
 #import <AVFoundation/AVFoundation.h>
-#import <WebImage/SDImageCache.h>
-#import <WebImage/UIImageView+WebCache.h>
+#import <SDWebImage/SDImageCache.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 CGFloat aspectRatio(CGSize size);
 CGFloat aspectRatio(CGSize size) {
@@ -26,6 +26,13 @@ CGFloat aspectRatio(CGSize size) {
             imageView;
         });
 
+        
+        self.activityIndicatorView = [[UIActivityIndicatorView alloc] init];
+        self.activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        self.activityIndicatorView.hidesWhenStopped = YES;
+        [self addSubview:self.activityIndicatorView];
+        
+        
         UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(viewDoubleTapped:)];
         recognizer.numberOfTapsRequired = 2;
@@ -43,11 +50,20 @@ CGFloat aspectRatio(CGSize size) {
     }
 
     __weak typeof(self) weakself = self;
+    
+    if (![url isFileURL]) {
+        [self.activityIndicatorView startAnimating];
+    }
+    
     [self.imageView sd_setImageWithURL:url
                              completed:^(UIImage *image, __unused NSError *error,
                                          __unused SDImageCacheType cacheType, __unused NSURL *imageURL)
      {
-         [weakself.imageCache storeImage:image forKey:url.absoluteString];
+         if ( image )
+             [self.activityIndicatorView stopAnimating];
+         
+         NSString* key = [[SDWebImageManager sharedManager] cacheKeyForURL:url];
+         [weakself.imageCache storeImage:image forKey:key];
          [weakself displayImage];
          if ([weakself.galleryItemDelegate respondsToSelector:@selector(imageLoadedForGalleryItem:)]) {
              [weakself.galleryItemDelegate imageLoadedForGalleryItem:weakself];
@@ -160,7 +176,10 @@ CGFloat aspectRatio(CGSize size) {
     if (!CGRectEqualToRect(self.imageView.frame, imageViewFrame)) {
         self.imageView.frame = imageViewFrame;
     }
+    
+    self.activityIndicatorView.center = self.imageView.center;
 }
+
 
 - (void)setMaxMinZoomScalesForCurrentBounds {
     // Reset

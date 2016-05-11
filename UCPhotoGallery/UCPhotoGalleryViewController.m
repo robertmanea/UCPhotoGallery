@@ -2,7 +2,7 @@
 #import "UCPhotoGalleryItemView.h"
 #import "UCPhotoGalleryFullscreenTransitionController.h"
 #import <UCDirectionalPanGestureRecognizer/UCDirectionalPanGestureRecognizer.h>
-#import <WebImage/SDImageCache.h>
+#import <SDWebImage/SDImageCache.h>
 #import "tgmath.h"
 
 @interface UCPhotoGalleryViewController () <UCGalleryViewDelegate, UCGalleryItemDelegate, UIGestureRecognizerDelegate, UIScrollViewDelegate, UIViewControllerTransitioningDelegate>

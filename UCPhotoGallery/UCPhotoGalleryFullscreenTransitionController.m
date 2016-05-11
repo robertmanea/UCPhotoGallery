@@ -29,7 +29,7 @@
         (UCPhotoGalleryViewController *)(isPresenting ? toController : fromController);
 
     UIImageView *transitionImageView = [[UIImageView alloc] initWithImage:self.transitionImage];
-    transitionImageView.contentMode = UIViewContentModeScaleAspectFill;
+    transitionImageView.contentMode = UIViewContentModeScaleAspectFit;
     transitionImageView.clipsToBounds = YES;
     CGRect startRect, endRect;
     fullscreenGalleryController.view.alpha = 0;

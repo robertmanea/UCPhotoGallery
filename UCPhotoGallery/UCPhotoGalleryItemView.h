@@ -38,6 +38,7 @@
  *  The zooming image view
  */
 @property (nonatomic) UIImageView *imageView;
+@property (nonatomic) UIActivityIndicatorView *activityIndicatorView;
 
 /**
  *  The index of this item in the gallery view (internal)
