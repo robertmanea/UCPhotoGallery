@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = "UCPhotoGallery"
+  s.name             = "UCPhotoGallery-rm"
   s.version          = "0.2.6"
   s.summary          = "A drop-in image gallery UI component"
   s.description      = <<-DESC
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/UrbanCompass/UCPhotoGallery"
   s.license          = 'MIT'
   s.authors          = { "Bryan Oltman" => "bryan@compass.com" }
-  s.source           = { :git => "https://github.com/UrbanCompass/UCPhotoGallery.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/robertmanea/UCPhotoGallery.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/moltman'
 
   s.platform     = :ios, '8.0'
